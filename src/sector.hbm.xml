@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Entidades.Sector" table="sector">
+        
+        <id name="OID" type="string">
+            <column name="OIDSector"/>
+            <generator class="uuid2"/>
+        </id>
+        
+        <property name="codSector" type="int">
+            <column name="codSector"/>
+        </property>
+        
+        <property name="nombreSector" type="string">
+            <column name="nombreSector"/>
+        </property>
+        
+        <property name="descripcionSector" type="string">
+            <column name="descripcionSector"/>
+        </property>
+        
+        <property name="fechaHoraFinVigenciaSector" type="date">
+            <column name="fechaHoraFinVigenciaSector"/>
+        </property>
+        
+    </class>
+
+</hibernate-mapping>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Entidades.TipoTarea" table="tipotarea">
+        
+        <id name="OID" type="string">
+            <column name="OIDTipoTarea"/>
+            <generator class="uuid2"/>
+        </id>
+        
+        <property name="codTipoTarea" type="int">
+            <column name="codTipoTarea"/>
+        </property>
+        
+        <property name="nombreTipoTarea" type="string">
+            <column name="nombreTipoTarea"/>
+        </property>
+        
+        <property name="descripcionTipoTarea" type="string">
+            <column name="descripcionTipoTarea"/>
+        </property>
+        
+        <property name="fechaFinVigenciaTipoTarea" type="date">
+            <column name="fechaFinVigenciaTipoTarea"/>
+        </property>
+        
+    </class>
+
+</hibernate-mapping>

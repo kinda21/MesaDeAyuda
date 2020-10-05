@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Entidades.TipoCaso" table="tipocaso">
+        
+        <id name="OID" type="String">
+            <column name="OIDTipoCaso"/>
+            <generator class="uuid2"/>
+        </id>
+        
+        <property name="codTipoCaso" type="int">
+            <column name="codTipoCaso"/>
+        </property>
+        
+        <property name="nombreTipoCaso" type="string">
+            <column name="nombreTipoCaso"/>
+        </property>
+        
+        <property name="numeroMaximaIteracion" type="int">
+            <column name="numeroMaximaIteracion"/>
+        </property>
+        
+        <property name="fechaHoraFinVigenciaTipoCaso" type="date">
+            <column name="fechaHoraFinVigenciaTipoCaso"/>
+        </property>
+        
+        <bag name="listaTipoCasoIteracion" table="tipocasoiteracion" cascade="none">
+            <key column="OIDTipoCaso" not-null="true"/>
+            <one-to-many class="Entidades.TipoCasoIteracion"/>
+        </bag>
+        
+    </class>
+
+</hibernate-mapping>

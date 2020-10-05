@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Entidades.TipoCasoIteracion" table="tipocasoiteracion">
+        
+        <id name="OID" type="String">
+            <column name="OIDTipoCasoIteracion"/>
+            <generator class="uuid2"/>
+        </id>
+        
+        <property name="numeroDeIteracion" type="int">
+            <column name="numeroDeIteracion"/>
+        </property>
+        
+        <property name="coeficienteReduccionTipo" type="int">
+            <column name="coeficienteReduccionTipo"/>
+        </property>
+        
+    </class>
+
+</hibernate-mapping>

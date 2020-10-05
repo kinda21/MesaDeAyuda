@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Entidades.TipoInstancia" table="tipoinstancia">
+        
+        <id name="OID" type="string">
+            <column name="OIDTipoInstancia"/>
+            <generator class="uuid2"/>
+        </id>
+        
+        <property name="codTipoInstancia" type="int">
+            <column name="codTipoInstancia"/>
+        </property>
+        
+        <property name="nombreTipoInstancia" type="string">
+            <column name="nombreTipoInstancia"/>
+        </property>
+        
+        <property name="fechaHoraFinVigenciaTipoInstancia" type="date">
+            <column name="fechaHoraFinVigenciaTipoInstancia"/>
+        </property>
+        
+        <many-to-one name="sector" class="Entidades.Sector" column="OIDSector" not-null="true"/>
+        
+        <!-- muchos a muchos con TipoTarea-->
+        <bag name="listaTipoTarea" table="tipotareatipoinstancia" cascade="none">
+            <key column="OIDTipoInstancia" not-null="true"/> 
+            <many-to-many class="Entidades.TipoTarea" column="OIDTipoTarea"/>            
+        </bag>
+        
+    </class>
+
+</hibernate-mapping>
