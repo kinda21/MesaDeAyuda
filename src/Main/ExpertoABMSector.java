@@ -134,12 +134,8 @@ public class ExpertoABMSector {
                 if(nuevoSector.getCodSector() == sectoraverificar.getCodSector()){
                     JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido, valor repetido.");
                     return;
-                }   else{
-                nuevoSector.setDescripcionSector(altaSector.getDescripcionSector());
-                nuevoSector.setFechaHoraFinVigenciaSector(null);
-                nuevoSector.setNombreSector(altaSector.getNombreSector());
+                }  
             }
-        }
         }
         catch(Exception e){
             

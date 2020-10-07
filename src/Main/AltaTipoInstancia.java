@@ -3,39 +3,77 @@ package Main;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author FLIA HUDSON
  */
 public class AltaTipoInstancia extends javax.swing.JFrame {
-    ControladorABMTipoInstancia controladorABMTI = new ControladorABMTipoInstancia();
-    DTOTipoInstancia DTOalta = new DTOTipoInstancia();
+    ControladorABMTipoInstancia controladorABMTI;
+    DTOTipoInstancia dtoalta = new DTOTipoInstancia();
+    List<DTOTipoTarea> listatipostarea;
+    List<DTOTipoTarea> listaTiposTareaParaAlta;
+    List<DTOSector> listasectores;
+    javax.swing.table.DefaultTableModel miTablaDisponibles=new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código TT","Nombre Tipo Tarea"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        };
+    javax.swing.table.DefaultTableModel miTablaElegidas=new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código TT","Nombre Tipo Tarea"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        };
+    /*NO SIRVEN
     DefaultListModel milista = new DefaultListModel();
-    /**
-     * Creates new form AltaTipoInstancia
-     */
+    DefaultListModel milista2 = new DefaultListModel();
+    */  
     public AltaTipoInstancia() {
         initComponents();
     }
     public void setVisible(boolean b) {
-        super.setVisible(b);
-        List<DTOSector> listasectores = controladorABMTI.buscarSectoresVigentes();
+        
+        listasectores = controladorABMTI.buscarSectoresVigentes();
         for (int i=0;i<listasectores.size();i++)
         {
             DTOSector unSector = listasectores.get(i);
-            sectoresComboBox.addItem(unSector.getNombreSector());
+            sectoresComboBox.addItem(unSector);
         }
-        List <DTOTipoTarea> listatipostarea = controladorABMTI.buscarTiposTareaVigentes();
+        listatipostarea = controladorABMTI.buscarTiposTareaVigentes();
         for (int i=0;i<listatipostarea.size();i++)
         {
-            DTOTipoTarea untipotarea = listatipostarea.get(i);
-            milista.addElement(untipotarea.getNombreTipoTarea()+untipotarea.getCodTipoTarea());
-            listaTareasVigentes.setModel(milista);
+            DTOTipoTarea unTipoTarea = listatipostarea.get(i);
+            miTablaDisponibles.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea()});
+            TiposTareaVigentesTable.setModel(miTablaDisponibles);
         }
+        super.setVisible(b);
     }
     public void inicializaAlta(ControladorABMTipoInstancia cont){
        controladorABMTI=cont;
+       listaTiposTareaParaAlta = new ArrayList<>();
     }
 
     /**
@@ -47,39 +85,64 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        removerTareaButtonold = new javax.swing.JButton();
+        agregarTareaButtonold = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listaTareasElegidas = new javax.swing.JList<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaTareasVigentes = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        codaltaTipoInstancia = new javax.swing.JTextField();
-        nomaltaTipoInstancia = new javax.swing.JTextField();
+        codaltaTipoInstanciaTextField = new javax.swing.JTextField();
+        nomaltaTipoInstanciaTextField = new javax.swing.JTextField();
         sectoresComboBox = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaTareasVigentes = new javax.swing.JList<>();
         jLabel4 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        listaTareasElegidas = new javax.swing.JList<>();
-        agregarTareaButton = new javax.swing.JButton();
-        removerTareaButton = new javax.swing.JButton();
         altaTipoInstanciaButton = new javax.swing.JButton();
         cancelarButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TiposTareaVigentesTable = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TiposTareaElegidasTable = new javax.swing.JTable();
+        agregarTareaButton = new javax.swing.JButton();
+        removerTareaButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Código Tipo Instancia");
-
-        jLabel2.setText("Nombre Tipo Instancia");
-
-        jLabel3.setText("Sector Tipo Instancia");
-
-        codaltaTipoInstancia.addActionListener(new java.awt.event.ActionListener() {
+        removerTareaButtonold.setText("<--");
+        removerTareaButtonold.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codaltaTipoInstanciaActionPerformed(evt);
+                removerTareaButtonoldActionPerformed(evt);
             }
         });
 
-        nomaltaTipoInstancia.addActionListener(new java.awt.event.ActionListener() {
+        agregarTareaButtonold.setText("-->");
+        agregarTareaButtonold.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomaltaTipoInstanciaActionPerformed(evt);
+                agregarTareaButtonoldActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(listaTareasElegidas);
+
+        jScrollPane1.setViewportView(listaTareasVigentes);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Alta Tipo Instancia");
+
+        jLabel1.setText("Código Tipo Instancia:");
+
+        jLabel2.setText("Nombre Tipo Instancia:");
+
+        jLabel3.setText("Sector Tipo Instancia");
+
+        codaltaTipoInstanciaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codaltaTipoInstanciaTextFieldActionPerformed(evt);
+            }
+        });
+
+        nomaltaTipoInstanciaTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomaltaTipoInstanciaTextFieldActionPerformed(evt);
             }
         });
 
@@ -89,11 +152,87 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane1.setViewportView(listaTareasVigentes);
+        jLabel4.setText("Elija los Tipos de Tarea vigentes que pertenecerán al Tipo Instancia");
 
-        jLabel4.setText("Tipos Tarea vigentes");
+        altaTipoInstanciaButton.setText("Dar alta al Tipo Instancia");
+        altaTipoInstanciaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                altaTipoInstanciaButtonActionPerformed(evt);
+            }
+        });
 
-        jScrollPane2.setViewportView(listaTareasElegidas);
+        cancelarButton.setText("Cancelar");
+        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarButtonActionPerformed(evt);
+            }
+        });
+
+        TiposTareaVigentesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Codigo TT", "Nombre Tipo Tarea"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        TiposTareaVigentesTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TiposTareaVigentesTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(TiposTareaVigentesTable);
+        TiposTareaVigentesTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (TiposTareaVigentesTable.getColumnModel().getColumnCount() > 0) {
+            TiposTareaVigentesTable.getColumnModel().getColumn(0).setMinWidth(0);
+            TiposTareaVigentesTable.getColumnModel().getColumn(0).setPreferredWidth(0);
+        }
+
+        TiposTareaElegidasTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Codigo TT", "Nombre Tipo Tarea"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        TiposTareaElegidasTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        TiposTareaElegidasTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(TiposTareaElegidasTable);
+        TiposTareaElegidasTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (TiposTareaElegidasTable.getColumnModel().getColumnCount() > 0) {
+            TiposTareaElegidasTable.getColumnModel().getColumn(0).setMinWidth(0);
+            TiposTareaElegidasTable.getColumnModel().getColumn(0).setPreferredWidth(0);
+        }
 
         agregarTareaButton.setText("-->");
         agregarTareaButton.addActionListener(new java.awt.event.ActionListener() {
@@ -109,115 +248,87 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
             }
         });
 
-        altaTipoInstanciaButton.setText("Dar alta al Tipo Instancia");
-
-        cancelarButton.setText("Cancelar");
-        cancelarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelarButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                                .addComponent(altaTipoInstanciaButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cancelarButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nomaltaTipoInstanciaTextField)
+                                    .addComponent(codaltaTipoInstanciaTextField)
+                                    .addComponent(sectoresComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(sectoresComboBox, 0, 82, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(altaTipoInstanciaButton)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(agregarTareaButton)
-                                    .addComponent(removerTareaButton))
+                                    .addComponent(agregarTareaButton, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
+                                    .addComponent(removerTareaButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(cancelarButton)
-                                .addGap(30, 30, 30))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(codaltaTipoInstancia))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(nomaltaTipoInstancia, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(7, 7, 7))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(codaltaTipoInstancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(nomaltaTipoInstancia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(sectoresComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(agregarTareaButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(removerTareaButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codaltaTipoInstanciaTextField)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(nomaltaTipoInstanciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(sectoresComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(agregarTareaButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(removerTareaButton))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(altaTipoInstanciaButton)
-                    .addComponent(cancelarButton))
-                .addGap(30, 30, 30))
+                    .addComponent(cancelarButton)))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void codaltaTipoInstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codaltaTipoInstanciaActionPerformed
+    private void codaltaTipoInstanciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codaltaTipoInstanciaTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_codaltaTipoInstanciaActionPerformed
+    }//GEN-LAST:event_codaltaTipoInstanciaTextFieldActionPerformed
 
-    private void nomaltaTipoInstanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomaltaTipoInstanciaActionPerformed
+    private void nomaltaTipoInstanciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomaltaTipoInstanciaTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomaltaTipoInstanciaActionPerformed
-
-    private void agregarTareaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTareaButtonActionPerformed
-      List<String> listaseleccionadas = listaTareasVigentes.getSelectedValuesList();
-      for (int i=0;i<listaTareasVigentes.getSelectedValuesList().size();i++)
-        {
-            milista.addElement(listaseleccionadas.get(i));
-        }
-       listaTareasElegidas.setModel(milista);
-    }//GEN-LAST:event_agregarTareaButtonActionPerformed
-
-    private void removerTareaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerTareaButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_removerTareaButtonActionPerformed
+    }//GEN-LAST:event_nomaltaTipoInstanciaTextFieldActionPerformed
 
     private void cancelarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarButtonActionPerformed
         setVisible(false);
@@ -227,6 +338,103 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
     private void sectoresComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sectoresComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sectoresComboBoxActionPerformed
+
+    private void altaTipoInstanciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_altaTipoInstanciaButtonActionPerformed
+        try  {
+            dtoalta.setCodTipoInstancia(Integer.parseInt(codaltaTipoInstanciaTextField.getText()));
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Error al ingresar codSector. Por favor ingrese un número", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        dtoalta.setNombreTipoInstancia(nomaltaTipoInstanciaTextField.getText());
+        dtoalta.setDTOSector((DTOSector)sectoresComboBox.getSelectedItem());
+        dtoalta.setListaTipoTarea(listaTiposTareaParaAlta);
+        controladorABMTI.darAltaTipoInstancia(dtoalta);
+        return;       
+    }//GEN-LAST:event_altaTipoInstanciaButtonActionPerformed
+
+    private void removerTareaButtonoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerTareaButtonoldActionPerformed
+        /*
+        List<String> listaseleccionadas = listaTareasElegidas.getSelectedValuesList();
+        for (int i=0;i<listaseleccionadas.size();i++)
+        {
+            int posicionfincodigo = listaseleccionadas.get(i).lastIndexOf(")", 0);
+            int codigo = Integer.parseInt(listaseleccionadas.get(i).substring(1, posicionfincodigo));
+            for (int j=0;i<listatipostarea.size();i++){
+                DTOTipoTarea untipotarea = listatipostarea.get(j);
+                if (codigo==untipotarea.getCodTipoTarea()) {
+                    milista2.removeElement(listaseleccionadas.get(i));
+                    listaTiposTareaParaAlta.remove(untipotarea);
+                }
+            }
+        }
+        listaTareasElegidas.setModel(milista2);
+        */
+    }//GEN-LAST:event_removerTareaButtonoldActionPerformed
+
+    private void agregarTareaButtonoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTareaButtonoldActionPerformed
+        /* VIEJO      
+        List<String> listaseleccionadas = TiposTareaVigentesTable.getSelectedValuesList();
+        for (int i=0;i<listaseleccionadas.size();i++)
+        {
+            int posicionfincodigo = listaseleccionadas.get(i).indexOf("]", 0);
+            int codigo = Integer.parseInt(listaseleccionadas.get(i).substring(1, posicionfincodigo));
+            for (int j=0;i<listatipostarea.size();i++){
+                DTOTipoTarea untipotarea = listatipostarea.get(j);
+                if (codigo==untipotarea.getCodTipoTarea()) {
+                    milista2.addElement(listaseleccionadas.get(i));
+                    listaTiposTareaParaAlta.add(untipotarea);
+                }
+            }
+        }
+        listaTareasElegidas.setModel(milista2);
+        */
+    }//GEN-LAST:event_agregarTareaButtonoldActionPerformed
+
+    private void agregarTareaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTareaButtonActionPerformed
+        int a;
+        try {
+            a= (Integer) TiposTareaVigentesTable.getModel().getValueAt(TiposTareaVigentesTable.getSelectedRow(), 0);
+            }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Seleccione un Tipo de Tarea para asignar", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        for (int i=0;i<listatipostarea.size();i++)
+        {
+            DTOTipoTarea unTipoTarea = listatipostarea.get(i);
+            if (a==unTipoTarea.getCodTipoTarea())
+            {
+                miTablaElegidas.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea()});
+                TiposTareaElegidasTable.setModel(miTablaElegidas);
+                listaTiposTareaParaAlta.add(unTipoTarea);
+                return;
+            }
+        }
+    }//GEN-LAST:event_agregarTareaButtonActionPerformed
+
+    private void removerTareaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerTareaButtonActionPerformed
+        int a;
+        try  {
+              a= (Integer) TiposTareaElegidasTable.getModel().getValueAt(TiposTareaElegidasTable.getSelectedRow(), 0);
+             }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Seleccione un Tipo de Tarea asignada", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        miTablaElegidas.removeRow(TiposTareaElegidasTable.getSelectedRow());
+        for (int i=0;i<listatipostarea.size();i++)
+        {
+            DTOTipoTarea unTipoTarea = listatipostarea.get(i);
+            if (a==unTipoTarea.getCodTipoTarea())
+            {
+                TiposTareaElegidasTable.setModel(miTablaElegidas);
+                listaTiposTareaParaAlta.remove(unTipoTarea);
+            }
+        }
+        System.out.println("!");
+    }//GEN-LAST:event_removerTareaButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -264,20 +472,26 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable TiposTareaElegidasTable;
+    private javax.swing.JTable TiposTareaVigentesTable;
     private javax.swing.JButton agregarTareaButton;
+    private javax.swing.JButton agregarTareaButtonold;
     private javax.swing.JButton altaTipoInstanciaButton;
     private javax.swing.JButton cancelarButton;
-    private javax.swing.JTextField codaltaTipoInstancia;
+    private javax.swing.JTextField codaltaTipoInstanciaTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList<String> listaTareasElegidas;
     private javax.swing.JList<String> listaTareasVigentes;
-    private javax.swing.JTextField nomaltaTipoInstancia;
+    private javax.swing.JTextField nomaltaTipoInstanciaTextField;
     private javax.swing.JButton removerTareaButton;
-    private javax.swing.JComboBox<String> sectoresComboBox;
+    private javax.swing.JButton removerTareaButtonold;
+    private javax.swing.JComboBox<DTOSector> sectoresComboBox;
     // End of variables declaration//GEN-END:variables
 }

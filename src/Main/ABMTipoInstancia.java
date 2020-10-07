@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,7 +15,7 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Código Tipo Instancia","Nombre Tipo Instancia", "Nombre Sector", "TipoTareas", "Fin Vigencia"
+                "Código Tipo Instancia","Nombre Tipo Instancia", "Nombre Sector", "Fin Vigencia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -29,14 +30,14 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
      * Creates new form ABMTipoInstancia
      */
     public void setVisible(boolean b) {
-        super.setVisible(b);
-         List<DTOTipoInstancia> listatipoinstancias = controladorABMTI.buscarTipoInstancias();
-         for (int i=0;i<listatipoinstancias.size();i++)
+        listatipoinstancias = controladorABMTI.buscarTipoInstancias();
+        for (int i=0;i<listatipoinstancias.size();i++)
         {
             DTOTipoInstancia unTipoInstancia = listatipoinstancias.get(i);
-            miTabla.addRow(new Object[]{unTipoInstancia.getCodTipoInstancia(),unTipoInstancia.getNombreTipoInstancia(),unTipoInstancia.getDTOSector().getNombreSector(),unTipoInstancia.getListaDTOTipoTarea().toString(),unTipoInstancia.getFechaHoraFinVigenciaTipoInstancia()});
+            miTabla.addRow(new Object[]{unTipoInstancia.getCodTipoInstancia(),unTipoInstancia.getNombreTipoInstancia(),unTipoInstancia.getDTOSector().getNombreSector(),unTipoInstancia.getFechaHoraFinVigenciaTipoInstancia()});
             TablaTipoInstancias.setModel(miTabla);
         }
+        super.setVisible(b);
     }
     public ABMTipoInstancia() {
         initComponents();
@@ -66,8 +67,10 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
         BotonAlta = new javax.swing.JButton();
         BotonBaja = new javax.swing.JButton();
         BotonMod = new javax.swing.JButton();
+        verTareasButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("ABM Tipo Instancia");
 
         label1.setText("Nombre Sector");
 
@@ -98,17 +101,17 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
 
         TablaTipoInstancias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Código Tipo Instancia", "Nombre Tipo Instancia", "Nombre Sector", "TipoTareas", "Fin Vigencia"
+                "Código Tipo Instancia", "Nombre Tipo Instancia", "Nombre Sector", "Fin Vigencia"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -146,6 +149,13 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
             }
         });
 
+        verTareasButton.setText("Ver Tareas");
+        verTareasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verTareasButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -176,6 +186,8 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
                 .addComponent(BotonBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(BotonMod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(verTareasButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -207,7 +219,9 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
                     .addComponent(actualizarButton)
                     .addComponent(BotonAlta)
                     .addComponent(BotonBaja)
-                    .addComponent(BotonMod))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(BotonMod)
+                        .addComponent(verTareasButton)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
         );
@@ -221,7 +235,7 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
         nomfilSector =nomSectorTextField.getText();
         //Limpio la tabla
         miTabla.setRowCount(0);
-        List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector);
+        List<DTOTipoInstancia> listatipoinstancias = controladorABMSector.buscarSectores(nomfilSector);
         for (int j=0;j<listaSectores.size();j++)
         {
             DTOSector unSector = listaSectores.get(j);
@@ -289,7 +303,7 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
             return;
         }
         int cod=a;
-        controladorABMSector.abrirBaja(cod);
+        
     }//GEN-LAST:event_BotonBajaActionPerformed
 
     private void BotonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModActionPerformed
@@ -305,6 +319,28 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
         controladorABMSector.abrirModificar(cod);
         // System.out.print(cod);
     }//GEN-LAST:event_BotonModActionPerformed
+
+    private void verTareasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTareasButtonActionPerformed
+        Integer a;
+        try  {
+            a= (Integer) TablaTipoInstancias.getValueAt(TablaTipoInstancias.getSelectedRow(), 0);
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Seleccione un Tipo Instancia", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int cod = a;
+        for (int j=0;j<listatipoinstancias.size();j++)
+            {
+                DTOTipoInstancia untipoinstancia = listatipoinstancias.get(j);
+                if (cod==untipoinstancia.getCodTipoInstancia()) {
+                    controladorABMTI.abrirConsultaTareas(untipoinstancia);
+                } else {
+                }
+                    
+            }
+               
+    }//GEN-LAST:event_verTareasButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -357,5 +393,6 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
     private javax.swing.JButton nomTipoInstanciafilButton;
     private javax.swing.JTextField nomTipoTareaTextField;
     private javax.swing.JButton nomTipoTareafilButton;
+    private javax.swing.JButton verTareasButton;
     // End of variables declaration//GEN-END:variables
 }

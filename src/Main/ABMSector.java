@@ -107,6 +107,7 @@ public class ABMSector extends javax.swing.JFrame {
             }
         });
         TablaSectores.setRowHeight(20);
+        TablaSectores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(TablaSectores);
 
         getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 430, 200));

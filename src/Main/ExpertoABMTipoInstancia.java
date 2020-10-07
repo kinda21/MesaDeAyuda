@@ -121,6 +121,26 @@ public class ExpertoABMTipoInstancia {
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
         }
+    public List<DTOTipoTarea> buscarTiposTarea(){  
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        List objetoList = FachadaPersistencia.getInstance().buscar("TipoTarea", null);
+        List<DTOTipoTarea> listaTiposTarea = new ArrayList<>();
+        for (Object x : objetoList) {
+            TipoTarea tipotarealeida = (TipoTarea) x;
+            DTOTipoTarea tipotarea = new DTOTipoTarea();
+            tipotarea.setCodTipoTarea(tipotarealeida.getCodTipoTarea());
+            tipotarea.setDescripcionTipoTarea(tipotarealeida.getDescripcionTipoTarea());
+            tipotarea.setFechaFinVigenciaTipoTarea(tipotarealeida.getFechaFinVigenciaTipoTarea());
+            tipotarea.setNombreTipoTarea(tipotarealeida.getNombreTipoTarea());
+            //System.out.println(sector.getCodSector());
+            //System.out.println(sector.getDescripcionSector());
+            //System.out.println(sector.getFechaHoraFinVigenciaSector());
+            //System.out.println(sector.getNombreSector());
+            listaTiposTarea.add(tipotarea);
+            }
+        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        return listaTiposTarea;
+        }
     public List<DTOTipoTarea> buscarTiposTareasVigentes(){  
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
@@ -143,34 +163,54 @@ public class ExpertoABMTipoInstancia {
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTiposTarea;
         }
-    }
-    /*
     public void daraltaTipoInstancia(DTOTipoInstancia altatipoinstancia) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         TipoInstancia nuevoTI = new TipoInstancia();
-        Sector sector = new Sector();
         try {
         nuevoTI.setCodTipoInstancia(altatipoinstancia.getCodTipoInstancia());
         nuevoTI.setFechaHoraFinVigenciaTipoInstancia(null);
-        nuevoSector.setNombreSector(altatipoinstancia.getNombreSector());
-        List objetoList = FachadaPersistencia.getInstance().buscar("Sector", null);
-        List<DTOSector> listaSectores = new ArrayList<>();
-        if(nuevoSector.getCodSector()== 0){
+        nuevoTI.setNombreTipoInstancia(altatipoinstancia.getNombreTipoInstancia());
+        int codSector = altatipoinstancia.getDTOSector().getCodSector();
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+        dto.setAtributo("codSector");
+        dto.setOperacion("=");
+        dto.setValor(codSector);
+        criterioList.add(dto);
+        List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
+        Sector SectoraAsignar = (Sector)objetoList.get(0);
+        nuevoTI.setSector(SectoraAsignar);
+        List listatareasAsignadas = altatipoinstancia.getListaDTOTipoTarea();
+        List<TipoTarea> listaTiposTarea = new ArrayList<>();
+        for (Object x : listatareasAsignadas) {
+            DTOTipoTarea DTOtipotarealeida = (DTOTipoTarea) x;
+            int codTarea = DTOtipotarealeida.getCodTipoTarea();    
+            dto.setAtributo("codTipoTarea");
+            dto.setOperacion("=");
+            dto.setValor(codTarea);
+            criterioList.clear();
+            criterioList.add(dto);
+            List objetoList2 = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
+            for (Object x2 : objetoList2) {
+                TipoTarea tipotarea = (TipoTarea) x2;
+                listaTiposTarea.add(tipotarea);
+            }
+        nuevoTI.setListaTipoTarea(listaTiposTarea);
+        List objetoList3 = FachadaPersistencia.getInstance().buscar("TipoInstancia", null);
+        List<DTOTipoInstancia> listaTiposInstancia = new ArrayList<>();
+        if(nuevoTI.getCodTipoInstancia()== 0){
             JOptionPane.showMessageDialog(null, "El codigo ingresado es incorrecto, valor nulo no aceptado.");
                     return;
-        }else if(nuevoSector.getCodSector()< 0){
+        }else if(nuevoTI.getCodTipoInstancia()< 0){
                 JOptionPane.showMessageDialog(null, "El codigo ingresado es incorrecto, valor negativo no aceptado.");
                 return;
         }else
-            for (Object x : objetoList) {
-                Sector sectoraverificar = (Sector) x;
-                if(nuevoSector.getCodSector() == sectoraverificar.getCodSector()){
+            for (Object x3 : objetoList3) {
+                TipoInstancia TIaverificar = (TipoInstancia) x3;
+                if(nuevoTI.getCodTipoInstancia()== TIaverificar.getCodTipoInstancia()){
                     JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido, valor repetido.");
                     return;
-                }   else{
-                nuevoSector.setDescripcionSector(altaSector.getDescripcionSector());
-                nuevoSector.setFechaHoraFinVigenciaSector(null);
-                nuevoSector.setNombreSector(altaSector.getNombreSector());
+                }  
             }
         }
         }
@@ -178,7 +218,9 @@ public class ExpertoABMTipoInstancia {
             
             JOptionPane.showMessageDialog(null, "Error al crear el Sector");
              }
-        FachadaPersistencia.getInstance().guardar(nuevoSector);
+        System.out.println("!");
+        System.out.println("!");
+        FachadaPersistencia.getInstance().guardar(nuevoTI);
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     public void darbajaSector(int codSector) {
@@ -215,4 +257,5 @@ public class ExpertoABMTipoInstancia {
         FachadaPersistencia.getInstance().guardar(sectoramodif);
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
-    }*/
+    }
+    

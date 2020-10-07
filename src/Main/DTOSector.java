@@ -23,6 +23,9 @@ public class DTOSector extends Entidad {
         fechaHoraFinVigenciaSector=null;
         
     }
+    public String toString() {
+        return(this.getNombreSector());
+    }
     public int getCodSector() {
         return codSector;
     }

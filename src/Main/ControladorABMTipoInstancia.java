@@ -16,10 +16,10 @@ public class ControladorABMTipoInstancia {
        List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia();
        return listaTipoInstancias;
     }
-    /*public void darAltaSector(DTOSector altaSector){
-        expertoTI.daraltaSector(altaSector);
+    public void darAltaTipoInstancia(DTOTipoInstancia altaTipoInstancia){
+        expertoTI.daraltaTipoInstancia(altaTipoInstancia);
     }
-    public void darbajaSector(int codSector) {
+    /*public void darbajaSector(int codSector) {
         expertoTI.darbajaSector(codSector);
     }
     public void modificarSector (int codSector, String nomSector, String descSector) {
@@ -52,6 +52,13 @@ public class ControladorABMTipoInstancia {
          AltaTipoInstancia alta = new AltaTipoInstancia();
          alta.inicializaAlta(this);
          alta.setVisible(true);
+     }
+     public void abrirConsultaTareas(DTOTipoInstancia undto)
+     {
+         ConsultaTareas consulta;
+         consulta = new ConsultaTareas();
+         consulta.inicializaconsulta(this,undto);
+         consulta.setVisible(true);
      }
      /*public void abrirModificar(int cod)
      {
