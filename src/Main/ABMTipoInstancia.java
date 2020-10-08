@@ -122,6 +122,7 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
             }
         });
         TablaTipoInstancias.setRowHeight(20);
+        TablaTipoInstancias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(TablaTipoInstancias);
 
         actualizarButton.setText("Actualizar");
@@ -240,6 +241,7 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void nomSecfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSecfilButtonActionPerformed
+        /*
         String nomfilSector;
         nomfilSector =nomSectorTextField.getText();
         //Limpio la tabla
@@ -253,10 +255,11 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
 
         }
         TablaTipoInstancias.setModel(miTabla);
+        */
     }//GEN-LAST:event_nomSecfilButtonActionPerformed
 
     private void nomTipoTareafilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTipoTareafilButtonActionPerformed
-        int codfilSector;
+        /*int codfilSector;
         if ("".equals(nomTipoTareaTextField.getText()) ){
             List<DTOSector> listaSectores = controladorABMSector.buscarSectores();
             miTabla.setRowCount(0);
@@ -287,10 +290,22 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
 
             TablaTipoInstancias.setModel(miTabla);
         }
+        */
     }//GEN-LAST:event_nomTipoTareafilButtonActionPerformed
 
     private void nomTipoInstanciafilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTipoInstanciafilButtonActionPerformed
-        // TODO add your handling code here:
+        String nomfilTipoInstancia;
+        nomfilTipoInstancia =nomTipoInstanciaFieldText.getText();
+        //Limpio la tabla
+        miTabla.setRowCount(0);
+        listatipoinstancias = controladorABMTI.buscarTipoInstancias(nomfilTipoInstancia);
+            for (int i=0;i<listatipoinstancias.size();i++)
+            {
+                DTOTipoInstancia unTipoInstancia = listatipoinstancias.get(i);
+                miTabla.addRow(new Object[]{unTipoInstancia.getCodTipoInstancia(),unTipoInstancia.getNombreTipoInstancia(),unTipoInstancia.getDTOSector().getNombreSector(),unTipoInstancia.getFechaHoraFinVigenciaTipoInstancia()});
+                TablaTipoInstancias.setModel(miTabla);
+            }
+        super.setVisible(true);
     }//GEN-LAST:event_nomTipoInstanciafilButtonActionPerformed
 
     private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
@@ -305,18 +320,18 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
     private void BotonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBajaActionPerformed
         Integer a;
         try  {
-            a= (Integer) TablaSectores.getModel().getValueAt(TablaSectores.getSelectedRow(), 0);
+            a= (Integer) TablaTipoInstancias.getModel().getValueAt(TablaTipoInstancias.getSelectedRow(), 0);
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Seleccione un Sector", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione un TipoInstancia", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cod=a;
-        
+        controladorABMTI.abrirBaja(cod);
     }//GEN-LAST:event_BotonBajaActionPerformed
 
     private void BotonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModActionPerformed
-        Integer a;
+        /*Integer a;
         try  {
             a= (Integer) TablaSectores.getModel().getValueAt(TablaSectores.getSelectedRow(), 0);
         }
@@ -327,6 +342,7 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
         int cod=a;
         controladorABMSector.abrirModificar(cod);
         // System.out.print(cod);
+        */
     }//GEN-LAST:event_BotonModActionPerformed
 
     private void verTareasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTareasButtonActionPerformed

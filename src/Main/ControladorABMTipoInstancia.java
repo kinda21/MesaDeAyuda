@@ -16,12 +16,21 @@ public class ControladorABMTipoInstancia {
        List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia();
        return listaTipoInstancias;
     }
+    public List<DTOTipoInstancia> buscarTipoInstancias(String nomfilTipoInstancia){
+       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(nomfilTipoInstancia);
+       return listaTipoInstancias;
+    }
+    public List<DTOTipoInstancia> buscarTipoInstancias(int codfilTipoInstancia){
+       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(codfilTipoInstancia);
+       return listaTipoInstancias;
+    }
     public void darAltaTipoInstancia(DTOTipoInstancia altaTipoInstancia){
         expertoTI.daraltaTipoInstancia(altaTipoInstancia);
     }
-    /*public void darbajaSector(int codSector) {
-        expertoTI.darbajaSector(codSector);
+    public void darbajaTipoInstancia(int codTipoInstancia) {
+        expertoTI.darbajaTipoInstancia(codTipoInstancia);
     }
+    /*
     public void modificarSector (int codSector, String nomSector, String descSector) {
         try {
             expertoTI.modificarSector(codSector, nomSector, descSector);
@@ -60,18 +69,19 @@ public class ControladorABMTipoInstancia {
          consulta.inicializaconsulta(this,undto);
          consulta.setVisible(true);
      }
+     public void abrirBaja(int cod)
+     {
+         BajaTipoInstancia baja = new BajaTipoInstancia();
+         baja.inicializaBaja(this, cod);
+         baja.setVisible(true);
+     }
      /*public void abrirModificar(int cod)
      {
          ModSector mod = new ModSector();
          mod.inicializaModificar(this, cod);
          mod.setVisible(true);
      }
-     public void abrirBaja(int cod)
-     {
-         BajaSector baja = new BajaSector();
-         baja.inicializaBaja(this, cod);
-         baja.setVisible(true);
-     }
+     
      public void abrirAlta()
      {
          AltaSector alta = new AltaSector();

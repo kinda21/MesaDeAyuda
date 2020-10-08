@@ -99,7 +99,7 @@ public class BajaSector extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(descActualSector, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addContainerGap()
                         .addComponent(bajaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))

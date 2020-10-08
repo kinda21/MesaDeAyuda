@@ -352,7 +352,8 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
         dtoalta.setDTOSector((DTOSector)sectoresComboBox.getSelectedItem());
         dtoalta.setListaTipoTarea(listaTiposTareaParaAlta);
         controladorABMTI.darAltaTipoInstancia(dtoalta);
-        return;       
+        setVisible(false);
+        dispose();       
     }//GEN-LAST:event_altaTipoInstanciaButtonActionPerformed
 
     private void removerTareaButtonoldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removerTareaButtonoldActionPerformed

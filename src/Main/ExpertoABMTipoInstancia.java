@@ -55,6 +55,84 @@ public class ExpertoABMTipoInstancia {
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTipoInstancia;
         }
+    public List<DTOTipoInstancia> buscarTipoInstancia(String nomfilTipoInstancia){  
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+        dto.setAtributo("nombreTipoInstancia");
+        dto.setOperacion("like");
+        dto.setValor(nomfilTipoInstancia);
+        criterioList.add(dto);
+        List objetoList = FachadaPersistencia.getInstance().buscar("TipoInstancia", criterioList);
+        List<DTOTipoInstancia> listaTipoInstancia = new ArrayList<>();
+        for (Object x : objetoList) {
+            TipoInstancia tipoInstancialeida = (TipoInstancia) x;
+            DTOTipoInstancia tipoinstancia = new DTOTipoInstancia();
+            tipoinstancia.setCodTipoInstancia(tipoInstancialeida.getCodTipoInstancia());
+            tipoinstancia.setFechaHoraFinVigenciaTipoInstancia(tipoInstancialeida.getFechaHoraFinVigenciaTipoInstancia());
+            tipoinstancia.setNombreTipoInstancia(tipoInstancialeida.getNombreTipoInstancia());
+            Sector sectorleido = (Sector) tipoInstancialeida.getSector();
+            DTOSector sector = new DTOSector();
+            sector.setCodSector(sectorleido.getCodSector());
+            sector.setDescripcionSector(sectorleido.getDescripcionSector());
+            sector.setFechaHoraFinVigenciaSector(sectorleido.getFechaHoraFinVigenciaSector());
+            sector.setNombreSector(sectorleido.getNombreSector());
+            tipoinstancia.setDTOSector(sector);
+            List<DTOTipoTarea> listaTipoTarea = new ArrayList<>();
+            for (TipoTarea x2 : tipoInstancialeida.getListaTipoTarea() ) {
+            TipoTarea tipotarealeida = x2;
+            DTOTipoTarea tipotarea = new DTOTipoTarea();
+            tipotarea.setCodTipoTarea(tipotarealeida.getCodTipoTarea());
+            tipotarea.setDescripcionTipoTarea(tipotarealeida.getDescripcionTipoTarea());
+            tipotarea.setFechaFinVigenciaTipoTarea(tipotarealeida.getFechaFinVigenciaTipoTarea());
+            tipotarea.setNombreTipoTarea(tipotarealeida.getNombreTipoTarea());
+            listaTipoTarea.add(tipotarea);
+            tipoinstancia.addListaTipoTarea(tipotarea);
+            }
+            listaTipoInstancia.add(tipoinstancia);
+            }
+        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        return listaTipoInstancia;
+        }
+    public List<DTOTipoInstancia> buscarTipoInstancia(int codfilTipoInstancia){  
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+        dto.setAtributo("codTipoInstancia");
+        dto.setOperacion("=");
+        dto.setValor(codfilTipoInstancia);
+        criterioList.add(dto);
+        List objetoList = FachadaPersistencia.getInstance().buscar("TipoInstancia", criterioList);
+        List<DTOTipoInstancia> listaTipoInstancia = new ArrayList<>();
+        for (Object x : objetoList) {
+            TipoInstancia tipoInstancialeida = (TipoInstancia) x;
+            DTOTipoInstancia tipoinstancia = new DTOTipoInstancia();
+            tipoinstancia.setCodTipoInstancia(tipoInstancialeida.getCodTipoInstancia());
+            tipoinstancia.setFechaHoraFinVigenciaTipoInstancia(tipoInstancialeida.getFechaHoraFinVigenciaTipoInstancia());
+            tipoinstancia.setNombreTipoInstancia(tipoInstancialeida.getNombreTipoInstancia());
+            Sector sectorleido = (Sector) tipoInstancialeida.getSector();
+            DTOSector sector = new DTOSector();
+            sector.setCodSector(sectorleido.getCodSector());
+            sector.setDescripcionSector(sectorleido.getDescripcionSector());
+            sector.setFechaHoraFinVigenciaSector(sectorleido.getFechaHoraFinVigenciaSector());
+            sector.setNombreSector(sectorleido.getNombreSector());
+            tipoinstancia.setDTOSector(sector);
+            List<DTOTipoTarea> listaTipoTarea = new ArrayList<>();
+            for (TipoTarea x2 : tipoInstancialeida.getListaTipoTarea() ) {
+            TipoTarea tipotarealeida = x2;
+            DTOTipoTarea tipotarea = new DTOTipoTarea();
+            tipotarea.setCodTipoTarea(tipotarealeida.getCodTipoTarea());
+            tipotarea.setDescripcionTipoTarea(tipotarealeida.getDescripcionTipoTarea());
+            tipotarea.setFechaFinVigenciaTipoTarea(tipotarealeida.getFechaFinVigenciaTipoTarea());
+            tipotarea.setNombreTipoTarea(tipotarealeida.getNombreTipoTarea());
+            listaTipoTarea.add(tipotarea);
+            tipoinstancia.addListaTipoTarea(tipotarea);
+            }
+            listaTipoInstancia.add(tipoinstancia);
+            }
+        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        return listaTipoInstancia;
+        }
     public List<DTOSector> buscarSectores(String filNombreSector){
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
@@ -193,6 +271,10 @@ public class ExpertoABMTipoInstancia {
             List objetoList2 = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
             for (Object x2 : objetoList2) {
                 TipoTarea tipotarea = (TipoTarea) x2;
+                if(tipotarea.getFechaFinVigenciaTipoTarea() != null){
+                    JOptionPane.showMessageDialog(null, "El Tipo Tarea ingresado es incorrecto, ya fue dado de baja");
+                    return;
+                }
                 listaTiposTarea.add(tipotarea);
             }
         nuevoTI.setListaTipoTarea(listaTiposTarea);
@@ -218,24 +300,24 @@ public class ExpertoABMTipoInstancia {
             
             JOptionPane.showMessageDialog(null, "Error al crear el Sector");
              }
-        System.out.println("!");
-        System.out.println("!");
+        //System.out.println("!");
+        //System.out.println("Guardando nuevo Tipo Instancia");
         FachadaPersistencia.getInstance().guardar(nuevoTI);
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
-    public void darbajaSector(int codSector) {
+    public void darbajaTipoInstancia(int codTipoInstancia) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
-        dto.setAtributo("codSector");
+        dto.setAtributo("codTipoInstancia");
         dto.setOperacion("=");
-        dto.setValor(codSector);
+        dto.setValor(codTipoInstancia);
         criterioList.add(dto);
-        List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
-        Sector sectordebaja = (Sector)objetoList.get(0);
+        List objetoList = FachadaPersistencia.getInstance().buscar("TipoInstancia", criterioList);
+        TipoInstancia tipoInstanciadebaja = (TipoInstancia)objetoList.get(0);
         Date fechadehoy = new Date();
-        sectordebaja.setFechaHoraFinVigenciaSector(fechadehoy);
-        FachadaPersistencia.getInstance().guardar(sectordebaja);
+        tipoInstanciadebaja.setFechaHoraFinVigenciaTipoInstancia(fechadehoy);
+        FachadaPersistencia.getInstance().guardar(tipoInstanciadebaja);
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     public void modificarSector (int codSector, String nomSector, String descSector) throws Exception {
