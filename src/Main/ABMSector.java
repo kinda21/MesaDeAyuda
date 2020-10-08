@@ -32,16 +32,17 @@ public class ABMSector extends javax.swing.JFrame {
      * Creates new form ABMSector
      */
     public void setVisible(boolean b) {
-        super.setVisible(b);
-         List<DTOSector> listaSectores = controladorABMSector.buscarSectores();
-         for (int i=0;i<listaSectores.size();i++)
-        {
-            DTOSector unSector = listaSectores.get(i);
-            miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
-        
-            TablaSectores.setModel(miTabla);
+        if (b==true) {
+            List<DTOSector> listaSectores = controladorABMSector.buscarSectores();
+            for (int i=0;i<listaSectores.size();i++)
+            {
+                DTOSector unSector = listaSectores.get(i);
+                miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
+                TablaSectores.setModel(miTabla);
+            }
         }
-    }
+        super.setVisible(b); 
+    }     
     public ABMSector() {
         initComponents();
         
@@ -70,14 +71,15 @@ public class ABMSector extends javax.swing.JFrame {
         label2 = new java.awt.Label();
         codSectorTextField = new javax.swing.JTextField();
         codfilButton = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Buscar Sector");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(nomSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
+        getContentPane().add(nomSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 150, -1));
 
         label1.setText("Nombre Sector");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 90, -1));
+        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 90, -1));
 
         nomfilButton.setText("Filtrar");
         nomfilButton.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +120,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonAltaActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 70, -1));
+        getContentPane().add(BotonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 70, 70, -1));
 
         BotonBaja.setText("Baja");
         BotonBaja.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +128,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonBajaActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 60, -1));
+        getContentPane().add(BotonBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 70, -1));
 
         BotonMod.setText("Modificar");
         BotonMod.addActionListener(new java.awt.event.ActionListener() {
@@ -134,7 +136,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonModActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 100, -1));
+        getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 80, -1));
 
         actualizarButton.setText("Actualizar");
         actualizarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -145,8 +147,8 @@ public class ABMSector extends javax.swing.JFrame {
         getContentPane().add(actualizarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
 
         label2.setText("Código Sector");
-        getContentPane().add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 90, -1));
-        getContentPane().add(codSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
+        getContentPane().add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        getContentPane().add(codSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 150, -1));
 
         codfilButton.setText("Filtrar");
         codfilButton.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +157,15 @@ public class ABMSector extends javax.swing.JFrame {
             }
         });
         getContentPane().add(codfilButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 80, -1));
+
+        BackButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BackButton.setText("Volver");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, -1, 60));
 
         pack();
         setLocationRelativeTo(null);
@@ -249,6 +260,11 @@ public class ABMSector extends javax.swing.JFrame {
          }
     }//GEN-LAST:event_codfilButtonActionPerformed
 
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_BackButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -285,6 +301,7 @@ public class ABMSector extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackButton;
     private javax.swing.JButton BotonAlta;
     private javax.swing.JButton BotonBaja;
     private javax.swing.JButton BotonMod;

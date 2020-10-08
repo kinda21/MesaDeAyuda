@@ -3,7 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="title" type="java.lang.String" value="ModSector"/>
+    <Property name="title" type="java.lang.String" value="Modificar Sector"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -39,19 +39,15 @@
                           <Component id="nomSectorTextField" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="codSectorTextField" min="-2" pref="121" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="119" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="label5" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="label2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                              <Component id="modButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="modButton" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -60,16 +56,15 @@
                                   <Component id="descActualSector" max="32767" attributes="0"/>
                                   <Component id="descSectorTextField" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="96" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="cancelButton" min="-2" pref="111" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -81,7 +76,7 @@
                   <Component id="label1" min="-2" max="-2" attributes="0"/>
                   <Component id="codSectorTextField" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="label4" min="-2" max="-2" attributes="0"/>
                   <Component id="nomActualSector" min="-2" max="-2" attributes="0"/>
@@ -144,6 +139,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="modButton">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Modificar Sector"/>
       </Properties>
       <Events>

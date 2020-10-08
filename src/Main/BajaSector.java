@@ -50,6 +50,7 @@ public class BajaSector extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Baja Sector");
 
+        bajaButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bajaButton.setText("Confirmar Baja de Sector");
         bajaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,8 +102,7 @@ public class BajaSector extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(bajaButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(54, 54, 54))
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)

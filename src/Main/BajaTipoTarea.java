@@ -71,6 +71,7 @@ public class BajaTipoTarea extends javax.swing.JFrame {
             }
         });
 
+        bajaButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         bajaButton.setText("Confirmar Baja de Tipo Tarea");
         bajaButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,9 +98,9 @@ public class BajaTipoTarea extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(descActualTipoTarea, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addContainerGap()
                         .addComponent(bajaButton)
-                        .addGap(55, 55, 55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
@@ -131,7 +132,7 @@ public class BajaTipoTarea extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bajaButton)
                     .addComponent(jButton1))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

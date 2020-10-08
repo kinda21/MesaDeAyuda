@@ -25,43 +25,37 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="label1" min="-2" max="-2" attributes="0"/>
                   <Component id="label2" min="-2" max="-2" attributes="0"/>
                   <Component id="label3" min="-2" max="-2" attributes="0"/>
+                  <Component id="actualizarButton" min="-2" pref="129" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="nomTipoTareaTextField" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="BotonAlta" min="-2" pref="78" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="BotonBaja" min="-2" pref="68" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="BotonMod" min="-2" pref="92" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="verTareasButton" min="-2" pref="101" max="-2" attributes="0"/>
+                  </Group>
                   <Component id="nomSectorTextField" alignment="1" max="32767" attributes="0"/>
-                  <Component id="nomTipoInstanciaFieldText" max="32767" attributes="0"/>
+                  <Component id="nomTipoTareaTextField" alignment="1" max="32767" attributes="0"/>
+                  <Component id="nomTipoInstanciaFieldText" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="nomTipoTareafilButton" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                  <Component id="nomSecfilButton" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
-                  <Component id="nomTipoInstanciafilButton" alignment="1" min="-2" pref="80" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="BackButton" max="32767" attributes="0"/>
+                  <Component id="nomTipoTareafilButton" alignment="0" pref="80" max="32767" attributes="0"/>
+                  <Component id="nomSecfilButton" alignment="0" pref="80" max="32767" attributes="0"/>
+                  <Component id="nomTipoInstanciafilButton" alignment="0" pref="80" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Component id="actualizarButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="21" pref="21" max="-2" attributes="0"/>
-              <Component id="BotonAlta" min="-2" pref="70" max="-2" attributes="0"/>
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="BotonBaja" min="-2" pref="60" max="-2" attributes="0"/>
-              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-              <Component id="BotonMod" min="-2" pref="100" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="verTareasButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane3" pref="899" max="32767" attributes="0"/>
-          </Group>
+          <Component id="jScrollPane3" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -69,40 +63,43 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="label3" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nomTipoInstanciafilButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="nomTipoInstanciaFieldText" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="label3" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="nomTipoInstanciaFieldText" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="nomSectorTextField" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="nomTipoTareaTextField" min="-2" max="-2" attributes="0"/>
+                          <Component id="label2" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="nomTipoInstanciafilButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="nomSecfilButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="nomTipoTareafilButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nomSecfilButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="nomSectorTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nomTipoTareafilButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="nomTipoTareaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="label2" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="actualizarButton" min="-2" max="-2" attributes="0"/>
                   <Component id="BotonAlta" min="-2" max="-2" attributes="0"/>
-                  <Component id="BotonBaja" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="BotonMod" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="verTareasButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BackButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BotonBaja" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="actualizarButton" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane3" pref="214" max="32767" attributes="0"/>
+              <Component id="jScrollPane3" pref="216" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -240,6 +237,17 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="verTareasButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="BackButton">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Volver"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BackButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
