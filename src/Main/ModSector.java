@@ -240,6 +240,7 @@ public class ModSector extends javax.swing.JFrame {
        List<DTOSector> listadto = controladorABMSector.buscarSectores(parCodSector);
        codSectorTextField.setText((Integer.toString(cod)));
        nomActualSector.setText(listadto.get(0).getNombreSector());
+       nomActualSector.setEnabled(true);
        nomSectorTextField.setText(listadto.get(0).getNombreSector());
        descActualSector.setText(listadto.get(0).getDescripcionSector()); 
        descSectorTextField.setText(listadto.get(0).getDescripcionSector());

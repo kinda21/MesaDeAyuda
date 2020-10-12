@@ -32,11 +32,11 @@ public class ABMSector extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
             
-        @Override
+       /* @Override
         public Class<?> getColumnClass(int columnIndex) {
             if (columnIndex == 0) return Integer.class;
             return super.getColumnClass(columnIndex);
-        }
+        }*/
         };
     
         /**
@@ -60,13 +60,13 @@ public class ABMSector extends javax.swing.JFrame {
         TablaSectores.setAutoCreateRowSorter(true);
         TablaSectores.setModel(miTabla);
         
-        TableRowSorter<TableModel> sorter = new TableRowSorter<>(TablaSectores.getModel());
+       /* TableRowSorter<TableModel> sorter = new TableRowSorter<>(TablaSectores.getModel());
         TablaSectores.setRowSorter(sorter);
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();
         int columnIndexToSort = 0;
         sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
         sorter.setSortKeys(sortKeys);
-        sorter.sort();
+        sorter.sort();*/
     }
     public ABMSector() {
         initComponents();
