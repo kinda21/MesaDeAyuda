@@ -222,6 +222,25 @@ public class ExpertoABMSector {
             JOptionPane.showMessageDialog(null, "Error al crear el Sector");
             return false;
             }
+        try{
+            if(nuevoSector.getNombreSector().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Error, nombre de sector vacio.");
+                return false;
+            } 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al crear el Sector");
+            return false;
+        }
+         try{
+            if(nuevoSector.getDescripcionSector().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Error, descripcion de sector vacia.");
+                return false;
+            } 
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al crear el Sector");
+            return false;
+        }
+        
         FachadaPersistencia.getInstance().guardar(nuevoSector);
         return true;
         //FachadaPersistencia.getInstance().finalizarTransaccion();

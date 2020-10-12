@@ -31,6 +31,12 @@ public class ABMSector extends javax.swing.JFrame {
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
+            
+        @Override
+        public Class<?> getColumnClass(int columnIndex) {
+            if (columnIndex == 0) return Integer.class;
+            return super.getColumnClass(columnIndex);
+        }
         };
     
         /**
@@ -50,9 +56,17 @@ public class ABMSector extends javax.swing.JFrame {
         {
             DTOSector unSector = listadtosectores.get(j);   
             miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
-        } 
+        }
         TablaSectores.setAutoCreateRowSorter(true);
         TablaSectores.setModel(miTabla);
+        
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(TablaSectores.getModel());
+        TablaSectores.setRowSorter(sorter);
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        int columnIndexToSort = 0;
+        sortKeys.add(new RowSorter.SortKey(columnIndexToSort, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+        sorter.sort();
     }
     public ABMSector() {
         initComponents();
