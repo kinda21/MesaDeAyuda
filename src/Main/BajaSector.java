@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
  */
 public class BajaSector extends javax.swing.JFrame {
     ControladorABMSector controladorABMSector;
+    ABMSector abm;
     int parCodSector;
     int codSector;
     /**
@@ -19,9 +20,10 @@ public class BajaSector extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void inicializaBaja(ControladorABMSector cont, int cod)
+    public void inicializaBaja(ControladorABMSector cont, ABMSector abmsector, int cod)
    {
        controladorABMSector=cont;
+       abm=abmsector;
        parCodSector=cod;
        List<DTOSector> listadto = controladorABMSector.buscarSectores(parCodSector);
        codSectorTextField.setText((Integer.toString(cod)));
@@ -149,9 +151,13 @@ public class BajaSector extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al ingresar codSector", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        controladorABMSector.darbajaSector(codSector);
+        Boolean exito;
+        exito = controladorABMSector.darbajaSector(codSector);
+        if (exito == true) {
         setVisible(false);
-        dispose(); 
+        dispose();
+        abm.setVisible(true);
+        }
     }//GEN-LAST:event_bajaButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

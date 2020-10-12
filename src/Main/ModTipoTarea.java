@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class ModTipoTarea extends javax.swing.JFrame {
     ControladorABMTipoTarea controladorABMTipoTarea;
+    ABMTipoTarea abm;
     int parCodTipoTarea;
     int codTipoTarea;
     String nomTipoTarea;
@@ -19,9 +20,10 @@ public class ModTipoTarea extends javax.swing.JFrame {
     public ModTipoTarea() {
         initComponents();
     }
-    public void inicializaModificar(ControladorABMTipoTarea cont, int cod)
+    public void inicializaModificar(ControladorABMTipoTarea cont,ABMTipoTarea abmtt, int cod)
    {
        controladorABMTipoTarea=cont;
+       abm=abmtt;
        parCodTipoTarea=cod;
        List<DTOTipoTarea> listadto = controladorABMTipoTarea.buscarTipoTarea(parCodTipoTarea);
        codTipoTareaTextField.setText((Integer.toString(cod)));
@@ -191,9 +193,13 @@ public class ModTipoTarea extends javax.swing.JFrame {
         }
         nomTipoTarea = nomTipoTareaTextField.getText();
         descTipoTarea= descTipoTareaTextField.getText();
-        controladorABMTipoTarea.modificarTipoTarea(codTipoTarea, nomTipoTarea, descTipoTarea);
+        Boolean exito;
+        exito = controladorABMTipoTarea.modificarTipoTarea(codTipoTarea, nomTipoTarea, descTipoTarea);
+        if (exito == true) {
         setVisible(false);
         dispose();
+        abm.setVisible(true);
+        }
     }//GEN-LAST:event_modButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed

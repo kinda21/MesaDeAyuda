@@ -187,7 +187,7 @@ public class ExpertoABMTipoTarea {
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTipoTarea;
     }
-    public void daraltaTipoTarea(DTOTipoTarea altaTipoTarea) {
+    public boolean daraltaTipoTarea(DTOTipoTarea altaTipoTarea) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         TipoTarea nuevoTipoTarea = new TipoTarea();
         try {
@@ -199,27 +199,28 @@ public class ExpertoABMTipoTarea {
         List<DTOTipoTarea> listaTipoTarea = new ArrayList<>();
         if(nuevoTipoTarea.getCodTipoTarea()== 0){
             JOptionPane.showMessageDialog(null, "El codigo ingresado es incorrecto, valor nulo no aceptado.");
-                    return;
+            return false;
         }else if(nuevoTipoTarea.getCodTipoTarea()< 0){
                 JOptionPane.showMessageDialog(null, "El codigo ingresado es incorrecto, valor negativo no aceptado.");
-                return;
+                return false;
         }else
             for (Object x : objetoList) {
                 TipoTarea TipoTareaaverificar = (TipoTarea) x;
                 if(nuevoTipoTarea.getCodTipoTarea() == TipoTareaaverificar.getCodTipoTarea()){
                     JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido, valor repetido.");
-                    return;
-                }  
+                    return false;
             }
+        }
         }
         catch(Exception e){
             
             JOptionPane.showMessageDialog(null, "Error al crear el TipoTarea");
              }
         FachadaPersistencia.getInstance().guardar(nuevoTipoTarea);
+        return true;
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
-    public void darbajaTipoTarea(int codTipoTarea) {
+    public boolean darbajaTipoTarea(int codTipoTarea) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
@@ -231,14 +232,15 @@ public class ExpertoABMTipoTarea {
         TipoTarea TipoTareadebaja = (TipoTarea)objetoList.get(0);
         if (TipoTareadebaja.getFechaFinVigenciaTipoTarea() != null){
             JOptionPane.showMessageDialog(null, "El Sector elegido ya se encuentra dado de baja");
-            return;
+            return false;
         }
         Date fechadehoy = new Date();
         TipoTareadebaja.setFechaFinVigenciaTipoTarea(fechadehoy);
         FachadaPersistencia.getInstance().guardar(TipoTareadebaja);
+        return true;
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
-    public void modificarTipoTarea (int codTipoTarea, String nomTipoTarea, String descTipoTarea) throws Exception {
+    public boolean modificarTipoTarea (int codTipoTarea, String nomTipoTarea, String descTipoTarea) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
@@ -250,11 +252,12 @@ public class ExpertoABMTipoTarea {
         TipoTarea TipoTareaamodif = (TipoTarea)objetoList.get(0);
         if (TipoTareaamodif.getFechaFinVigenciaTipoTarea() != null){
             JOptionPane.showMessageDialog(null,"No se puede modificar un TipoTarea dado de baja" );
-            throw new Exception();
+            return false;                       
         }
         TipoTareaamodif.setNombreTipoTarea(nomTipoTarea);
         TipoTareaamodif.setDescripcionTipoTarea(descTipoTarea);
         FachadaPersistencia.getInstance().guardar(TipoTareaamodif);
+        return true;
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     }

@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class ModSector extends javax.swing.JFrame {
     ControladorABMSector controladorABMSector;
+    ABMSector abm;
     int parCodSector;
     int codSector;
     String nomSector;
@@ -169,11 +170,15 @@ public class ModSector extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al ingresar codSector", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-         nomSector = nomSectorTextField.getText();
-         descSector= descSectorTextField.getText();
-         controladorABMSector.modificarSector(codSector, nomSector, descSector);
-         setVisible(false);
-         dispose();  
+        nomSector = nomSectorTextField.getText();
+        descSector= descSectorTextField.getText();
+        Boolean exito;
+        exito = controladorABMSector.modificarSector(codSector, nomSector, descSector);
+        if (exito == true) {
+        setVisible(false);
+        dispose();
+        abm.setVisible(true);
+        } 
     }//GEN-LAST:event_modButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -227,9 +232,10 @@ public class ModSector extends javax.swing.JFrame {
             }
         });
     }
-   public void inicializaModificar(ControladorABMSector cont, int cod)
+   public void inicializaModificar(ControladorABMSector cont,ABMSector abmsector, int cod)
    {
        controladorABMSector=cont;
+       abm=abmsector;
        parCodSector=cod;
        List<DTOSector> listadto = controladorABMSector.buscarSectores(parCodSector);
        codSectorTextField.setText((Integer.toString(cod)));

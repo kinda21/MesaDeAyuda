@@ -26,9 +26,10 @@ public class ControladorABMTipoInstancia {
     public void darAltaTipoInstancia(DTOTipoInstancia altaTipoInstancia){
         expertoTI.daraltaTipoInstancia(altaTipoInstancia);
     }
-    public void darbajaTipoInstancia(int codTipoInstancia) throws Exception {
+    public void darbajaTipoInstancia(int codTipoInstancia) {
         expertoTI.darbajaTipoInstancia(codTipoInstancia);
     }
+    
     public void modificarTipoInstancia (DTOTipoInstancia modTipoInstancia) {
         expertoTI.modificarTipoInstancia(modTipoInstancia);
     }

@@ -16,18 +16,14 @@ public class ControladorABMTipoTarea {
        List<DTOTipoTarea> listaTipoTarea = expertoTipoTarea.buscarTiposTarea();
        return listaTipoTarea;
     }
-    public void darAltaTipoTarea(DTOTipoTarea altaTipoTarea){
-        expertoTipoTarea.daraltaTipoTarea(altaTipoTarea);
+    public boolean darAltaTipoTarea(DTOTipoTarea altaTipoTarea){
+        return expertoTipoTarea.daraltaTipoTarea(altaTipoTarea);
     }
-    public void darbajaTipoTarea(int codTipoTarea) {
-        expertoTipoTarea.darbajaTipoTarea(codTipoTarea);
+    public boolean darbajaTipoTarea(int codTipoTarea) {
+        return expertoTipoTarea.darbajaTipoTarea(codTipoTarea);
     }
-    public void modificarTipoTarea (int codTipoTarea, String nomTipoTarea, String descTipoTarea) {
-        try {
-            expertoTipoTarea.modificarTipoTarea(codTipoTarea, nomTipoTarea, descTipoTarea);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladorABMTipoTarea.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public boolean modificarTipoTarea (int codTipoTarea, String nomTipoTarea, String descTipoTarea) {
+        return expertoTipoTarea.modificarTipoTarea(codTipoTarea, nomTipoTarea, descTipoTarea);
     }
     public List<DTOTipoTarea> buscarTipoTarea(String nomfilTipoTarea, String codfilTipoTarea){
     List<DTOTipoTarea> listaTipoTarea = expertoTipoTarea.buscarTiposTarea(nomfilTipoTarea,codfilTipoTarea);
@@ -41,22 +37,22 @@ public class ControladorABMTipoTarea {
        List<DTOTipoTarea> listaTipoTarea = expertoTipoTarea.buscarTiposTarea(codfilTipoTarea);
        return listaTipoTarea;
     }
-     public void abrirModificar(int cod)
+     public void abrirModificar(int cod,ABMTipoTarea abm)
      {
          ModTipoTarea mod = new ModTipoTarea();
-         mod.inicializaModificar(this, cod);
+         mod.inicializaModificar(this,abm, cod);
          mod.setVisible(true);
      }
-     public void abrirBaja(int cod)
+     public void abrirBaja(int cod,ABMTipoTarea abm)
      {
          BajaTipoTarea baja = new BajaTipoTarea();
-         baja.inicializaBaja(this, cod);
+         baja.inicializaBaja(this,abm, cod);
          baja.setVisible(true);
      }
-     public void abrirAlta()
+     public void abrirAlta(ABMTipoTarea abm)
      {
          AltaTipoTarea alta = new AltaTipoTarea();
-         alta.inicializaAlta(this);
+         alta.inicializaAlta(this,abm);
          alta.setVisible(true);
      }
      

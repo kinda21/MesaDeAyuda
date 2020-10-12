@@ -214,7 +214,7 @@ public class ABMTipoTarea extends javax.swing.JFrame {
             return;
         }
         int cod=a;
-        controladorABMTipoTarea.abrirModificar(cod);
+        controladorABMTipoTarea.abrirModificar(cod,this);
         // System.out.print(cod);
     }//GEN-LAST:event_BotonModActionPerformed
 
@@ -228,11 +228,11 @@ public class ABMTipoTarea extends javax.swing.JFrame {
             return;
         }
         int cod=a;
-        controladorABMTipoTarea.abrirBaja(cod);
+        controladorABMTipoTarea.abrirBaja(cod,this);
     }//GEN-LAST:event_BotonBajaActionPerformed
 
     private void BotonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAltaActionPerformed
-        controladorABMTipoTarea.abrirAlta();
+        controladorABMTipoTarea.abrirAlta(this);
     }//GEN-LAST:event_BotonAltaActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed

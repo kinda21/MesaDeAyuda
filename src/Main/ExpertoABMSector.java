@@ -192,7 +192,7 @@ public class ExpertoABMSector {
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
     }
-    public void daraltaSector(DTOSector altaSector) {
+    public boolean daraltaSector(DTOSector altaSector) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         Sector nuevoSector = new Sector();
         try {
@@ -204,27 +204,29 @@ public class ExpertoABMSector {
         List<DTOSector> listaSectores = new ArrayList<>();
         if(nuevoSector.getCodSector()== 0){
             JOptionPane.showMessageDialog(null, "El codigo ingresado es incorrecto, valor nulo no aceptado.");
-                    return;
+                    return false;
         }else if(nuevoSector.getCodSector()< 0){
                 JOptionPane.showMessageDialog(null, "El codigo ingresado es incorrecto, valor negativo no aceptado.");
-                return;
+                return false;
         }else
             for (Object x : objetoList) {
                 Sector sectoraverificar = (Sector) x;
                 if(nuevoSector.getCodSector() == sectoraverificar.getCodSector()){
                     JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido, valor repetido.");
-                    return;
+                    return false;
                 }  
             }
         }
         catch(Exception e){
             
             JOptionPane.showMessageDialog(null, "Error al crear el Sector");
-             }
+            return false;
+            }
         FachadaPersistencia.getInstance().guardar(nuevoSector);
+        return true;
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
-    public void darbajaSector(int codSector) {
+    public boolean darbajaSector(int codSector) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
@@ -236,14 +238,15 @@ public class ExpertoABMSector {
         Sector sectordebaja = (Sector)objetoList.get(0);
         if (sectordebaja.getFechaHoraFinVigenciaSector() != null){
             JOptionPane.showMessageDialog(null, "El Sector elegido ya se encuentra dado de baja");
-            return;
+            return false;
         }
         Date fechadehoy = new Date();
         sectordebaja.setFechaHoraFinVigenciaSector(fechadehoy);
         FachadaPersistencia.getInstance().guardar(sectordebaja);
+        return true;
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
-    public void modificarSector (int codSector, String nomSector, String descSector) throws Exception {
+    public boolean modificarSector (int codSector, String nomSector, String descSector){
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
@@ -255,11 +258,12 @@ public class ExpertoABMSector {
         Sector sectoramodif = (Sector)objetoList.get(0);
         if (sectoramodif.getFechaHoraFinVigenciaSector() != null){
             JOptionPane.showMessageDialog(null,"No se puede modificar un Sector dado de baja" );
-            throw new Exception();
+            return false;
         }
         sectoramodif.setNombreSector(nomSector);
         sectoramodif.setDescripcionSector(descSector);
         FachadaPersistencia.getInstance().guardar(sectoramodif);
+        return true;
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     }

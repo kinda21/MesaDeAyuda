@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
  */
 public class BajaTipoTarea extends javax.swing.JFrame {
     ControladorABMTipoTarea controladorABMTipoTarea;
+    ABMTipoTarea abm;
     int parCodTipoTarea;
     int codTipoTarea;
     /**
@@ -19,9 +20,10 @@ public class BajaTipoTarea extends javax.swing.JFrame {
         initComponents();
     }
     
-    public void inicializaBaja(ControladorABMTipoTarea cont, int cod)
+    public void inicializaBaja(ControladorABMTipoTarea cont,ABMTipoTarea abmtt, int cod)
    {
        controladorABMTipoTarea=cont;
+       abm=abmtt;
        parCodTipoTarea=cod;
        List<DTOTipoTarea> listadto = controladorABMTipoTarea.buscarTipoTarea(parCodTipoTarea);
        codTipoTareaTextField.setText((Integer.toString(cod)));
@@ -155,9 +157,13 @@ public class BajaTipoTarea extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al ingresar codTipoTarea", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        controladorABMTipoTarea.darbajaTipoTarea(codTipoTarea);
+        boolean exito;
+        exito = controladorABMTipoTarea.darbajaTipoTarea(codTipoTarea);
+        if (exito == true) {
         setVisible(false);
         dispose();
+        abm.setVisible(true);
+        }
     }//GEN-LAST:event_bajaButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.lang.*;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author FLIA HUDSON
@@ -30,6 +32,7 @@ public class ABMSector extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         };
+    
         /**
      * Creates new form ABMSector
      */
@@ -38,7 +41,8 @@ public class ABMSector extends javax.swing.JFrame {
             List<DTOSector> listaSectores = controladorABMSector.buscarSectores();
             poblarTabla(listaSectores);
         }    
-        super.setVisible(b); 
+        super.setVisible(b);
+        miTabla.getColumnClass(ICONIFIED);
     }     
     public void poblarTabla (List<DTOSector> listadtosectores){
         miTabla.setRowCount(0);
@@ -185,12 +189,12 @@ public class ABMSector extends javax.swing.JFrame {
             return;
         }
         int cod=a;
-       controladorABMSector.abrirModificar(cod);
+       controladorABMSector.abrirModificar(cod,this);
       // System.out.print(cod);    
     }//GEN-LAST:event_BotonModActionPerformed
 
     private void BotonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAltaActionPerformed
-        controladorABMSector.abrirAlta();
+        controladorABMSector.abrirAlta(this);
     }//GEN-LAST:event_BotonAltaActionPerformed
 
     private void BotonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBajaActionPerformed
@@ -203,7 +207,7 @@ public class ABMSector extends javax.swing.JFrame {
             return;
         }
         int cod=a;
-        controladorABMSector.abrirBaja(cod);
+        controladorABMSector.abrirBaja(cod,this);
     }//GEN-LAST:event_BotonBajaActionPerformed
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed

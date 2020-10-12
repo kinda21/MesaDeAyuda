@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class AltaTipoTarea extends javax.swing.JFrame {
  ControladorABMTipoTarea controladorABMTipoTarea = new ControladorABMTipoTarea();
+ ABMTipoTarea abm;
     DTOTipoTarea DTOalta = new DTOTipoTarea();
     /**
      * Creates new form AltaTipoTarea
@@ -20,9 +21,10 @@ public class AltaTipoTarea extends javax.swing.JFrame {
     public AltaTipoTarea() {
         initComponents();
     }
-     public void inicializaAlta(ControladorABMTipoTarea cont)
+     public void inicializaAlta(ControladorABMTipoTarea cont,ABMTipoTarea abmtt)
    {
        controladorABMTipoTarea=cont;
+       abm=abmtt;
        
    }
     /**
@@ -141,9 +143,13 @@ public class AltaTipoTarea extends javax.swing.JFrame {
         }
         DTOalta.setDescripcionTipoTarea(descTipoTarea.getText());
         DTOalta.setNombreTipoTarea(nomTipoTarea.getText());
-        controladorABMTipoTarea.darAltaTipoTarea(DTOalta);
+        boolean exito;
+        exito = controladorABMTipoTarea.darAltaTipoTarea(DTOalta);
+        if (exito == true) {
         setVisible(false);
         dispose();
+        abm.setVisible(true);
+        }
     }//GEN-LAST:event_BotonAltaTipoTareaActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

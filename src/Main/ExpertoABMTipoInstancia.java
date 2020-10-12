@@ -519,7 +519,7 @@ public class ExpertoABMTipoInstancia {
         System.out.println("!");
         System.out.println("Guardando TI");
     }
-    public void darbajaTipoInstancia(int codTipoInstancia) throws Exception {
+    public void darbajaTipoInstancia(int codTipoInstancia) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
@@ -531,7 +531,6 @@ public class ExpertoABMTipoInstancia {
         TipoInstancia tipoInstanciadebaja = (TipoInstancia)objetoList.get(0);
         if (tipoInstanciadebaja.getFechaHoraFinVigenciaTipoInstancia()!= null){
             JOptionPane.showMessageDialog(null,"Este Tipo Instancia ya esta dado de baja" );
-            throw new Exception();
         }
         Date fechadehoy = new Date();
         tipoInstanciadebaja.setFechaHoraFinVigenciaTipoInstancia(fechadehoy);

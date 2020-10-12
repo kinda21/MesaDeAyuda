@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
  */
 public class AltaSector extends javax.swing.JFrame {
     ControladorABMSector controladorABMSector = new ControladorABMSector();
+    ABMSector abm;
     DTOSector DTOalta = new DTOSector();
     /**
      * Creates new form AltaSector
@@ -15,9 +16,10 @@ public class AltaSector extends javax.swing.JFrame {
     public AltaSector() {
         initComponents();
     }
-     public void inicializaAlta(ControladorABMSector cont)
+     public void inicializaAlta(ControladorABMSector cont, ABMSector abmsector)
    {
        controladorABMSector=cont;
+       abm=abmsector;
        
    }
 
@@ -145,11 +147,15 @@ public class AltaSector extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al ingresar codSector", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        Boolean exito;
         DTOalta.setDescripcionSector(descSector.getText());
         DTOalta.setNombreSector(nomSector.getText());
-        controladorABMSector.darAltaSector(DTOalta);
+        exito = controladorABMSector.darAltaSector(DTOalta);
+        if (exito == true) {
         setVisible(false);
         dispose();
+        abm.setVisible(true);
+        }
     }//GEN-LAST:event_BotonAltaSectorActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
