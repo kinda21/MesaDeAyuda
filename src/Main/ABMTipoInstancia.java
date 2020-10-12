@@ -331,18 +331,16 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
     }//GEN-LAST:event_BotonBajaActionPerformed
 
     private void BotonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModActionPerformed
-        /*Integer a;
+        Integer a;
         try  {
-            a= (Integer) TablaSectores.getModel().getValueAt(TablaSectores.getSelectedRow(), 0);
+              a= (Integer) TablaTipoInstancias.getModel().getValueAt(TablaTipoInstancias.getSelectedRow(), 0);
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(this, "Seleccione un Sector", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cod=a;
-        controladorABMSector.abrirModificar(cod);
-        // System.out.print(cod);
-        */
+       controladorABMTI.abrirModificar(cod);
     }//GEN-LAST:event_BotonModActionPerformed
 
     private void verTareasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTareasButtonActionPerformed

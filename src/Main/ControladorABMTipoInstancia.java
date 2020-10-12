@@ -30,16 +30,14 @@ public class ControladorABMTipoInstancia {
     public void darbajaTipoInstancia(int codTipoInstancia) {
         expertoTI.darbajaTipoInstancia(codTipoInstancia);
     }
-    /*
-    public void modificarSector (int codSector, String nomSector, String descSector) {
+    public void modificarTipoInstancia (DTOTipoInstancia modTipoInstancia) {
         try {
-            expertoTI.modificarSector(codSector, nomSector, descSector);
+            expertoTI.modificarTipoInstancia(modTipoInstancia);
         } catch (Exception ex) {
             Logger.getLogger(ControladorABMSector.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    */
-     public List<DTOSector> buscarSectores(String nomfilSector){
+    public List<DTOSector> buscarSectores(String nomfilSector){
        List<DTOSector> listaSectores = expertoTI.buscarSectores(nomfilSector);
        return listaSectores;
     }
@@ -75,20 +73,10 @@ public class ControladorABMTipoInstancia {
          baja.inicializaBaja(this, cod);
          baja.setVisible(true);
      }
-     /*public void abrirModificar(int cod)
+     public void abrirModificar(int cod)
      {
-         ModSector mod = new ModSector();
+         ModTipoInstancia mod = new ModTipoInstancia();
          mod.inicializaModificar(this, cod);
          mod.setVisible(true);
-     }
-     
-     public void abrirAlta()
-     {
-         AltaSector alta = new AltaSector();
-         alta.inicializaAlta(this);
-         alta.setVisible(true);
-     }
-     */
-   
-    
+     }   
 }

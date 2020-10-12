@@ -305,6 +305,55 @@ public class ExpertoABMTipoInstancia {
         FachadaPersistencia.getInstance().guardar(nuevoTI);
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
+        public void modificarTipoInstancia(DTOTipoInstancia modtipoinstancia) {
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        DTOCriterio dto = new DTOCriterio();
+        dto.setAtributo("codTipoInstancia");
+        dto.setOperacion("=");
+        dto.setValor(modtipoinstancia.getCodTipoInstancia());
+        criterioList.add(dto);
+        TipoInstancia TIamodificar = (TipoInstancia)FachadaPersistencia.getInstance().buscar("TipoInstancia", criterioList).get(0);
+        List<TipoTarea> listaTiposTarea = new ArrayList<>();
+        try {
+            TIamodificar.setNombreTipoInstancia(modtipoinstancia.getNombreTipoInstancia());
+            dto.setAtributo("codSector");
+            dto.setOperacion("=");
+            dto.setValor(modtipoinstancia.getDTOSector().getCodSector());
+            criterioList.clear();
+            criterioList.add(dto);
+            Sector sectorasignado = (Sector)FachadaPersistencia.getInstance().buscar("Sector", criterioList);
+            TIamodificar.setSector(sectorasignado);
+            TIamodificar.getListaTipoTarea().clear();
+            List<DTOTipoTarea> listatareasAsignadas = modtipoinstancia.getListaDTOTipoTarea();
+            for (Object x : listatareasAsignadas) {
+                DTOTipoTarea DTOtipotarealeida = (DTOTipoTarea) x;
+                int codTarea = DTOtipotarealeida.getCodTipoTarea();    
+                dto.setAtributo("codTipoTarea");
+                dto.setOperacion("=");
+                dto.setValor(codTarea);
+                criterioList.clear();
+                criterioList.add(dto);
+                List objetoList2 = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
+                for (Object x2 : objetoList2) {
+                    TipoTarea tipotarea = (TipoTarea) x2;
+                    if(tipotarea.getFechaFinVigenciaTipoTarea() != null){
+                        JOptionPane.showMessageDialog(null, "El Tipo Tarea ingresado es incorrecto, ya fue dado de baja");
+                        return;
+                    }
+                    listaTiposTarea.add(tipotarea);
+                }
+            }
+        }    
+        catch(Exception e){
+            
+            JOptionPane.showMessageDialog(null, "Error al crear el Sector");
+             }    
+        TIamodificar.setListaTipoTarea(listaTiposTarea);
+        FachadaPersistencia.getInstance().guardar(TIamodificar);
+        System.out.println("!");
+        System.out.println("Guardando TI");
+    }
     public void darbajaTipoInstancia(int codTipoInstancia) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
@@ -320,24 +369,6 @@ public class ExpertoABMTipoInstancia {
         FachadaPersistencia.getInstance().guardar(tipoInstanciadebaja);
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
-    public void modificarSector (int codSector, String nomSector, String descSector) throws Exception {
-        FachadaPersistencia.getInstance().iniciarTransaccion();
-        List<DTOCriterio> criterioList = new ArrayList<>();
-        DTOCriterio dto = new DTOCriterio();
-        dto.setAtributo("codSector");
-        dto.setOperacion("=");
-        dto.setValor(codSector);
-        criterioList.add(dto);
-        List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
-        Sector sectoramodif = (Sector)objetoList.get(0);
-        if (sectoramodif.getFechaHoraFinVigenciaSector() != null){
-            JOptionPane.showMessageDialog(null,"No se puede modificar un Sector dado de baja" );
-            throw new Exception();
-        }
-        sectoramodif.setNombreSector(nomSector);
-        sectoramodif.setDescripcionSector(descSector);
-        FachadaPersistencia.getInstance().guardar(sectoramodif);
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
-        }
+    
     }
     

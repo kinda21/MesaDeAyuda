@@ -21,7 +21,87 @@ public class ExpertoABMSector {
     //    darbajaSector(333);
     //    modificarSector(333,"prueba superada","ya lo probe");
     }
-    
+     public List<DTOSector> buscarSectores(String filNombreSector, String filCodSector){
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        List<DTOSector> listaSectores = new ArrayList<>();
+        //si vienen vacios busco todos los sectores
+        if ("".equals(filNombreSector) && "".equals(filCodSector)) {
+            List objetoList = FachadaPersistencia.getInstance().buscar("Sector", null);
+            for (Object x : objetoList) {
+            Sector sectorleido = (Sector) x;
+            DTOSector sector = new DTOSector();
+            sector.setCodSector(sectorleido.getCodSector());
+            sector.setDescripcionSector(sectorleido.getDescripcionSector());
+            sector.setFechaHoraFinVigenciaSector(sectorleido.getFechaHoraFinVigenciaSector());
+            sector.setNombreSector(sectorleido.getNombreSector());
+            listaSectores.add(sector);
+            }
+        }
+        //si filCodSector viene vacío y filNombreSector no, busco sector por nombre
+        if ("".equals(filCodSector) && !"".equals(filNombreSector)){
+            DTOCriterio dto = new DTOCriterio();
+            dto.setAtributo("nombreSector");
+            dto.setOperacion("like");
+            dto.setValor(filNombreSector);
+            criterioList.add(dto);
+            List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
+            for (Object x : objetoList) {
+                Sector sectorleido = (Sector) x;
+                DTOSector sector = new DTOSector();
+                sector.setCodSector(sectorleido.getCodSector());
+                sector.setDescripcionSector(sectorleido.getDescripcionSector());
+                sector.setFechaHoraFinVigenciaSector(sectorleido.getFechaHoraFinVigenciaSector());
+                sector.setNombreSector(sectorleido.getNombreSector());
+                listaSectores.add(sector);
+            }
+        }
+        //si filCodSector no viene vacío y filNomSector viene vacío busco por codigo sector
+        if (!"".equals(filCodSector) && "".equals(filNombreSector)){
+            DTOCriterio dto = new DTOCriterio();
+            dto.setAtributo("codSector");
+            dto.setOperacion("=");
+            dto.setValor(Integer.parseInt(filCodSector));
+            criterioList.add(dto);
+            List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
+            for (Object x : objetoList) {
+                Sector sectorleido = (Sector) x;
+                DTOSector sector = new DTOSector();
+                sector.setCodSector(sectorleido.getCodSector());
+                sector.setDescripcionSector(sectorleido.getDescripcionSector());
+                sector.setFechaHoraFinVigenciaSector(sectorleido.getFechaHoraFinVigenciaSector());
+                sector.setNombreSector(sectorleido.getNombreSector());
+            listaSectores.add(sector);
+            }
+        }
+        //si ninguno viene vacío, busco todos los que tengan el nombre y sean mayores? al codigo enviado
+        if (!"".equals(filCodSector) && !"".equals(filNombreSector)) {
+            DTOCriterio dto = new DTOCriterio();
+            dto.setAtributo("nombreSector");
+            dto.setOperacion("like");
+            dto.setValor(filNombreSector);
+            criterioList.add(dto);
+            DTOCriterio dto2 = new DTOCriterio();
+            dto2.setAtributo("codSector");
+            dto2.setOperacion(">=");
+            dto2.setValor(Integer.parseInt(filCodSector));      
+            criterioList.add(dto2);
+            // List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
+            List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
+            for (Object x : objetoList) {
+                Sector sectorleido = (Sector) x;
+                //if (sectorleido.getCodSector()>=Integer.parseInt(filCodSector)) {
+                    DTOSector sector = new DTOSector();
+                    sector.setCodSector(sectorleido.getCodSector());
+                    sector.setDescripcionSector(sectorleido.getDescripcionSector());
+                    sector.setFechaHoraFinVigenciaSector(sectorleido.getFechaHoraFinVigenciaSector());
+                    sector.setNombreSector(sectorleido.getNombreSector());
+                    listaSectores.add(sector);
+                //} 
+            }
+        }   
+        return listaSectores; 
+    }    
     public List<DTOSector> buscarSectores(){  
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List objetoList = FachadaPersistencia.getInstance().buscar("Sector", null);
@@ -38,10 +118,9 @@ public class ExpertoABMSector {
             //System.out.println(sector.getFechaHoraFinVigenciaSector());
             //System.out.println(sector.getNombreSector());
             listaSectores.add(sector);
-            }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
-        return listaSectores;
         }
+        return listaSectores;
+    }
     public List<DTOSector> buscarSectoresVigentes(){  
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
@@ -90,6 +169,7 @@ public class ExpertoABMSector {
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
     }
+   
     public List<DTOSector> buscarSectores(int filcodSector){
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
@@ -154,6 +234,10 @@ public class ExpertoABMSector {
         criterioList.add(dto);
         List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
         Sector sectordebaja = (Sector)objetoList.get(0);
+        if (sectordebaja.getFechaHoraFinVigenciaSector() != null){
+            JOptionPane.showMessageDialog(null, "El Sector elegido ya se encuentra dado de baja");
+            return;
+        }
         Date fechadehoy = new Date();
         sectordebaja.setFechaHoraFinVigenciaSector(fechadehoy);
         FachadaPersistencia.getInstance().guardar(sectordebaja);

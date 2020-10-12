@@ -106,11 +106,11 @@ public class ModSector extends javax.swing.JFrame {
                             .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomActualSector, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nomSectorTextField)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(codSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 119, Short.MAX_VALUE))))
+                                .addGap(0, 119, Short.MAX_VALUE))
+                            .addComponent(nomSectorTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nomActualSector, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -234,7 +234,9 @@ public class ModSector extends javax.swing.JFrame {
        List<DTOSector> listadto = controladorABMSector.buscarSectores(parCodSector);
        codSectorTextField.setText((Integer.toString(cod)));
        nomActualSector.setText(listadto.get(0).getNombreSector());
-       descActualSector.setText(listadto.get(0).getDescripcionSector());       
+       nomSectorTextField.setText(listadto.get(0).getNombreSector());
+       descActualSector.setText(listadto.get(0).getDescripcionSector()); 
+       descSectorTextField.setText(listadto.get(0).getDescripcionSector());
    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;

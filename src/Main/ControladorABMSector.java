@@ -33,6 +33,10 @@ public class ControladorABMSector {
        List<DTOSector> listaSectores = expertosector.buscarSectores(nomfilSector);
        return listaSectores;
     }
+    public List<DTOSector> buscarSectores(String nomfilSector, String codfilSector){
+    List<DTOSector> listaSectores = expertosector.buscarSectores(nomfilSector,codfilSector);
+    return listaSectores;
+    }
      public List<DTOSector> buscarSectores(int codfilSector){
        List<DTOSector> listaSectores = expertosector.buscarSectores(codfilSector);
        return listaSectores;
