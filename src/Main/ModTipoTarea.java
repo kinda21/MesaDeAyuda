@@ -26,7 +26,9 @@ public class ModTipoTarea extends javax.swing.JFrame {
        List<DTOTipoTarea> listadto = controladorABMTipoTarea.buscarTipoTarea(parCodTipoTarea);
        codTipoTareaTextField.setText((Integer.toString(cod)));
        nomActualTipoTarea.setText(listadto.get(0).getNombreTipoTarea());
-       descActualTipoTarea.setText(listadto.get(0).getDescripcionTipoTarea());       
+       nomTipoTareaTextField.setText(listadto.get(0).getNombreTipoTarea());
+       descActualTipoTarea.setText(listadto.get(0).getDescripcionTipoTarea());
+       descTipoTareaTextField.setText(listadto.get(0).getDescripcionTipoTarea());          
    }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,9 +160,9 @@ public class ModTipoTarea extends javax.swing.JFrame {
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(descTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(modButton)
-                    .addComponent(cancelButton))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cancelButton)
+                    .addComponent(modButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 

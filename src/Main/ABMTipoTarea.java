@@ -12,6 +12,8 @@ import java.lang.*;
 public class ABMTipoTarea extends javax.swing.JFrame {
     ControladorABMTipoTarea controladorABMTipoTarea = new ControladorABMTipoTarea();
     List<DTOTipoTarea> listaTipoTareas;
+    String nomfilTipoTarea;
+    String codfilTipoTarea;
     javax.swing.table.DefaultTableModel miTabla=new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -34,15 +36,20 @@ public class ABMTipoTarea extends javax.swing.JFrame {
     public void setVisible(boolean b) {
         if (b==true) {
             List<DTOTipoTarea> listaTipoTareas = controladorABMTipoTarea.buscarTipoTarea();
-            for (int i=0;i<listaTipoTareas.size();i++)
-            {
-                DTOTipoTarea unTipoTarea = listaTipoTareas.get(i);
-                miTabla.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea(),unTipoTarea.getDescripcionTipoTarea(),unTipoTarea.getFechaFinVigenciaTipoTarea()});
-                TablaTipoTarea.setModel(miTabla);
-            }
-        super.setVisible(b); 
+            poblarTabla(listaTipoTareas);
+            super.setVisible(b); 
         }
-    }    
+    }
+    public void poblarTabla (List<DTOTipoTarea> listaTipoTareas){
+        miTabla.setRowCount(0);
+        for (int j=0;j<listaTipoTareas.size();j++)
+        {
+            DTOTipoTarea unTipoTarea = listaTipoTareas.get(j);   
+            miTabla.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea(),unTipoTarea.getDescripcionTipoTarea(),unTipoTarea.getFechaFinVigenciaTipoTarea()});
+        } 
+        TablaTipoTarea.setAutoCreateRowSorter(true);
+        TablaTipoTarea.setModel(miTabla);
+    }
     public ABMTipoTarea() {
         initComponents();
         
@@ -63,12 +70,9 @@ public class ABMTipoTarea extends javax.swing.JFrame {
         label2 = new java.awt.Label();
         codTipoTareaTextField = new javax.swing.JTextField();
         nomTipoTareaTextField = new javax.swing.JTextField();
-        nomfilButton = new javax.swing.JButton();
-        codfilButton = new javax.swing.JButton();
         BotonMod = new javax.swing.JButton();
         BotonBaja = new javax.swing.JButton();
         BotonAlta = new javax.swing.JButton();
-        actualizarButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaTipoTarea = new javax.swing.JTable();
         BackButton = new javax.swing.JButton();
@@ -80,17 +84,15 @@ public class ABMTipoTarea extends javax.swing.JFrame {
 
         label2.setText("Código Tipo Tarea");
 
-        nomfilButton.setText("Filtrar");
-        nomfilButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomfilButtonActionPerformed(evt);
+        codTipoTareaTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                codTipoTareaTextFieldKeyReleased(evt);
             }
         });
 
-        codfilButton.setText("Filtrar");
-        codfilButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codfilButtonActionPerformed(evt);
+        nomTipoTareaTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nomTipoTareaTextFieldKeyReleased(evt);
             }
         });
 
@@ -112,13 +114,6 @@ public class ABMTipoTarea extends javax.swing.JFrame {
         BotonAlta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonAltaActionPerformed(evt);
-            }
-        });
-
-        actualizarButton.setText("Actualizar");
-        actualizarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarButtonActionPerformed(evt);
             }
         });
 
@@ -165,9 +160,8 @@ public class ABMTipoTarea extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(actualizarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,10 +174,7 @@ public class ABMTipoTarea extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BotonMod, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(BackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(codfilButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nomfilButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(BackButton))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -193,79 +184,25 @@ public class ABMTipoTarea extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nomfilButton)
-                        .addComponent(nomTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nomTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(codTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(codfilButton)
-                    .addComponent(codTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(actualizarButton)
                     .addComponent(BotonAlta)
                     .addComponent(BotonBaja)
                     .addComponent(BotonMod)
                     .addComponent(BackButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nomfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomfilButtonActionPerformed
-        String nomfilTipoTarea;
-        nomfilTipoTarea =nomTipoTareaTextField.getText();
-        //Limpio la tabla
-        miTabla.setRowCount(0);
-        List<DTOTipoTarea> listaTipoTareas = controladorABMTipoTarea.buscarTipoTarea(nomfilTipoTarea);
-        for (int j=0;j<listaTipoTareas.size();j++)
-        {
-            DTOTipoTarea unTipoTarea = listaTipoTareas.get(j);
-
-            miTabla.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea(),unTipoTarea.getDescripcionTipoTarea(),unTipoTarea.getFechaFinVigenciaTipoTarea()});
-
-        }
-        TablaTipoTarea.setModel(miTabla);
-    }//GEN-LAST:event_nomfilButtonActionPerformed
-
-    private void codfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codfilButtonActionPerformed
-        int codfilTipoTarea;
-        if ("".equals(codTipoTareaTextField.getText()) ){
-            List<DTOTipoTarea> listaTipoTareas = controladorABMTipoTarea.buscarTipoTarea();
-            miTabla.setRowCount(0);
-
-            for (int j=0;j<listaTipoTareas.size();j++)
-            {
-                DTOTipoTarea unTipoTarea = listaTipoTareas.get(j);
-
-                miTabla.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea(),unTipoTarea.getDescripcionTipoTarea(),unTipoTarea.getFechaFinVigenciaTipoTarea()});
-
-            }
-
-            TablaTipoTarea.setModel(miTabla);
-        }
-        else {
-            codfilTipoTarea = Integer.parseInt(codTipoTareaTextField.getText());
-            //Limpio la tabla
-            miTabla.setRowCount(0);
-            List<DTOTipoTarea> listaTipoTareas = controladorABMTipoTarea.buscarTipoTarea(codfilTipoTarea);
-
-            for (int j=0;j<listaTipoTareas.size();j++)
-            {
-                DTOTipoTarea unTipoTarea = listaTipoTareas.get(j);
-
-                miTabla.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea(),unTipoTarea.getDescripcionTipoTarea(),unTipoTarea.getFechaFinVigenciaTipoTarea()});
-
-            }
-
-            TablaTipoTarea.setModel(miTabla);
-        }
-    }//GEN-LAST:event_codfilButtonActionPerformed
 
     private void BotonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModActionPerformed
         Integer a;
@@ -298,15 +235,31 @@ public class ABMTipoTarea extends javax.swing.JFrame {
         controladorABMTipoTarea.abrirAlta();
     }//GEN-LAST:event_BotonAltaActionPerformed
 
-    private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
-        miTabla.setRowCount(0);
-        setVisible(true);
-    }//GEN-LAST:event_actualizarButtonActionPerformed
-
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         setVisible(false);
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void nomTipoTareaTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomTipoTareaTextFieldKeyReleased
+        nomfilTipoTarea=nomTipoTareaTextField.getText();
+        codfilTipoTarea=codTipoTareaTextField.getText();
+        List<DTOTipoTarea> listatipostarea = controladorABMTipoTarea.buscarTipoTarea(nomfilTipoTarea,codfilTipoTarea);  
+        poblarTabla(listatipostarea); 
+    }//GEN-LAST:event_nomTipoTareaTextFieldKeyReleased
+
+    private void codTipoTareaTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codTipoTareaTextFieldKeyReleased
+    if (!"".equals(codTipoTareaTextField.getText())) try { 
+            Integer a= Integer.parseInt(codTipoTareaTextField.getText());
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Ingrese un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        nomfilTipoTarea=nomTipoTareaTextField.getText();
+        codfilTipoTarea=codTipoTareaTextField.getText();
+        List<DTOTipoTarea> listatipostarea = controladorABMTipoTarea.buscarTipoTarea(nomfilTipoTarea,codfilTipoTarea);  
+        poblarTabla(listatipostarea);   
+    }//GEN-LAST:event_codTipoTareaTextFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -349,13 +302,10 @@ public class ABMTipoTarea extends javax.swing.JFrame {
     private javax.swing.JButton BotonBaja;
     private javax.swing.JButton BotonMod;
     private javax.swing.JTable TablaTipoTarea;
-    private javax.swing.JButton actualizarButton;
     private javax.swing.JTextField codTipoTareaTextField;
-    private javax.swing.JButton codfilButton;
     private javax.swing.JScrollPane jScrollPane3;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private javax.swing.JTextField nomTipoTareaTextField;
-    private javax.swing.JButton nomfilButton;
     // End of variables declaration//GEN-END:variables
 }

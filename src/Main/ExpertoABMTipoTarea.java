@@ -21,6 +21,85 @@ public class ExpertoABMTipoTarea {
     //    darbajaSector(333);
     //    modificarSector(333,"prueba superada","ya lo probe");
     }
+    public List<DTOTipoTarea> buscarTiposTarea(String filNombreTT, String filCodTT){
+        FachadaPersistencia.getInstance().iniciarTransaccion();
+        List<DTOCriterio> criterioList = new ArrayList<>();
+        List<DTOTipoTarea> listaTipoTareas = new ArrayList<>();
+        //si vienen vacios busco todos los tipos tarea
+        if ("".equals(filNombreTT) && "".equals(filCodTT)) {
+            List objetoList = FachadaPersistencia.getInstance().buscar("TipoTarea", null);
+            for (Object x : objetoList) {
+            TipoTarea tipoTarealeido = (TipoTarea) x;
+            DTOTipoTarea tipoTarea = new DTOTipoTarea();
+            tipoTarea.setCodTipoTarea(tipoTarealeido.getCodTipoTarea());
+            tipoTarea.setDescripcionTipoTarea(tipoTarealeido.getDescripcionTipoTarea());
+            tipoTarea.setFechaFinVigenciaTipoTarea(tipoTarealeido.getFechaFinVigenciaTipoTarea());
+            tipoTarea.setNombreTipoTarea(tipoTarealeido.getNombreTipoTarea());
+            listaTipoTareas.add(tipoTarea);
+            }
+        }
+        //si filNombreTT viene vacío y filNombreTT no, busco TipoTarea por nombre
+        if ("".equals(filCodTT) && !"".equals(filNombreTT)){
+            DTOCriterio dto = new DTOCriterio();
+            dto.setAtributo("nombreTipoTarea");
+            dto.setOperacion("like");
+            dto.setValor(filNombreTT);
+            criterioList.add(dto);
+            List objetoList = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
+            for (Object x : objetoList) {
+                TipoTarea tipoTarealeido = (TipoTarea) x;
+                DTOTipoTarea tipoTarea = new DTOTipoTarea();
+                tipoTarea.setCodTipoTarea(tipoTarealeido.getCodTipoTarea());
+                tipoTarea.setDescripcionTipoTarea(tipoTarealeido.getDescripcionTipoTarea());
+                tipoTarea.setFechaFinVigenciaTipoTarea(tipoTarealeido.getFechaFinVigenciaTipoTarea());
+                tipoTarea.setNombreTipoTarea(tipoTarealeido.getNombreTipoTarea());
+                listaTipoTareas.add(tipoTarea);
+            }
+        }
+        //si filcodTT no viene vacío y filNombreTT viene vacío busco por codigo TipoTarea
+        if (!"".equals(filCodTT) && "".equals(filNombreTT)){
+            DTOCriterio dto = new DTOCriterio();
+            dto.setAtributo("codTipoTarea");
+            dto.setOperacion("=");
+            dto.setValor(Integer.parseInt(filCodTT));
+            criterioList.add(dto);
+            List objetoList = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
+            for (Object x : objetoList) {
+                TipoTarea tipoTarealeido = (TipoTarea) x;
+                DTOTipoTarea tipoTarea = new DTOTipoTarea();
+                tipoTarea.setCodTipoTarea(tipoTarealeido.getCodTipoTarea());
+                tipoTarea.setDescripcionTipoTarea(tipoTarealeido.getDescripcionTipoTarea());
+                tipoTarea.setFechaFinVigenciaTipoTarea(tipoTarealeido.getFechaFinVigenciaTipoTarea());
+                tipoTarea.setNombreTipoTarea(tipoTarealeido.getNombreTipoTarea());
+                listaTipoTareas.add(tipoTarea);
+            }
+        }
+        //si ninguno viene vacío, busco todos los que tengan el nombre y sean mayores? al codigo enviado
+        if (!"".equals(filCodTT) && !"".equals(filNombreTT)) {
+            DTOCriterio dto = new DTOCriterio();
+            dto.setAtributo("nombreTipoTarea");
+            dto.setOperacion("like");
+            dto.setValor(filNombreTT);
+            criterioList.add(dto);
+            DTOCriterio dto2 = new DTOCriterio();
+            dto2.setAtributo("codTipoTarea");
+            dto2.setOperacion(">=");
+            dto2.setValor(Integer.parseInt(filCodTT));      
+            criterioList.add(dto2);
+            // List objetoList = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
+            List objetoList = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
+            for (Object x : objetoList) {
+                TipoTarea tipoTarealeido = (TipoTarea) x;
+                DTOTipoTarea tipoTarea = new DTOTipoTarea();
+                tipoTarea.setCodTipoTarea(tipoTarealeido.getCodTipoTarea());
+                tipoTarea.setDescripcionTipoTarea(tipoTarealeido.getDescripcionTipoTarea());
+                tipoTarea.setFechaFinVigenciaTipoTarea(tipoTarealeido.getFechaFinVigenciaTipoTarea());
+                tipoTarea.setNombreTipoTarea(tipoTarealeido.getNombreTipoTarea());
+                listaTipoTareas.add(tipoTarea);
+            }
+        }   
+        return listaTipoTareas; 
+    }    
     
     public List<DTOTipoTarea> buscarTiposTarea(){ 
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -150,6 +229,10 @@ public class ExpertoABMTipoTarea {
         criterioList.add(dto);
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
         TipoTarea TipoTareadebaja = (TipoTarea)objetoList.get(0);
+        if (TipoTareadebaja.getFechaFinVigenciaTipoTarea() != null){
+            JOptionPane.showMessageDialog(null, "El Sector elegido ya se encuentra dado de baja");
+            return;
+        }
         Date fechadehoy = new Date();
         TipoTareadebaja.setFechaFinVigenciaTipoTarea(fechadehoy);
         FachadaPersistencia.getInstance().guardar(TipoTareadebaja);

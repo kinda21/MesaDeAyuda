@@ -11,13 +11,12 @@ public class ControladorABMTipoInstancia {
     ExpertoABMTipoInstancia expertoTI = new ExpertoABMTipoInstancia();
     public ControladorABMTipoInstancia () {
     }
-    
-    public List<DTOTipoInstancia> buscarTipoInstancias(){
-       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia();
+    public List<DTOTipoInstancia> buscarTipoInstancia(String nomfilTipoInstancia, String nomSector, String nomTipoTarea){
+       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(nomfilTipoInstancia, nomSector, nomTipoTarea);
        return listaTipoInstancias;
     }
-    public List<DTOTipoInstancia> buscarTipoInstancias(String nomfilTipoInstancia){
-       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(nomfilTipoInstancia);
+    public List<DTOTipoInstancia> buscarTipoInstancias(){
+       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia();
        return listaTipoInstancias;
     }
     public List<DTOTipoInstancia> buscarTipoInstancias(int codfilTipoInstancia){
@@ -27,24 +26,17 @@ public class ControladorABMTipoInstancia {
     public void darAltaTipoInstancia(DTOTipoInstancia altaTipoInstancia){
         expertoTI.daraltaTipoInstancia(altaTipoInstancia);
     }
-    public void darbajaTipoInstancia(int codTipoInstancia) {
+    public void darbajaTipoInstancia(int codTipoInstancia) throws Exception {
         expertoTI.darbajaTipoInstancia(codTipoInstancia);
     }
     public void modificarTipoInstancia (DTOTipoInstancia modTipoInstancia) {
-        try {
-            expertoTI.modificarTipoInstancia(modTipoInstancia);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladorABMSector.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        expertoTI.modificarTipoInstancia(modTipoInstancia);
     }
-    public List<DTOSector> buscarSectores(String nomfilSector){
-       List<DTOSector> listaSectores = expertoTI.buscarSectores(nomfilSector);
-       return listaSectores;
+    public List<DTOSector> buscarSectores(String nomfilSector, String codfilSector){
+    List<DTOSector> listaSectores = expertoTI.buscarSectores(nomfilSector,codfilSector);
+    return listaSectores;
     }
-     public List<DTOSector> buscarSectores(int codfilSector){
-       List<DTOSector> listaSectores = expertoTI.buscarSectores(codfilSector);
-       return listaSectores;
-    }
+    
     public List<DTOSector> buscarSectoresVigentes(){
        List<DTOSector> listaSectores = expertoTI.buscarSectoresVigentes();
        return listaSectores;

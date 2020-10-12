@@ -15,6 +15,8 @@ public class ModTipoInstancia extends javax.swing.JFrame {
     List<DTOTipoTarea> listatipostarea;
     List<DTOTipoTarea> listaTiposTareaParaAlta;
     List<DTOSector> listasectores;
+    String nomfilSector;
+    String codfilSector;
     javax.swing.table.DefaultTableModel miTablaDisponibles=new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -67,6 +69,7 @@ public class ModTipoInstancia extends javax.swing.JFrame {
         {
             DTOTipoTarea unTipoTarea = listatipostarea.get(i);
             miTablaDisponibles.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea()});
+            TiposTareaVigentesTable.setAutoCreateRowSorter(true);
             TiposTareaVigentesTable.setModel(miTablaDisponibles);
         }
         super.setVisible(b);
@@ -84,6 +87,7 @@ public class ModTipoInstancia extends javax.swing.JFrame {
         {
             DTOTipoTarea unTipoTarea = listaTiposTareaParaAlta.get(i);
             miTablaElegidas.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea()});
+            TiposTareaElegidasTable.setAutoCreateRowSorter(true);
             TiposTareaElegidasTable.setModel(miTablaElegidas);
         }
    }
@@ -116,6 +120,10 @@ public class ModTipoInstancia extends javax.swing.JFrame {
         nomActualTipoInstanciaTextField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         nomActualSectorTipoInstanciaTextField = new javax.swing.JTextField();
+        nomSectorTextField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        codSectorTextField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Modificar Tipo Instancia");
@@ -250,17 +258,33 @@ public class ModTipoInstancia extends javax.swing.JFrame {
             }
         });
 
+        nomSectorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nomSectorTextFieldKeyReleased(evt);
+            }
+        });
+
+        jLabel7.setText("Ingrese nombre de Sector para filtrar:");
+
+        jLabel8.setText("Ingrese Código de Sector para filtrar:");
+
+        codSectorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codSectorTextFieldActionPerformed(evt);
+            }
+        });
+        codSectorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                codSectorTextFieldKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sectoresComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,17 +322,29 @@ public class ModTipoInstancia extends javax.swing.JFrame {
                         .addGap(48, 48, 48)
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nomActualSectorTipoInstanciaTextField)))
+                        .addComponent(nomActualSectorTipoInstanciaTextField))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(sectoresComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(codSectorTextField)
+                            .addComponent(nomSectorTextField))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(codModTipoInstanciaTextField))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomActualTipoInstanciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
@@ -322,9 +358,17 @@ public class ModTipoInstancia extends javax.swing.JFrame {
                     .addComponent(nomActualSectorTipoInstanciaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(codSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(nomSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sectoresComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -374,6 +418,7 @@ public class ModTipoInstancia extends javax.swing.JFrame {
             if (a==unTipoTarea.getCodTipoTarea())
             {
                 miTablaElegidas.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea()});
+                TiposTareaElegidasTable.setAutoCreateRowSorter(true);
                 TiposTareaElegidasTable.setModel(miTablaElegidas);
                 listaTiposTareaParaAlta.add(unTipoTarea);
             return;
@@ -396,11 +441,12 @@ public class ModTipoInstancia extends javax.swing.JFrame {
             DTOTipoTarea unTipoTarea = listatipostarea.get(i);
             if (a==unTipoTarea.getCodTipoTarea())
             {
+                TiposTareaElegidasTable.setAutoCreateRowSorter(true);
                 TiposTareaElegidasTable.setModel(miTablaElegidas);
                 listaTiposTareaParaAlta.remove(unTipoTarea);
             }
         }
-        System.out.println("!");
+
     }//GEN-LAST:event_removerTareaButtonActionPerformed
 
     private void modTipoInstanciaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modTipoInstanciaButtonActionPerformed
@@ -414,6 +460,7 @@ public class ModTipoInstancia extends javax.swing.JFrame {
         dtomod.setNombreTipoInstancia(nomModTipoInstanciaTextField.getText());
         dtomod.setDTOSector((DTOSector)sectoresComboBox.getSelectedItem());
         dtomod.setListaTipoTarea(listaTiposTareaParaAlta);
+        System.out.println("Enviando dtomod");
         controladorABMTI.modificarTipoInstancia(dtomod);
         setVisible(false);
         dispose();
@@ -431,6 +478,41 @@ public class ModTipoInstancia extends javax.swing.JFrame {
     private void nomActualSectorTipoInstanciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomActualSectorTipoInstanciaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomActualSectorTipoInstanciaTextFieldActionPerformed
+
+    private void nomSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomSectorTextFieldKeyReleased
+        nomfilSector=nomSectorTextField.getText();
+        codfilSector="";
+        List<DTOSector> listaSectoresfiltrados = controladorABMTI.buscarSectores(nomfilSector,codfilSector);
+        sectoresComboBox.removeAllItems();
+        for (int i=0;i<listaSectoresfiltrados.size();i++)
+        {
+            DTOSector unSector = listaSectoresfiltrados.get(i);
+             sectoresComboBox.addItem(unSector);
+        }
+    }//GEN-LAST:event_nomSectorTextFieldKeyReleased
+
+    private void codSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codSectorTextFieldKeyReleased
+        if (!"".equals(codSectorTextField.getText())) try {
+            Integer a= Integer.parseInt(codSectorTextField.getText());
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Ingrese un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        nomfilSector="";
+        codfilSector=codSectorTextField.getText();
+        List<DTOSector> listaSectoresfiltrados = controladorABMTI.buscarSectores(nomfilSector,codfilSector);
+        sectoresComboBox.removeAllItems();
+        for (int i=0;i<listaSectoresfiltrados.size();i++)
+        {
+            DTOSector unSector = listaSectoresfiltrados.get(i);
+            sectoresComboBox.addItem(unSector);
+        }
+    }//GEN-LAST:event_codSectorTextFieldKeyReleased
+
+    private void codSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codSectorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codSectorTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -473,18 +555,22 @@ public class ModTipoInstancia extends javax.swing.JFrame {
     private javax.swing.JButton agregarTareaButton;
     private javax.swing.JButton cancelarButton;
     private javax.swing.JTextField codModTipoInstanciaTextField;
+    private javax.swing.JTextField codSectorTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton modTipoInstanciaButton;
     private javax.swing.JTextField nomActualSectorTipoInstanciaTextField;
     private javax.swing.JTextField nomActualTipoInstanciaTextField;
     private javax.swing.JTextField nomModTipoInstanciaTextField;
+    private javax.swing.JTextField nomSectorTextField;
     private javax.swing.JButton removerTareaButton;
     private javax.swing.JComboBox<DTOSector> sectoresComboBox;
     // End of variables declaration//GEN-END:variables

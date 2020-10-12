@@ -29,6 +29,10 @@ public class ControladorABMTipoTarea {
             Logger.getLogger(ControladorABMTipoTarea.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    public List<DTOTipoTarea> buscarTipoTarea(String nomfilTipoTarea, String codfilTipoTarea){
+    List<DTOTipoTarea> listaTipoTarea = expertoTipoTarea.buscarTiposTarea(nomfilTipoTarea,codfilTipoTarea);
+    return listaTipoTarea;
+    }
      public List<DTOTipoTarea> buscarTipoTarea(String nomfilTipoTarea){
        List<DTOTipoTarea> listaTipoTarea = expertoTipoTarea.buscarTiposTarea(nomfilTipoTarea);
        return listaTipoTarea;

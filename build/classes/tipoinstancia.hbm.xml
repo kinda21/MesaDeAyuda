@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
 <hibernate-mapping>
 
     <class name="Entidades.TipoInstancia" table="tipoinstancia">
@@ -23,8 +24,7 @@
         
         <many-to-one name="sector" class="Entidades.Sector" column="OIDSector" not-null="true"/>
         
-        <!-- muchos a muchos con TipoTarea-->
-        <bag name="listaTipoTarea" table="tipotareatipoinstancia" cascade="none">
+        <bag name="listaTipoTarea" table="tipotareatipoinstancia" cascade="save-update">
             <key column="OIDTipoInstancia" not-null="true"/> 
             <many-to-many class="Entidades.TipoTarea" column="OIDTipoTarea"/>            
         </bag>

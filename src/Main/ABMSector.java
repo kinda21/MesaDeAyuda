@@ -47,6 +47,7 @@ public class ABMSector extends javax.swing.JFrame {
             DTOSector unSector = listadtosectores.get(j);   
             miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
         } 
+        TablaSectores.setAutoCreateRowSorter(true);
         TablaSectores.setModel(miTabla);
     }
     public ABMSector() {
@@ -131,7 +132,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonBajaActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 60, -1));
+        getContentPane().add(BotonBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 60, -1));
 
         BotonMod.setText("Modificar");
         BotonMod.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +140,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonModActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 110, -1));
+        getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 120, -1));
 
         codSectorTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,8 +221,6 @@ public class ABMSector extends javax.swing.JFrame {
         }
         nomfilSector=nomSectorTextField.getText();
         codfilSector=codSectorTextField.getText();
-        //Limpio la tabla
-        miTabla.setRowCount(0);
         List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector,codfilSector);  
         poblarTabla(listaSectores);   
     }//GEN-LAST:event_codSectorTextFieldKeyReleased
@@ -233,8 +232,6 @@ public class ABMSector extends javax.swing.JFrame {
     private void nomSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomSectorTextFieldKeyReleased
         nomfilSector=nomSectorTextField.getText();
         codfilSector=codSectorTextField.getText();
-        //Limpio la tabla
-        miTabla.setRowCount(0);
         List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector,codfilSector);  
         poblarTabla(listaSectores);   
     }//GEN-LAST:event_nomSectorTextFieldKeyReleased

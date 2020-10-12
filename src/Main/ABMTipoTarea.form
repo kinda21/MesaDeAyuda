@@ -28,9 +28,8 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="actualizarButton" max="32767" attributes="0"/>
-                          <Component id="label1" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="label2" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -46,11 +45,7 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="BackButton" max="32767" attributes="0"/>
-                          <Component id="codfilButton" alignment="1" max="32767" attributes="0"/>
-                          <Component id="nomfilButton" alignment="1" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="BackButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane3" min="-2" pref="463" max="-2" attributes="0"/>
@@ -65,21 +60,16 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nomfilButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="nomTipoTareaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="nomTipoTareaTextField" min="-2" max="-2" attributes="0"/>
                   <Component id="label1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="codfilButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="codTipoTareaTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="label2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="codTipoTareaTextField" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="actualizarButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BotonAlta" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BotonBaja" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="BotonMod" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -87,7 +77,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="200" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -104,23 +94,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="codTipoTareaTextField">
-    </Component>
-    <Component class="javax.swing.JTextField" name="nomTipoTareaTextField">
-    </Component>
-    <Component class="javax.swing.JButton" name="nomfilButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Filtrar"/>
-      </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomfilButtonActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="codTipoTareaTextFieldKeyReleased"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="codfilButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Filtrar"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="nomTipoTareaTextField">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="codfilButtonActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nomTipoTareaTextFieldKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="BotonMod">
@@ -145,14 +125,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BotonAltaActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="actualizarButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Actualizar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="actualizarButtonActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">

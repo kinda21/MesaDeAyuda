@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ExpertoABMSector.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMSector.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Entidades/Sector.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ControladorABMSector.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/FachadaInterna.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ModTipoInstancia.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ExpertoABMTipoInstancia.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Entidades/TipoTarea.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/tipoinstancia.hbm.xml</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Entidades/TipoInstancia.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ControladorABMTipoInstancia.java</file>
         </group>
     </open-files>
 </project-private>
