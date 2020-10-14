@@ -80,7 +80,7 @@ public class FachadaInterna {
     }
 
     void guardar(Object objeto) {
-        HibernateUtil.getSession().save(objeto);
+        HibernateUtil.getSession().saveOrUpdate(objeto);
         HibernateUtil.getSession().flush();
     }
 

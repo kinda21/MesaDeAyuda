@@ -15,6 +15,9 @@ public class AltaTipoTarea extends javax.swing.JFrame {
  ControladorABMTipoTarea controladorABMTipoTarea = new ControladorABMTipoTarea();
  ABMTipoTarea abm;
     DTOTipoTarea DTOalta = new DTOTipoTarea();
+    int codAltaTT;
+    String nomAltaTT;
+    String descAltaTT;
     /**
      * Creates new form AltaTipoTarea
      */
@@ -45,7 +48,7 @@ public class AltaTipoTarea extends javax.swing.JFrame {
         BotonAltaTipoTarea = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta TipoTarea");
 
         jLabel1.setText("Código TipoTarea:");
@@ -135,16 +138,16 @@ public class AltaTipoTarea extends javax.swing.JFrame {
 
     private void BotonAltaTipoTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAltaTipoTareaActionPerformed
         try  {
-            DTOalta.setCodTipoTarea(Integer.parseInt(codTipoTarea.getText()));
+            codAltaTT=(Integer.parseInt(codTipoTarea.getText()));
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(this, "Error al ingresar codTipoTarea", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        DTOalta.setDescripcionTipoTarea(descTipoTarea.getText());
-        DTOalta.setNombreTipoTarea(nomTipoTarea.getText());
+        descAltaTT = descTipoTarea.getText();
+        nomAltaTT = nomTipoTarea.getText();
         boolean exito;
-        exito = controladorABMTipoTarea.darAltaTipoTarea(DTOalta);
+        exito = controladorABMTipoTarea.darAltaTipoTarea(codAltaTT,nomAltaTT,descAltaTT);
         if (exito == true) {
         setVisible(false);
         dispose();

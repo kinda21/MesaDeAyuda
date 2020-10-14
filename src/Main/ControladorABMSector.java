@@ -16,8 +16,8 @@ public class ControladorABMSector {
        List<DTOSector> listaSectores = expertosector.buscarSectores();
        return listaSectores;
     }
-    public boolean darAltaSector(DTOSector altaSector){
-        return expertosector.daraltaSector(altaSector);
+    public boolean darAltaSector(int codSector, String nomSector, String descSector){
+        return expertosector.daraltaSector(codSector, nomSector, descSector);
         }
     public boolean darbajaSector(int codSector) {
         return expertosector.darbajaSector(codSector);

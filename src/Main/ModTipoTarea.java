@@ -27,9 +27,7 @@ public class ModTipoTarea extends javax.swing.JFrame {
        parCodTipoTarea=cod;
        List<DTOTipoTarea> listadto = controladorABMTipoTarea.buscarTipoTarea(parCodTipoTarea);
        codTipoTareaTextField.setText((Integer.toString(cod)));
-       nomActualTipoTarea.setText(listadto.get(0).getNombreTipoTarea());
        nomTipoTareaTextField.setText(listadto.get(0).getNombreTipoTarea());
-       descActualTipoTarea.setText(listadto.get(0).getDescripcionTipoTarea());
        descTipoTareaTextField.setText(listadto.get(0).getDescripcionTipoTarea());          
    }
     /**
@@ -42,28 +40,20 @@ public class ModTipoTarea extends javax.swing.JFrame {
     private void initComponents() {
 
         label2 = new java.awt.Label();
-        label5 = new java.awt.Label();
         label3 = new java.awt.Label();
-        label4 = new java.awt.Label();
         label1 = new java.awt.Label();
         codTipoTareaTextField = new javax.swing.JTextField();
-        nomActualTipoTarea = new javax.swing.JTextField();
         nomTipoTareaTextField = new javax.swing.JTextField();
-        descActualTipoTarea = new javax.swing.JTextField();
         descTipoTareaTextField = new javax.swing.JTextField();
         modButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Modificar Tipo Tarea");
 
         label2.setText("Nueva descripcion Tipo Tarea:");
 
-        label5.setText("Descripcion actual Tipo Tarea:");
-
         label3.setText("Nuevo nombre del Tipo Tarea:");
-
-        label4.setText("Nombre actual del Tipo Tarea:");
 
         label1.setText("Codigo Tipo Tarea:");
 
@@ -74,24 +64,14 @@ public class ModTipoTarea extends javax.swing.JFrame {
             }
         });
 
-        nomActualTipoTarea.setEditable(false);
-        nomActualTipoTarea.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomActualTipoTareaActionPerformed(evt);
-            }
-        });
-
         nomTipoTareaTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomTipoTareaTextFieldActionPerformed(evt);
             }
         });
 
-        descActualTipoTarea.setEditable(false);
-
         modButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        modButton.setText("Modificar Sector");
-        modButton.setActionCommand("Modificar Tipo Tarea");
+        modButton.setText("Modificar Tipo Tarea");
         modButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modButtonActionPerformed(evt);
@@ -114,28 +94,20 @@ public class ModTipoTarea extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomTipoTareaTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nomActualTipoTarea, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nomTipoTareaTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                             .addComponent(codTipoTareaTextField, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(modButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
-                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(descTipoTareaTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(descActualTipoTarea))))))
+                        .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(9, 9, 9)
+                        .addComponent(descTipoTareaTextField))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(modButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -147,24 +119,16 @@ public class ModTipoTarea extends javax.swing.JFrame {
                     .addComponent(codTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomActualTipoTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nomTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(descActualTipoTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(descTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cancelButton)
-                    .addComponent(modButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(modButton)
+                    .addComponent(cancelButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -174,10 +138,6 @@ public class ModTipoTarea extends javax.swing.JFrame {
     private void codTipoTareaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codTipoTareaTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_codTipoTareaTextFieldActionPerformed
-
-    private void nomActualTipoTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomActualTipoTareaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomActualTipoTareaActionPerformed
 
     private void nomTipoTareaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTipoTareaTextFieldActionPerformed
         // TODO add your handling code here:
@@ -245,15 +205,11 @@ public class ModTipoTarea extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField codTipoTareaTextField;
-    private javax.swing.JTextField descActualTipoTarea;
     private javax.swing.JTextField descTipoTareaTextField;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
-    private java.awt.Label label4;
-    private java.awt.Label label5;
     private javax.swing.JButton modButton;
-    private javax.swing.JTextField nomActualTipoTarea;
     private javax.swing.JTextField nomTipoTareaTextField;
     // End of variables declaration//GEN-END:variables
 }

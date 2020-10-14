@@ -1,5 +1,6 @@
 package Main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,14 +37,45 @@ public class ConsultaTareas extends javax.swing.JFrame {
        tipoinstancia = undto;
        codTITextField.setText((Integer.toString(undto.getCodTipoInstancia())));
        nomTITextField.setText(undto.getNombreTipoInstancia());
-       nomSectorTextField.setText(undto.getDTOSector().getNombreSector());
-       List <DTOTipoTarea> listatipotarea = undto.getListaDTOTipoTarea();
+       nomSectorTextField.setText(undto.getNombreSector());
+       List <DTOTipoTarea> listatipotarea = ordenaDTOTipoTarea(undto.getListaDTOTipoTarea());
          for (int i=0;i<listatipotarea.size();i++)
         {
             DTOTipoTarea untipotarea = listatipotarea.get(i);
             miTabla.addRow(new Object[]{untipotarea.getCodTipoTarea(),untipotarea.getNombreTipoTarea(),untipotarea.getDescripcionTipoTarea(),untipotarea.getFechaFinVigenciaTipoTarea()});
             TablaTipoInstancias.setModel(miTabla);
         }
+    }
+     private  List<DTOTipoTarea> ordenaDTOTipoTarea(List<DTOTipoTarea> listadtoTipoTarea)
+    {
+        List<DTOTipoTarea> ordenado,aux;
+        ordenado=new ArrayList<DTOTipoTarea>();
+        aux= new ArrayList<DTOTipoTarea>();
+        for (int i=0; i< listadtoTipoTarea.size();i++)
+        {
+            aux.add(listadtoTipoTarea.get(i));
+        }
+        for (int i=0; i< listadtoTipoTarea.size();i++)
+        {
+            int ultCod=0;
+            DTOTipoTarea saux=null;
+            for(int j=0;j<aux.size();j++)
+            {
+                if(ultCod ==0)
+                {
+                    ultCod=aux.get(j).getCodTipoTarea();
+                    saux=aux.get(j);
+                }
+                if (ultCod >aux.get(j).getCodTipoTarea())
+                {
+                    ultCod=aux.get(j).getCodTipoTarea();
+                    saux=aux.get(j);
+                }
+            }
+            ordenado.add(saux);
+            aux.remove(saux);
+        }
+         return ordenado; 
     }
 
     /**
@@ -65,7 +97,7 @@ public class ConsultaTareas extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaTipoInstancias = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Información Tipo Instancia");
 
         jLabel1.setText("Código Tipo Instancia:");
@@ -138,9 +170,8 @@ public class ConsultaTareas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(codTITextField, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(nomSectorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
-                        .addComponent(nomTITextField)))
+                    .addComponent(nomSectorTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(nomTITextField))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(backButton)
                 .addContainerGap())

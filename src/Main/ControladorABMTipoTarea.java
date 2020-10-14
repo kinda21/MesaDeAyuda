@@ -16,8 +16,8 @@ public class ControladorABMTipoTarea {
        List<DTOTipoTarea> listaTipoTarea = expertoTipoTarea.buscarTiposTarea();
        return listaTipoTarea;
     }
-    public boolean darAltaTipoTarea(DTOTipoTarea altaTipoTarea){
-        return expertoTipoTarea.daraltaTipoTarea(altaTipoTarea);
+    public boolean darAltaTipoTarea(int codTipoTarea, String nomTipoTarea, String descTipoTarea){
+        return expertoTipoTarea.daraltaTipoTarea(codTipoTarea,nomTipoTarea,descTipoTarea);
     }
     public boolean darbajaTipoTarea(int codTipoTarea) {
         return expertoTipoTarea.darbajaTipoTarea(codTipoTarea);

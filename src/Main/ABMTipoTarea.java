@@ -11,7 +11,7 @@ import java.lang.*;
  */
 public class ABMTipoTarea extends javax.swing.JFrame {
     ControladorABMTipoTarea controladorABMTipoTarea = new ControladorABMTipoTarea();
-    List<DTOTipoTarea> listaTipoTareas;
+    List<DTOTipoTarea> listaTipoTareasVigentesOrdenada;
     String nomfilTipoTarea;
     String codfilTipoTarea;
     javax.swing.table.DefaultTableModel miTabla=new javax.swing.table.DefaultTableModel(
@@ -42,13 +42,44 @@ public class ABMTipoTarea extends javax.swing.JFrame {
     }
     public void poblarTabla (List<DTOTipoTarea> listaTipoTareas){
         miTabla.setRowCount(0);
-        for (int j=0;j<listaTipoTareas.size();j++)
+        listaTipoTareasVigentesOrdenada = ordenaTipoTarea(listaTipoTareas);
+        for (int j=0;j<listaTipoTareasVigentesOrdenada.size();j++)
         {
-            DTOTipoTarea unTipoTarea = listaTipoTareas.get(j);   
+            DTOTipoTarea unTipoTarea = listaTipoTareasVigentesOrdenada.get(j);   
             miTabla.addRow(new Object[]{unTipoTarea.getCodTipoTarea(),unTipoTarea.getNombreTipoTarea(),unTipoTarea.getDescripcionTipoTarea(),unTipoTarea.getFechaFinVigenciaTipoTarea()});
         } 
-        TablaTipoTarea.setAutoCreateRowSorter(true);
         TablaTipoTarea.setModel(miTabla);
+    }
+    private  List<DTOTipoTarea> ordenaTipoTarea (List<DTOTipoTarea> listadtotipostarea)
+    {
+        List<DTOTipoTarea> ordenado,aux;
+        ordenado=new ArrayList<DTOTipoTarea>();
+        aux= new ArrayList<DTOTipoTarea>();
+        for (int i=0; i< listadtotipostarea.size();i++)
+        {
+            aux.add(listadtotipostarea.get(i));
+        }
+        for (int i=0; i< listadtotipostarea.size();i++)
+        {
+            int ultCod=0;
+            DTOTipoTarea saux=null;
+            for(int j=0;j<aux.size();j++)
+            {
+                if(ultCod ==0)
+                {
+                    ultCod=aux.get(j).getCodTipoTarea();
+                    saux=aux.get(j);
+                }
+                if (ultCod >aux.get(j).getCodTipoTarea())
+                {
+                    ultCod=aux.get(j).getCodTipoTarea();
+                    saux=aux.get(j);
+                }
+            }
+            ordenado.add(saux);
+            aux.remove(saux);
+        }
+         return ordenado; 
     }
     public ABMTipoTarea() {
         initComponents();
@@ -77,7 +108,7 @@ public class ABMTipoTarea extends javax.swing.JFrame {
         TablaTipoTarea = new javax.swing.JTable();
         BackButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("ABM Tipo Tarea");
 
         label1.setText("Nombre Tipo Tarea");

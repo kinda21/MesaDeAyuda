@@ -11,8 +11,8 @@ public class ControladorABMTipoInstancia {
     ExpertoABMTipoInstancia expertoTI = new ExpertoABMTipoInstancia();
     public ControladorABMTipoInstancia () {
     }
-    public List<DTOTipoInstancia> buscarTipoInstancia(String nomfilTipoInstancia, String nomSector, String nomTipoTarea){
-       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(nomfilTipoInstancia, nomSector, nomTipoTarea);
+    public List<DTOTipoInstancia> buscarTipoInstancia(String nomfilTipoInstancia, String nomSector){
+       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(nomfilTipoInstancia, nomSector);
        return listaTipoInstancias;
     }
     public List<DTOTipoInstancia> buscarTipoInstancias(){
@@ -23,15 +23,15 @@ public class ControladorABMTipoInstancia {
        List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(codfilTipoInstancia);
        return listaTipoInstancias;
     }
-    public void darAltaTipoInstancia(DTOTipoInstancia altaTipoInstancia){
-        expertoTI.daraltaTipoInstancia(altaTipoInstancia);
+    public boolean darAltaTipoInstancia(int codtipoinstancia, int codSector, String nomTI, List<DTOTipoTarea> tareas){
+        return expertoTI.daraltaTipoInstancia(codtipoinstancia,codSector,nomTI,tareas);
     }
-    public void darbajaTipoInstancia(int codTipoInstancia) {
-        expertoTI.darbajaTipoInstancia(codTipoInstancia);
+    public boolean darbajaTipoInstancia(int codTipoInstancia) {
+        return expertoTI.darbajaTipoInstancia(codTipoInstancia);
     }
     
-    public void modificarTipoInstancia (DTOTipoInstancia modTipoInstancia) {
-        expertoTI.modificarTipoInstancia(modTipoInstancia);
+    public boolean modificarTipoInstancia (int codtipoinstancia,int codSector, String nomTI, List<DTOTipoTarea> tareas) {
+        return expertoTI.modificarTipoInstancia(codtipoinstancia,codSector, nomTI, tareas);
     }
     public List<DTOSector> buscarSectores(String nomfilSector, String codfilSector){
     List<DTOSector> listaSectores = expertoTI.buscarSectores(nomfilSector,codfilSector);
@@ -47,10 +47,10 @@ public class ControladorABMTipoInstancia {
        return listaTiposTarea;
     }
     
-     public void abrirAlta()
+     public void abrirAlta(ABMTipoInstancia abm)
      {
          AltaTipoInstancia alta = new AltaTipoInstancia();
-         alta.inicializaAlta(this);
+         alta.inicializaAlta(this,abm);
          alta.setVisible(true);
      }
      public void abrirConsultaTareas(DTOTipoInstancia undto)
@@ -60,16 +60,16 @@ public class ControladorABMTipoInstancia {
          consulta.inicializaconsulta(this,undto);
          consulta.setVisible(true);
      }
-     public void abrirBaja(int cod)
+     public void abrirBaja(int cod,ABMTipoInstancia abm)
      {
          BajaTipoInstancia baja = new BajaTipoInstancia();
-         baja.inicializaBaja(this, cod);
+         baja.inicializaBaja(this, abm, cod);
          baja.setVisible(true);
      }
-     public void abrirModificar(int cod)
+     public void abrirModificar(int cod,ABMTipoInstancia abm)
      {
          ModTipoInstancia mod = new ModTipoInstancia();
-         mod.inicializaModificar(this, cod);
+         mod.inicializaModificar(this,abm, cod);
          mod.setVisible(true);
      }   
 }

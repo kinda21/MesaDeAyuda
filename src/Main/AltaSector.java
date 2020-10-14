@@ -9,7 +9,9 @@ import javax.swing.JOptionPane;
 public class AltaSector extends javax.swing.JFrame {
     ControladorABMSector controladorABMSector = new ControladorABMSector();
     ABMSector abm;
-    DTOSector DTOalta = new DTOSector();
+    int codSectorAlta;
+    String descSectorAlta;
+    String nomSectorAlta;
     /**
      * Creates new form AltaSector
      */
@@ -41,7 +43,7 @@ public class AltaSector extends javax.swing.JFrame {
         BotonAltaSector = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta Sector");
 
         jLabel1.setText("Código Sector:");
@@ -141,16 +143,16 @@ public class AltaSector extends javax.swing.JFrame {
 
     private void BotonAltaSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAltaSectorActionPerformed
         try  {
-            DTOalta.setCodSector(Integer.parseInt(codSector.getText()));
+            codSectorAlta=(Integer.parseInt(codSector.getText()));
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(this, "Error al ingresar codSector", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
         Boolean exito;
-        DTOalta.setDescripcionSector(descSector.getText());
-        DTOalta.setNombreSector(nomSector.getText());
-        exito = controladorABMSector.darAltaSector(DTOalta);
+        descSectorAlta = descSector.getText();
+        nomSectorAlta = nomSector.getText();
+        exito = controladorABMSector.darAltaSector(codSectorAlta,nomSectorAlta,descSectorAlta);
         if (exito == true) {
         setVisible(false);
         dispose();

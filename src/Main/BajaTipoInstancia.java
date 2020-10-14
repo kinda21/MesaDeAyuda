@@ -8,7 +8,8 @@ import javax.swing.JOptionPane;
  * @author FLIA HUDSON
  */
 public class BajaTipoInstancia extends javax.swing.JFrame {
-ControladorABMTipoInstancia controladorABMTipoInstancia;
+    ControladorABMTipoInstancia controladorABMTipoInstancia;
+    ABMTipoInstancia abmTI;
     int parCodTipoInstancia;
     int codTipoInstancia;
     List<DTOTipoTarea> listatareas;
@@ -35,14 +36,15 @@ ControladorABMTipoInstancia controladorABMTipoInstancia;
         initComponents();
     }
     
-    public void inicializaBaja(ControladorABMTipoInstancia cont, int cod)
+    public void inicializaBaja(ControladorABMTipoInstancia cont,ABMTipoInstancia abm, int cod)
    {
+       abmTI = abm;
        controladorABMTipoInstancia=cont;
        parCodTipoInstancia=cod;
        List<DTOTipoInstancia> listadto = controladorABMTipoInstancia.buscarTipoInstancias(parCodTipoInstancia);
        codbajaTipoInstanciaTextField.setText((Integer.toString(listadto.get(0).getCodTipoInstancia())));
        nomBajaTipoInstanciaTextField.setText(listadto.get(0).getNombreTipoInstancia());
-       nomSectorBajaTipoInstanciaTextField.setText(listadto.get(0).getDTOSector().getNombreSector());
+       nomSectorBajaTipoInstanciaTextField.setText(listadto.get(0).getNombreSector());
        listatareas = listadto.get(0).getListaDTOTipoTarea();
         for (int i=0;i<listatareas.size();i++)
         {
@@ -67,7 +69,7 @@ ControladorABMTipoInstancia controladorABMTipoInstancia;
         BajaButton = new javax.swing.JButton();
         volverButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Código Tipo Instancia:");
 
@@ -222,9 +224,12 @@ ControladorABMTipoInstancia controladorABMTipoInstancia;
             JOptionPane.showMessageDialog(this, "Error al ingresar codSector", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        controladorABMTipoInstancia.darbajaTipoInstancia(codTipoInstancia);
+        Boolean exito = controladorABMTipoInstancia.darbajaTipoInstancia(codTipoInstancia);
+        if (exito == true) {
         setVisible(false);
-        dispose(); 
+        dispose();
+        abmTI.setVisible(true);
+        }
     }//GEN-LAST:event_BajaButtonActionPerformed
 
     private void volverButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverButtonActionPerformed

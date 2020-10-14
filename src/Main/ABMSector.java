@@ -36,22 +36,55 @@ public class ABMSector extends javax.swing.JFrame {
         /**
      * Creates new form ABMSector
      */
+    private  List<DTOSector> ordenaSector(List<DTOSector> listadtosectores)
+    {
+        List<DTOSector> ordenado,aux;
+        ordenado=new ArrayList<DTOSector>();
+        aux= new ArrayList<DTOSector>();
+        for (int i=0; i< listadtosectores.size();i++)
+        {
+            aux.add(listadtosectores.get(i));
+        }
+        for (int i=0; i< listadtosectores.size();i++)
+        {
+            int ultCod=0;
+            DTOSector saux=null;
+            for(int j=0;j<aux.size();j++)
+            {
+                if(ultCod ==0)
+                {
+                    ultCod=aux.get(j).getCodSector();
+                    saux=aux.get(j);
+                }
+                if (ultCod >aux.get(j).getCodSector() )
+                {
+                    ultCod=aux.get(j).getCodSector();
+                    saux=aux.get(j);
+                }
+            }
+            ordenado.add(saux);
+            aux.remove(saux);
+        }
+         return ordenado; 
+    }
     public void setVisible(boolean b) {
         if (b==true) {
-            List<DTOSector> listaSectores = controladorABMSector.buscarSectores();
+            List<DTOSector> listaSectores = controladorABMSector.buscarSectores("","");
             poblarTabla(listaSectores);
         }    
         super.setVisible(b);
         miTabla.getColumnClass(ICONIFIED);
     }     
-    public void poblarTabla (List<DTOSector> listadtosectores){
+    public void poblarTabla (List<DTOSector> plistadtosectores){
         miTabla.setRowCount(0);
+        List<DTOSector> listadtosectores=ordenaSector(plistadtosectores);
         for (int j=0;j<listadtosectores.size();j++)
         {
-            DTOSector unSector = listadtosectores.get(j);   
+            DTOSector unSector = listadtosectores.get(j);  
+            
             miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
         } 
-        TablaSectores.setAutoCreateRowSorter(true);
+    //    TablaSectores.setAutoCreateRowSorter(true);
         TablaSectores.setModel(miTabla);
     }
     public ABMSector() {
@@ -81,7 +114,7 @@ public class ABMSector extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Sector");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -146,6 +179,7 @@ public class ABMSector extends javax.swing.JFrame {
         });
         getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 70, 120, -1));
 
+        codSectorTextField.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         codSectorTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codSectorTextFieldActionPerformed(evt);
@@ -173,6 +207,7 @@ public class ABMSector extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel2.setText("Código Sector:");
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 40, -1, 20));
 
         pack();
@@ -215,20 +250,6 @@ public class ABMSector extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_BackButtonActionPerformed
 
-    private void codSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codSectorTextFieldKeyReleased
-        if (!"".equals(codSectorTextField.getText())) try { 
-            Integer a= Integer.parseInt(codSectorTextField.getText());
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Ingrese un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        nomfilSector=nomSectorTextField.getText();
-        codfilSector=codSectorTextField.getText();
-        List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector,codfilSector);  
-        poblarTabla(listaSectores);   
-    }//GEN-LAST:event_codSectorTextFieldKeyReleased
-
     private void nomSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSectorTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomSectorTextFieldActionPerformed
@@ -239,6 +260,20 @@ public class ABMSector extends javax.swing.JFrame {
         List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector,codfilSector);  
         poblarTabla(listaSectores);   
     }//GEN-LAST:event_nomSectorTextFieldKeyReleased
+
+    private void codSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codSectorTextFieldKeyReleased
+        if (!"".equals(codSectorTextField.getText())) try {
+            Integer a= Integer.parseInt(codSectorTextField.getText());
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Ingrese un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        nomfilSector=nomSectorTextField.getText();
+        codfilSector=codSectorTextField.getText();
+        List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector,codfilSector);
+        poblarTabla(listaSectores);
+    }//GEN-LAST:event_codSectorTextFieldKeyReleased
 
     private void codSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codSectorTextFieldActionPerformed
         // TODO add your handling code here:

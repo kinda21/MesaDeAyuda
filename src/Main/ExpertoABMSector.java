@@ -192,17 +192,22 @@ public class ExpertoABMSector {
         //FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
     }
-    public boolean daraltaSector(DTOSector altaSector) {
+    public boolean daraltaSector(int codSector, String nomSector, String descSector) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         Sector nuevoSector = new Sector();
         try {
-        nuevoSector.setCodSector(altaSector.getCodSector());
-        nuevoSector.setDescripcionSector(altaSector.getDescripcionSector());
+        nuevoSector.setCodSector(codSector);
+        nuevoSector.setDescripcionSector(descSector);
         nuevoSector.setFechaHoraFinVigenciaSector(null);
-        nuevoSector.setNombreSector(altaSector.getNombreSector());
+        nuevoSector.setNombreSector(nomSector);
         List objetoList = FachadaPersistencia.getInstance().buscar("Sector", null);
-        List<DTOSector> listaSectores = new ArrayList<>();
-        if(nuevoSector.getCodSector()== 0){
+        if(nuevoSector.getDescripcionSector().equals("")){
+            JOptionPane.showMessageDialog(null, "La descripción ingresada es incorrecta, valor nulo no aceptado.");
+            return false;
+        }else if(nuevoSector.getNombreSector().equals("")){
+            JOptionPane.showMessageDialog(null, "El nombre ingresado es incorrecto, valor nulo no aceptado.");
+            return false;
+        }else if(nuevoSector.getCodSector()== 0){
             JOptionPane.showMessageDialog(null, "El codigo ingresado es incorrecto, valor nulo no aceptado.");
                     return false;
         }else if(nuevoSector.getCodSector()< 0){
@@ -212,7 +217,7 @@ public class ExpertoABMSector {
             for (Object x : objetoList) {
                 Sector sectoraverificar = (Sector) x;
                 if(nuevoSector.getCodSector() == sectoraverificar.getCodSector()){
-                    JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido, valor repetido.");
+                    JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido, ya existe un Sector con ese código.");
                     return false;
                 }  
             }
@@ -256,7 +261,13 @@ public class ExpertoABMSector {
         criterioList.add(dto);
         List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
         Sector sectoramodif = (Sector)objetoList.get(0);
-        if (sectoramodif.getFechaHoraFinVigenciaSector() != null){
+        if(sectoramodif.getDescripcionSector().equals("")){
+            JOptionPane.showMessageDialog(null, "La descripción ingresada es incorrecta, valor nulo no aceptado.");
+            return false;
+        }else if(sectoramodif.getNombreSector().equals("")){
+            JOptionPane.showMessageDialog(null, "El nombre ingresado es incorrecto, valor nulo no aceptado.");
+            return false;
+        }else if (sectoramodif.getFechaHoraFinVigenciaSector() != null){
             JOptionPane.showMessageDialog(null,"No se puede modificar un Sector dado de baja" );
             return false;
         }
