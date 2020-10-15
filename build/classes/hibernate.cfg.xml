@@ -22,15 +22,11 @@
         <mapping resource="tipoinstancia.hbm.xml"/>
         <mapping resource="tipotarea.hbm.xml"/>
         <mapping resource="sector.hbm.xml"/>
-       <!-- 
         <mapping resource="configuraciontipocaso.hbm.xml"/>       
         <mapping resource="tipocaso.hbm.xml"/>
         <mapping resource="tipocasoiteracion.hbm.xml"/>
         <mapping resource="tipocasotipoinstancia.hbm.xml"/>
-        <mapping resource="tipoinstancia.hbm.xml"/>
-        <mapping resource="tipotarea.hbm.xml"/>
-       -->
-
+       
     </session-factory>
 
 </hibernate-configuration>
