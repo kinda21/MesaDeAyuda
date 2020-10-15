@@ -35,7 +35,7 @@ public class ABMTipoTarea extends javax.swing.JFrame {
      */
     public void setVisible(boolean b) {
         if (b==true) {
-            List<DTOTipoTarea> listaTipoTareas = controladorABMTipoTarea.buscarTipoTarea();
+            List<DTOTipoTarea> listaTipoTareas = controladorABMTipoTarea.buscarTipoTarea(nomfilTipoTarea=nomTipoTareaTextField.getText(),"");
             poblarTabla(listaTipoTareas);
             super.setVisible(b); 
         }
@@ -83,7 +83,7 @@ public class ABMTipoTarea extends javax.swing.JFrame {
     }
     public ABMTipoTarea() {
         initComponents();
-        
+        nomTipoTareaTextField.setText("");
        
          
     }
@@ -98,8 +98,6 @@ public class ABMTipoTarea extends javax.swing.JFrame {
     private void initComponents() {
 
         label1 = new java.awt.Label();
-        label2 = new java.awt.Label();
-        codTipoTareaTextField = new javax.swing.JTextField();
         nomTipoTareaTextField = new javax.swing.JTextField();
         BotonMod = new javax.swing.JButton();
         BotonBaja = new javax.swing.JButton();
@@ -112,14 +110,6 @@ public class ABMTipoTarea extends javax.swing.JFrame {
         setTitle("ABM Tipo Tarea");
 
         label1.setText("Nombre Tipo Tarea");
-
-        label2.setText("Código Tipo Tarea");
-
-        codTipoTareaTextField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                codTipoTareaTextFieldKeyReleased(evt);
-            }
-        });
 
         nomTipoTareaTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -191,45 +181,41 @@ public class ABMTipoTarea extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(BotonAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(label1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomTipoTareaTextField)
-                            .addComponent(codTipoTareaTextField)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(BotonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(BotonBaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BotonMod, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(BotonMod, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nomTipoTareaTextField))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BackButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 463, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(BackButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nomTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(codTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonAlta)
-                    .addComponent(BotonBaja)
-                    .addComponent(BotonMod)
-                    .addComponent(BackButton))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BotonAlta)
+                            .addComponent(BotonBaja)
+                            .addComponent(BotonMod)))
+                    .addComponent(BackButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -273,24 +259,9 @@ public class ABMTipoTarea extends javax.swing.JFrame {
 
     private void nomTipoTareaTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomTipoTareaTextFieldKeyReleased
         nomfilTipoTarea=nomTipoTareaTextField.getText();
-        codfilTipoTarea=codTipoTareaTextField.getText();
-        List<DTOTipoTarea> listatipostarea = controladorABMTipoTarea.buscarTipoTarea(nomfilTipoTarea,codfilTipoTarea);  
+        List<DTOTipoTarea> listatipostarea = controladorABMTipoTarea.buscarTipoTarea(nomfilTipoTarea,"");  
         poblarTabla(listatipostarea); 
     }//GEN-LAST:event_nomTipoTareaTextFieldKeyReleased
-
-    private void codTipoTareaTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codTipoTareaTextFieldKeyReleased
-    if (!"".equals(codTipoTareaTextField.getText())) try { 
-            Integer a= Integer.parseInt(codTipoTareaTextField.getText());
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Ingrese un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        nomfilTipoTarea=nomTipoTareaTextField.getText();
-        codfilTipoTarea=codTipoTareaTextField.getText();
-        List<DTOTipoTarea> listatipostarea = controladorABMTipoTarea.buscarTipoTarea(nomfilTipoTarea,codfilTipoTarea);  
-        poblarTabla(listatipostarea);   
-    }//GEN-LAST:event_codTipoTareaTextFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -333,10 +304,8 @@ public class ABMTipoTarea extends javax.swing.JFrame {
     private javax.swing.JButton BotonBaja;
     private javax.swing.JButton BotonMod;
     private javax.swing.JTable TablaTipoTarea;
-    private javax.swing.JTextField codTipoTareaTextField;
     private javax.swing.JScrollPane jScrollPane3;
     private java.awt.Label label1;
-    private java.awt.Label label2;
     private javax.swing.JTextField nomTipoTareaTextField;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,7 +35,7 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
      */
     public void setVisible(boolean b) {
         if (b==true) {
-            List<DTOTipoInstancia> listatipoinstancias = controladorABMTI.buscarTipoInstancia("","");
+            List<DTOTipoInstancia> listatipoinstancias = controladorABMTI.buscarTipoInstancia(nomTipoInstanciaFieldText.getText(),nomSectorTextField.getText());
             poblarTabla(listatipoinstancias);
             super.setVisible(b);
         }
@@ -84,6 +84,8 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
     }
     public ABMTipoInstancia() {
         initComponents();
+        nomTipoInstanciaFieldText.setText("");
+        nomSectorTextField.setText("");
     }
 
     /**
@@ -120,6 +122,11 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
 
         label3.setText("Nombre Tipo Instancia");
 
+        nomTipoInstanciaFieldText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomTipoInstanciaFieldTextActionPerformed(evt);
+            }
+        });
         nomTipoInstanciaFieldText.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nomTipoInstanciaFieldTextKeyPressed(evt);
@@ -309,6 +316,10 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
         List<DTOTipoInstancia> listatipoinstanciasfiltradas = controladorABMTI.buscarTipoInstancia(filNombreTI, filNombreSector);
         poblarTabla(listatipoinstanciasfiltradas);
     }//GEN-LAST:event_nomSectorTextFieldKeyReleased
+
+    private void nomTipoInstanciaFieldTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTipoInstanciaFieldTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomTipoInstanciaFieldTextActionPerformed
 
     /**
      * @param args the command line arguments

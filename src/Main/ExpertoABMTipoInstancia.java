@@ -460,6 +460,11 @@ public class ExpertoABMTipoInstancia {
         public boolean modificarTipoInstancia(int codtipoinstancia, int codSector, String nomTI, List<DTOTipoTarea> tareas) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         int codigoTI = codtipoinstancia;
+        /* CONTROL PREVIO A MODIFICAR INSTANCIA
+        if (nomTI.equals("")) {
+                JOptionPane.showMessageDialog(null, "El nombre ingresado es incorrecto, valor nulo no aceptado");
+                return false;
+            }*/
         List<DTOCriterio> criterioList = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
         dto.setAtributo("codTipoInstancia");

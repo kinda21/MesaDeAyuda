@@ -28,28 +28,25 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="label1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="label2" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" pref="463" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="BotonAlta" max="32767" attributes="0"/>
+                          <Component id="label1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="nomTipoTareaTextField" max="32767" attributes="0"/>
-                          <Component id="codTipoTareaTextField" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="BotonAlta" min="-2" pref="67" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="BotonBaja" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="BotonMod" min="-2" pref="118" max="-2" attributes="0"/>
+                              <Component id="BotonMod" min="-2" pref="136" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="nomTipoTareaTextField" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BackButton" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane3" min="-2" pref="463" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -59,25 +56,25 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="nomTipoTareaTextField" min="-2" max="-2" attributes="0"/>
-                  <Component id="label1" min="-2" max="-2" attributes="0"/>
-              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="label2" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="codTipoTareaTextField" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BotonAlta" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BotonBaja" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BotonMod" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="BackButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="nomTipoTareaTextField" min="-2" max="-2" attributes="0"/>
+                          <Component id="label1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="BotonAlta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BotonBaja" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BotonMod" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="BackButton" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="200" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,16 +84,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre Tipo Tarea"/>
       </Properties>
-    </Component>
-    <Component class="java.awt.Label" name="label2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="C&#xf3;digo Tipo Tarea"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="codTipoTareaTextField">
-      <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="codTipoTareaTextFieldKeyReleased"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="nomTipoTareaTextField">
       <Events>
