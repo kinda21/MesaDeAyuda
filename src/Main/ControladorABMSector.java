@@ -16,43 +16,43 @@ public class ControladorABMSector {
        List<DTOSector> listaSectores = expertosector.buscarSectores();
        return listaSectores;
     }
-    public void darAltaSector(DTOSector altaSector){
-        expertosector.daraltaSector(altaSector);
-    }
-    public void darbajaSector(int codSector) {
-        expertosector.darbajaSector(codSector);
-    }
-    public void modificarSector (int codSector, String nomSector, String descSector) {
-        try {
-            expertosector.modificarSector(codSector, nomSector, descSector);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladorABMSector.class.getName()).log(Level.SEVERE, null, ex);
+    public boolean darAltaSector(int codSector, String nomSector, String descSector){
+        return expertosector.daraltaSector(codSector, nomSector, descSector);
         }
+    public boolean darbajaSector(int codSector) {
+        return expertosector.darbajaSector(codSector);
+    }
+    public boolean modificarSector (int codSector, String nomSector, String descSector) {
+        return expertosector.modificarSector(codSector, nomSector, descSector);
     }
      public List<DTOSector> buscarSectores(String nomfilSector){
        List<DTOSector> listaSectores = expertosector.buscarSectores(nomfilSector);
        return listaSectores;
     }
+    public List<DTOSector> buscarSectores(String nomfilSector, String codfilSector){
+    List<DTOSector> listaSectores = expertosector.buscarSectores(nomfilSector,codfilSector);
+    return listaSectores;
+    }
      public List<DTOSector> buscarSectores(int codfilSector){
        List<DTOSector> listaSectores = expertosector.buscarSectores(codfilSector);
        return listaSectores;
     }
-     public void abrirModificar(int cod)
+     public void abrirModificar(int cod, ABMSector abm)
      {
          ModSector mod = new ModSector();
-         mod.inicializaModificar(this, cod);
+         mod.inicializaModificar(this, abm, cod);
          mod.setVisible(true);
      }
-     public void abrirBaja(int cod)
+     public void abrirBaja(int cod,ABMSector abm)
      {
          BajaSector baja = new BajaSector();
-         baja.inicializaBaja(this, cod);
+         baja.inicializaBaja(this, abm, cod);
          baja.setVisible(true);
      }
-     public void abrirAlta()
+     public void abrirAlta(ABMSector abm)
      {
          AltaSector alta = new AltaSector();
-         alta.inicializaAlta(this);
+         alta.inicializaAlta(this, abm);
          alta.setVisible(true);
      }
      

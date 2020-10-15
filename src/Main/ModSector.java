@@ -8,6 +8,7 @@ import java.util.List;
  */
 public class ModSector extends javax.swing.JFrame {
     ControladorABMSector controladorABMSector;
+    ABMSector abm;
     int parCodSector;
     int codSector;
     String nomSector;
@@ -37,13 +38,9 @@ public class ModSector extends javax.swing.JFrame {
         descSectorTextField = new javax.swing.JTextField();
         modButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
-        nomActualSector = new javax.swing.JTextField();
-        label4 = new java.awt.Label();
-        label5 = new java.awt.Label();
-        descActualSector = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ModSector");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Modificar Sector");
 
         codSectorTextField.setEditable(false);
         codSectorTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -52,11 +49,12 @@ public class ModSector extends javax.swing.JFrame {
             }
         });
 
-        label1.setText("Codigo Sector");
+        label1.setText("Codigo Sector:");
 
-        label2.setText("Nueva descripcion del sector");
+        label2.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
+        label2.setText("Nueva descripcion del sector:");
 
-        label3.setText("Nuevo nombre del sector");
+        label3.setText("Nuevo nombre del sector:");
 
         nomSectorTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,6 +62,13 @@ public class ModSector extends javax.swing.JFrame {
             }
         });
 
+        descSectorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descSectorTextFieldActionPerformed(evt);
+            }
+        });
+
+        modButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         modButton.setText("Modificar Sector");
         modButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,19 +83,6 @@ public class ModSector extends javax.swing.JFrame {
             }
         });
 
-        nomActualSector.setEditable(false);
-        nomActualSector.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomActualSectorActionPerformed(evt);
-            }
-        });
-
-        label4.setText("Nombre actual del Sector");
-
-        label5.setText("Descripcion actual del sector");
-
-        descActualSector.setEditable(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -99,62 +91,38 @@ public class ModSector extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomActualSector, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nomSectorTextField)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(codSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
+                        .addComponent(modButton, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
+                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(modButton)))
+                            .addComponent(label1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(descActualSector)
-                                    .addComponent(descSectorTextField))
-                                .addContainerGap())
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50))))))
+                            .addComponent(nomSectorTextField)
+                            .addComponent(codSectorTextField)
+                            .addComponent(descSectorTextField))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(codSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomActualSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nomSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(descActualSector, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(descSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(modButton)
                     .addComponent(cancelButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -172,11 +140,15 @@ public class ModSector extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al ingresar codSector", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-         nomSector = nomSectorTextField.getText();
-         descSector= descSectorTextField.getText();
-         controladorABMSector.modificarSector(codSector, nomSector, descSector);
-         setVisible(false);
-         dispose();  
+        nomSector = nomSectorTextField.getText();
+        descSector= descSectorTextField.getText();
+        Boolean exito;
+        exito = controladorABMSector.modificarSector(codSector, nomSector, descSector);
+        if (exito == true) {
+        setVisible(false);
+        dispose();
+        abm.setVisible(true);
+        } 
     }//GEN-LAST:event_modButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
@@ -192,9 +164,9 @@ public class ModSector extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomSectorTextFieldActionPerformed
 
-    private void nomActualSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomActualSectorActionPerformed
+    private void descSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descSectorTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nomActualSectorActionPerformed
+    }//GEN-LAST:event_descSectorTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,27 +202,24 @@ public class ModSector extends javax.swing.JFrame {
             }
         });
     }
-   public void inicializaModificar(ControladorABMSector cont, int cod)
+   public void inicializaModificar(ControladorABMSector cont,ABMSector abmsector, int cod)
    {
        controladorABMSector=cont;
+       abm=abmsector;
        parCodSector=cod;
        List<DTOSector> listadto = controladorABMSector.buscarSectores(parCodSector);
        codSectorTextField.setText((Integer.toString(cod)));
-       nomActualSector.setText(listadto.get(0).getNombreSector());
-       descActualSector.setText(listadto.get(0).getDescripcionSector());       
+       nomSectorTextField.setText(listadto.get(0).getNombreSector());
+       descSectorTextField.setText(listadto.get(0).getDescripcionSector());
    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField codSectorTextField;
-    private javax.swing.JTextField descActualSector;
     private javax.swing.JTextField descSectorTextField;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
-    private java.awt.Label label4;
-    private java.awt.Label label5;
     private javax.swing.JButton modButton;
-    private javax.swing.JTextField nomActualSector;
     private javax.swing.JTextField nomSectorTextField;
     // End of variables declaration//GEN-END:variables
 }

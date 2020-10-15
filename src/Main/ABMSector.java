@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.*;
 import java.lang.*;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 /**
  *
  * @author FLIA HUDSON
@@ -12,6 +14,7 @@ import java.lang.*;
 public class ABMSector extends javax.swing.JFrame {
     ControladorABMSector controladorABMSector = new ControladorABMSector();
     List<DTOSector> listaSectores;
+    String nomfilSector;
     javax.swing.table.DefaultTableModel miTabla=new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -28,22 +31,64 @@ public class ABMSector extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         };
+    
         /**
      * Creates new form ABMSector
      */
-    public void setVisible(boolean b) {
-        super.setVisible(b);
-         List<DTOSector> listaSectores = controladorABMSector.buscarSectores();
-         for (int i=0;i<listaSectores.size();i++)
+    private  List<DTOSector> ordenaSector(List<DTOSector> listadtosectores)
+    {
+        List<DTOSector> ordenado,aux;
+        ordenado=new ArrayList<DTOSector>();
+        aux= new ArrayList<DTOSector>();
+        for (int i=0; i< listadtosectores.size();i++)
         {
-            DTOSector unSector = listaSectores.get(i);
-            miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
-        
-            TablaSectores.setModel(miTabla);
+            aux.add(listadtosectores.get(i));
         }
+        for (int i=0; i< listadtosectores.size();i++)
+        {
+            int ultCod=0;
+            DTOSector saux=null;
+            for(int j=0;j<aux.size();j++)
+            {
+                if(ultCod ==0)
+                {
+                    ultCod=aux.get(j).getCodSector();
+                    saux=aux.get(j);
+                }
+                if (ultCod >aux.get(j).getCodSector() )
+                {
+                    ultCod=aux.get(j).getCodSector();
+                    saux=aux.get(j);
+                }
+            }
+            ordenado.add(saux);
+            aux.remove(saux);
+        }
+         return ordenado; 
+    }
+    public void setVisible(boolean b) {
+        if (b==true) {
+            List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomSectorTextField.getText(),"");
+            poblarTabla(listaSectores);
+        }    
+        super.setVisible(b);
+        miTabla.getColumnClass(ICONIFIED);
+    }     
+    public void poblarTabla (List<DTOSector> plistadtosectores){
+        miTabla.setRowCount(0);
+        List<DTOSector> listadtosectores=ordenaSector(plistadtosectores);
+        for (int j=0;j<listadtosectores.size();j++)
+        {
+            DTOSector unSector = listadtosectores.get(j);  
+            
+            miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
+        } 
+    //    TablaSectores.setAutoCreateRowSorter(true);
+        TablaSectores.setModel(miTabla);
     }
     public ABMSector() {
         initComponents();
+        nomSectorTextField.setText("");
         
        
          
@@ -59,33 +104,29 @@ public class ABMSector extends javax.swing.JFrame {
     private void initComponents() {
 
         nomSectorTextField = new javax.swing.JTextField();
-        label1 = new java.awt.Label();
-        nomfilButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaSectores = new javax.swing.JTable();
         BotonAlta = new javax.swing.JButton();
         BotonBaja = new javax.swing.JButton();
         BotonMod = new javax.swing.JButton();
-        actualizarButton = new javax.swing.JButton();
-        label2 = new java.awt.Label();
-        codSectorTextField = new javax.swing.JTextField();
-        codfilButton = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar Sector");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(nomSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 140, -1));
 
-        label1.setText("Nombre Sector");
-        getContentPane().add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 90, -1));
-
-        nomfilButton.setText("Filtrar");
-        nomfilButton.addActionListener(new java.awt.event.ActionListener() {
+        nomSectorTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomfilButtonActionPerformed(evt);
+                nomSectorTextFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(nomfilButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, 80, -1));
+        nomSectorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nomSectorTextFieldKeyReleased(evt);
+            }
+        });
+        getContentPane().add(nomSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 270, -1));
 
         TablaSectores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,9 +148,10 @@ public class ABMSector extends javax.swing.JFrame {
             }
         });
         TablaSectores.setRowHeight(20);
+        TablaSectores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(TablaSectores);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 430, 200));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 460, 200));
 
         BotonAlta.setText("Alta");
         BotonAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +159,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonAltaActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 70, -1));
+        getContentPane().add(BotonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 100, 30));
 
         BotonBaja.setText("Baja");
         BotonBaja.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +167,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonBajaActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 60, -1));
+        getContentPane().add(BotonBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 110, 30));
 
         BotonMod.setText("Modificar");
         BotonMod.addActionListener(new java.awt.event.ActionListener() {
@@ -133,48 +175,24 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonModActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 100, -1));
+        getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 130, 30));
 
-        actualizarButton.setText("Actualizar");
-        actualizarButton.addActionListener(new java.awt.event.ActionListener() {
+        BackButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BackButton.setText("Volver");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarButtonActionPerformed(evt);
+                BackButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(actualizarButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, -1, -1));
+        getContentPane().add(BackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, 60));
 
-        label2.setText("Código Sector");
-        getContentPane().add(label2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 90, -1));
-        getContentPane().add(codSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 140, -1));
-
-        codfilButton.setText("Filtrar");
-        codfilButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codfilButtonActionPerformed(evt);
-            }
-        });
-        getContentPane().add(codfilButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, 80, -1));
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("Nombre Sector:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 20));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nomfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomfilButtonActionPerformed
-        String nomfilSector;
-        nomfilSector =nomSectorTextField.getText();
-        //Limpio la tabla
-        miTabla.setRowCount(0);
-        List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector);  
-        for (int j=0;j<listaSectores.size();j++)
-        {
-            DTOSector unSector = listaSectores.get(j);
-            
-            miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});    
-                        
-                       
-         } 
-         TablaSectores.setModel(miTabla);
-    }//GEN-LAST:event_nomfilButtonActionPerformed
 
     private void BotonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModActionPerformed
         Integer a;
@@ -186,16 +204,16 @@ public class ABMSector extends javax.swing.JFrame {
             return;
         }
         int cod=a;
-       controladorABMSector.abrirModificar(cod);
+       controladorABMSector.abrirModificar(cod,this);
       // System.out.print(cod);    
     }//GEN-LAST:event_BotonModActionPerformed
 
     private void BotonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAltaActionPerformed
-        controladorABMSector.abrirAlta();
+        controladorABMSector.abrirAlta(this);
     }//GEN-LAST:event_BotonAltaActionPerformed
 
     private void BotonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBajaActionPerformed
-       Integer a;
+        Integer a;
         try  {
               a= (Integer) TablaSectores.getModel().getValueAt(TablaSectores.getSelectedRow(), 0);
         }
@@ -204,49 +222,23 @@ public class ABMSector extends javax.swing.JFrame {
             return;
         }
         int cod=a;
-       controladorABMSector.abrirBaja(cod);
+        controladorABMSector.abrirBaja(cod,this);
     }//GEN-LAST:event_BotonBajaActionPerformed
 
-    private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
-        miTabla.setRowCount(0);
-        setVisible(true);
-    }//GEN-LAST:event_actualizarButtonActionPerformed
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_BackButtonActionPerformed
 
-    private void codfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codfilButtonActionPerformed
-        int codfilSector;
-        if ("".equals(codSectorTextField.getText()) ){
-            List<DTOSector> listaSectores = controladorABMSector.buscarSectores();
-            miTabla.setRowCount(0);
-               
-          for (int j=0;j<listaSectores.size();j++)
-        {
-            DTOSector unSector = listaSectores.get(j);
-            
-            miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});    
-                        
-                       
-          }
-          
-         TablaSectores.setModel(miTabla);
-         }
-        else {
-        codfilSector = Integer.parseInt(codSectorTextField.getText());
-        //Limpio la tabla
-        miTabla.setRowCount(0);
-        List<DTOSector> listaSectores = controladorABMSector.buscarSectores(codfilSector);  
-        
-          for (int j=0;j<listaSectores.size();j++)
-        {
-            DTOSector unSector = listaSectores.get(j);
-            
-            miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});    
-                        
-                       
-          }
-          
-         TablaSectores.setModel(miTabla);
-         }
-    }//GEN-LAST:event_codfilButtonActionPerformed
+    private void nomSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSectorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomSectorTextFieldActionPerformed
+
+    private void nomSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomSectorTextFieldKeyReleased
+        nomfilSector=nomSectorTextField.getText();
+        List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector,"");  
+        poblarTabla(listaSectores);   
+    }//GEN-LAST:event_nomSectorTextFieldKeyReleased
 
     /**
      * @param args the command line arguments
@@ -284,17 +276,13 @@ public class ABMSector extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackButton;
     private javax.swing.JButton BotonAlta;
     private javax.swing.JButton BotonBaja;
     private javax.swing.JButton BotonMod;
     private javax.swing.JTable TablaSectores;
-    private javax.swing.JButton actualizarButton;
-    private javax.swing.JTextField codSectorTextField;
-    private javax.swing.JButton codfilButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private java.awt.Label label1;
-    private java.awt.Label label2;
     private javax.swing.JTextField nomSectorTextField;
-    private javax.swing.JButton nomfilButton;
     // End of variables declaration//GEN-END:variables
 }

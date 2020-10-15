@@ -1,6 +1,8 @@
 package Main;
 
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -8,13 +10,16 @@ import java.util.List;
  */
 public class ABMTipoInstancia extends javax.swing.JFrame {
     ControladorABMTipoInstancia controladorABMTI = new ControladorABMTipoInstancia();
-    List<DTOTipoInstancia> listatipoinstancias;
+    List<DTOTipoInstancia> listatipoinstanciasordenadas;
+    String filNombreTI;
+    String filNombreSector;
+    String filNombreTT;
     javax.swing.table.DefaultTableModel miTabla=new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Código Tipo Instancia","Nombre Tipo Instancia", "Nombre Sector", "TipoTareas", "Fin Vigencia"
+                "Código Tipo Instancia","Nombre Tipo Instancia", "Nombre Sector", "Fin Vigencia"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -29,17 +34,58 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
      * Creates new form ABMTipoInstancia
      */
     public void setVisible(boolean b) {
-        super.setVisible(b);
-         List<DTOTipoInstancia> listatipoinstancias = controladorABMTI.buscarTipoInstancias();
-         for (int i=0;i<listatipoinstancias.size();i++)
-        {
-            DTOTipoInstancia unTipoInstancia = listatipoinstancias.get(i);
-            miTabla.addRow(new Object[]{unTipoInstancia.getCodTipoInstancia(),unTipoInstancia.getNombreTipoInstancia(),unTipoInstancia.getDTOSector().getNombreSector(),unTipoInstancia.getListaDTOTipoTarea().toString(),unTipoInstancia.getFechaHoraFinVigenciaTipoInstancia()});
-            TablaTipoInstancias.setModel(miTabla);
+        if (b==true) {
+            List<DTOTipoInstancia> listatipoinstancias = controladorABMTI.buscarTipoInstancia(nomTipoInstanciaFieldText.getText(),nomSectorTextField.getText());
+            poblarTabla(listatipoinstancias);
+            super.setVisible(b);
         }
+    }
+    public void poblarTabla(List<DTOTipoInstancia> listatipoinstancias) {
+        miTabla.setRowCount(0);
+        listatipoinstanciasordenadas = ordenaTipoInstancia(listatipoinstancias);
+        for (int i=0;i<listatipoinstanciasordenadas.size();i++)
+            {
+                DTOTipoInstancia unTipoInstancia = listatipoinstanciasordenadas.get(i);
+                miTabla.addRow(new Object[]{unTipoInstancia.getCodTipoInstancia(),unTipoInstancia.getNombreTipoInstancia(),unTipoInstancia.getNombreSector(),unTipoInstancia.getFechaHoraFinVigenciaTipoInstancia()});
+                TablaTipoInstancias.setAutoCreateRowSorter(true);
+                TablaTipoInstancias.setModel(miTabla);
+            }
+    }
+    private  List<DTOTipoInstancia> ordenaTipoInstancia(List<DTOTipoInstancia> listadtoTipoInstancias)
+    {
+        List<DTOTipoInstancia> ordenado,aux;
+        ordenado=new ArrayList<DTOTipoInstancia>();
+        aux= new ArrayList<DTOTipoInstancia>();
+        for (int i=0; i< listadtoTipoInstancias.size();i++)
+        {
+            aux.add(listadtoTipoInstancias.get(i));
+        }
+        for (int i=0; i< listadtoTipoInstancias.size();i++)
+        {
+            int ultCod=0;
+            DTOTipoInstancia saux=null;
+            for(int j=0;j<aux.size();j++)
+            {
+                if(ultCod ==0)
+                {
+                    ultCod=aux.get(j).getCodTipoInstancia();
+                    saux=aux.get(j);
+                }
+                if (ultCod >aux.get(j).getCodTipoInstancia())
+                {
+                    ultCod=aux.get(j).getCodTipoInstancia();
+                    saux=aux.get(j);
+                }
+            }
+            ordenado.add(saux);
+            aux.remove(saux);
+        }
+         return ordenado; 
     }
     public ABMTipoInstancia() {
         initComponents();
+        nomTipoInstanciaFieldText.setText("");
+        nomSectorTextField.setText("");
     }
 
     /**
@@ -53,62 +99,53 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
 
         label1 = new java.awt.Label();
         nomSectorTextField = new javax.swing.JTextField();
-        nomSecfilButton = new javax.swing.JButton();
-        nomTipoTareafilButton = new javax.swing.JButton();
-        nomTipoTareaTextField = new javax.swing.JTextField();
-        label2 = new java.awt.Label();
         label3 = new java.awt.Label();
         nomTipoInstanciaFieldText = new javax.swing.JTextField();
-        nomTipoInstanciafilButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         TablaTipoInstancias = new javax.swing.JTable();
-        actualizarButton = new javax.swing.JButton();
         BotonAlta = new javax.swing.JButton();
         BotonBaja = new javax.swing.JButton();
         BotonMod = new javax.swing.JButton();
+        verTareasButton = new javax.swing.JButton();
+        BackButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("ABM Tipo Instancia");
 
         label1.setText("Nombre Sector");
 
-        nomSecfilButton.setText("Filtrar");
-        nomSecfilButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomSecfilButtonActionPerformed(evt);
+        nomSectorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                nomSectorTextFieldKeyReleased(evt);
             }
         });
-
-        nomTipoTareafilButton.setText("Filtrar");
-        nomTipoTareafilButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomTipoTareafilButtonActionPerformed(evt);
-            }
-        });
-
-        label2.setText("Nombre Tipo Tarea");
 
         label3.setText("Nombre Tipo Instancia");
 
-        nomTipoInstanciafilButton.setText("Filtrar");
-        nomTipoInstanciafilButton.addActionListener(new java.awt.event.ActionListener() {
+        nomTipoInstanciaFieldText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomTipoInstanciafilButtonActionPerformed(evt);
+                nomTipoInstanciaFieldTextActionPerformed(evt);
+            }
+        });
+        nomTipoInstanciaFieldText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nomTipoInstanciaFieldTextKeyPressed(evt);
             }
         });
 
         TablaTipoInstancias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Código Tipo Instancia", "Nombre Tipo Instancia", "Nombre Sector", "TipoTareas", "Fin Vigencia"
+                "Código Tipo Instancia", "Nombre Tipo Instancia", "Nombre Sector", "Fin Vigencia"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -116,14 +153,8 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
             }
         });
         TablaTipoInstancias.setRowHeight(20);
+        TablaTipoInstancias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(TablaTipoInstancias);
-
-        actualizarButton.setText("Actualizar");
-        actualizarButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                actualizarButtonActionPerformed(evt);
-            }
-        });
 
         BotonAlta.setText("Alta");
         BotonAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -146,40 +177,47 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
             }
         });
 
+        verTareasButton.setText("Ver Tareas");
+        verTareasButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                verTareasButtonActionPerformed(evt);
+            }
+        });
+
+        BackButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BackButton.setText("Volver");
+        BackButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomTipoTareaTextField)
-                    .addComponent(nomSectorTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nomTipoInstanciaFieldText))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomTipoTareafilButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomSecfilButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomTipoInstanciafilButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BotonAlta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(BotonBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(BotonMod, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(verTareasButton, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nomTipoInstanciaFieldText)
+                            .addComponent(nomSectorTextField, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addComponent(jScrollPane3))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(actualizarButton)
-                .addGap(21, 21, 21)
-                .addComponent(BotonAlta, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(BotonBaja, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addComponent(BotonMod, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,124 +225,101 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nomTipoInstanciafilButton)
-                        .addComponent(nomTipoInstanciaFieldText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(nomTipoInstanciaFieldText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nomSecfilButton)
-                        .addComponent(nomSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(nomTipoTareafilButton)
-                        .addComponent(nomTipoTareaTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(actualizarButton)
-                    .addComponent(BotonAlta)
+                    .addComponent(nomSectorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonMod)
+                    .addComponent(verTareasButton)
+                    .addComponent(BackButton)
                     .addComponent(BotonBaja)
-                    .addComponent(BotonMod))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+                    .addComponent(BotonAlta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomSecfilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSecfilButtonActionPerformed
-        String nomfilSector;
-        nomfilSector =nomSectorTextField.getText();
-        //Limpio la tabla
-        miTabla.setRowCount(0);
-        List<DTOSector> listaSectores = controladorABMSector.buscarSectores(nomfilSector);
-        for (int j=0;j<listaSectores.size();j++)
-        {
-            DTOSector unSector = listaSectores.get(j);
-
-            miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
-
-        }
-        TablaTipoInstancias.setModel(miTabla);
-    }//GEN-LAST:event_nomSecfilButtonActionPerformed
-
-    private void nomTipoTareafilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTipoTareafilButtonActionPerformed
-        int codfilSector;
-        if ("".equals(nomTipoTareaTextField.getText()) ){
-            List<DTOSector> listaSectores = controladorABMSector.buscarSectores();
-            miTabla.setRowCount(0);
-
-            for (int j=0;j<listaSectores.size();j++)
-            {
-                DTOSector unSector = listaSectores.get(j);
-
-                miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
-
-            }
-
-            TablaTipoInstancias.setModel(miTabla);
-        }
-        else {
-            codfilSector = Integer.parseInt(nomTipoTareaTextField.getText());
-            //Limpio la tabla
-            miTabla.setRowCount(0);
-            List<DTOSector> listaSectores = controladorABMSector.buscarSectores(codfilSector);
-
-            for (int j=0;j<listaSectores.size();j++)
-            {
-                DTOSector unSector = listaSectores.get(j);
-
-                miTabla.addRow(new Object[]{unSector.getCodSector(),unSector.getNombreSector(),unSector.getDescripcionSector(),unSector.getFechaHoraFinVigenciaSector()});
-
-            }
-
-            TablaTipoInstancias.setModel(miTabla);
-        }
-    }//GEN-LAST:event_nomTipoTareafilButtonActionPerformed
-
-    private void nomTipoInstanciafilButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTipoInstanciafilButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomTipoInstanciafilButtonActionPerformed
-
-    private void actualizarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actualizarButtonActionPerformed
-        miTabla.setRowCount(0);
-        setVisible(true);
-    }//GEN-LAST:event_actualizarButtonActionPerformed
-
     private void BotonAltaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAltaActionPerformed
-        controladorABMTI.abrirAlta();
+        controladorABMTI.abrirAlta(this);
     }//GEN-LAST:event_BotonAltaActionPerformed
 
     private void BotonBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonBajaActionPerformed
         Integer a;
         try  {
-            a= (Integer) TablaSectores.getModel().getValueAt(TablaSectores.getSelectedRow(), 0);
+            a= (Integer) TablaTipoInstancias.getModel().getValueAt(TablaTipoInstancias.getSelectedRow(), 0);
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Seleccione un Sector", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione un TipoInstancia", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cod=a;
-        controladorABMSector.abrirBaja(cod);
+        controladorABMTI.abrirBaja(cod,this);
     }//GEN-LAST:event_BotonBajaActionPerformed
 
     private void BotonModActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModActionPerformed
         Integer a;
         try  {
-            a= (Integer) TablaSectores.getModel().getValueAt(TablaSectores.getSelectedRow(), 0);
+              a= (Integer) TablaTipoInstancias.getModel().getValueAt(TablaTipoInstancias.getSelectedRow(), 0);
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(this, "Seleccione un Sector", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cod=a;
-        controladorABMSector.abrirModificar(cod);
-        // System.out.print(cod);
+       controladorABMTI.abrirModificar(cod,this);
     }//GEN-LAST:event_BotonModActionPerformed
+
+    private void verTareasButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verTareasButtonActionPerformed
+        Integer a;
+        try  {
+            a= (Integer) TablaTipoInstancias.getValueAt(TablaTipoInstancias.getSelectedRow(), 0);
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Seleccione un Tipo Instancia", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        int cod = a;
+        for (int j=0;j<listatipoinstanciasordenadas.size();j++)
+            {
+                DTOTipoInstancia untipoinstancia = listatipoinstanciasordenadas.get(j);
+                if (cod==untipoinstancia.getCodTipoInstancia()) {
+                    controladorABMTI.abrirConsultaTareas(untipoinstancia);
+                } else {
+                }
+                    
+            }
+               
+    }//GEN-LAST:event_verTareasButtonActionPerformed
+
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        setVisible(false);
+        dispose();
+    }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void nomTipoInstanciaFieldTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomTipoInstanciaFieldTextKeyPressed
+        filNombreTI = nomTipoInstanciaFieldText.getText();
+        filNombreSector = nomSectorTextField.getText();
+        List<DTOTipoInstancia> listatipoinstanciasfiltradas = controladorABMTI.buscarTipoInstancia(filNombreTI, filNombreSector);
+        poblarTabla(listatipoinstanciasfiltradas);
+    }//GEN-LAST:event_nomTipoInstanciaFieldTextKeyPressed
+
+    private void nomSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomSectorTextFieldKeyReleased
+        filNombreTI = nomTipoInstanciaFieldText.getText();
+        filNombreSector = nomSectorTextField.getText();
+        List<DTOTipoInstancia> listatipoinstanciasfiltradas = controladorABMTI.buscarTipoInstancia(filNombreTI, filNombreSector);
+        poblarTabla(listatipoinstanciasfiltradas);
+    }//GEN-LAST:event_nomSectorTextFieldKeyReleased
+
+    private void nomTipoInstanciaFieldTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTipoInstanciaFieldTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomTipoInstanciaFieldTextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,20 +357,16 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BackButton;
     private javax.swing.JButton BotonAlta;
     private javax.swing.JButton BotonBaja;
     private javax.swing.JButton BotonMod;
     private javax.swing.JTable TablaTipoInstancias;
-    private javax.swing.JButton actualizarButton;
     private javax.swing.JScrollPane jScrollPane3;
     private java.awt.Label label1;
-    private java.awt.Label label2;
     private java.awt.Label label3;
-    private javax.swing.JButton nomSecfilButton;
     private javax.swing.JTextField nomSectorTextField;
     private javax.swing.JTextField nomTipoInstanciaFieldText;
-    private javax.swing.JButton nomTipoInstanciafilButton;
-    private javax.swing.JTextField nomTipoTareaTextField;
-    private javax.swing.JButton nomTipoTareafilButton;
+    private javax.swing.JButton verTareasButton;
     // End of variables declaration//GEN-END:variables
 }

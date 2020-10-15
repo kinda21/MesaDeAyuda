@@ -11,33 +11,33 @@ public class ControladorABMTipoInstancia {
     ExpertoABMTipoInstancia expertoTI = new ExpertoABMTipoInstancia();
     public ControladorABMTipoInstancia () {
     }
-    
+    public List<DTOTipoInstancia> buscarTipoInstancia(String nomfilTipoInstancia, String nomSector){
+       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(nomfilTipoInstancia, nomSector);
+       return listaTipoInstancias;
+    }
     public List<DTOTipoInstancia> buscarTipoInstancias(){
        List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia();
        return listaTipoInstancias;
     }
-    /*public void darAltaSector(DTOSector altaSector){
-        expertoTI.daraltaSector(altaSector);
+    public List<DTOTipoInstancia> buscarTipoInstancias(int codfilTipoInstancia){
+       List<DTOTipoInstancia> listaTipoInstancias = expertoTI.buscarTipoInstancia(codfilTipoInstancia);
+       return listaTipoInstancias;
     }
-    public void darbajaSector(int codSector) {
-        expertoTI.darbajaSector(codSector);
+    public boolean darAltaTipoInstancia(int codtipoinstancia, int codSector, String nomTI, List<DTOTipoTarea> tareas){
+        return expertoTI.daraltaTipoInstancia(codtipoinstancia,codSector,nomTI,tareas);
     }
-    public void modificarSector (int codSector, String nomSector, String descSector) {
-        try {
-            expertoTI.modificarSector(codSector, nomSector, descSector);
-        } catch (Exception ex) {
-            Logger.getLogger(ControladorABMSector.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public boolean darbajaTipoInstancia(int codTipoInstancia) {
+        return expertoTI.darbajaTipoInstancia(codTipoInstancia);
     }
-    */
-     public List<DTOSector> buscarSectores(String nomfilSector){
-       List<DTOSector> listaSectores = expertoTI.buscarSectores(nomfilSector);
-       return listaSectores;
+    
+    public boolean modificarTipoInstancia (int codtipoinstancia,int codSector, String nomTI, List<DTOTipoTarea> tareas) {
+        return expertoTI.modificarTipoInstancia(codtipoinstancia,codSector, nomTI, tareas);
     }
-     public List<DTOSector> buscarSectores(int codfilSector){
-       List<DTOSector> listaSectores = expertoTI.buscarSectores(codfilSector);
-       return listaSectores;
+    public List<DTOSector> buscarSectores(String nomfilSector, String codfilSector){
+    List<DTOSector> listaSectores = expertoTI.buscarSectores(nomfilSector,codfilSector);
+    return listaSectores;
     }
+    
     public List<DTOSector> buscarSectoresVigentes(){
        List<DTOSector> listaSectores = expertoTI.buscarSectoresVigentes();
        return listaSectores;
@@ -47,31 +47,29 @@ public class ControladorABMTipoInstancia {
        return listaTiposTarea;
     }
     
-     public void abrirAlta()
+     public void abrirAlta(ABMTipoInstancia abm)
      {
          AltaTipoInstancia alta = new AltaTipoInstancia();
-         alta.inicializaAlta(this);
+         alta.inicializaAlta(this,abm);
          alta.setVisible(true);
      }
-     /*public void abrirModificar(int cod)
+     public void abrirConsultaTareas(DTOTipoInstancia undto)
      {
-         ModSector mod = new ModSector();
-         mod.inicializaModificar(this, cod);
-         mod.setVisible(true);
+         ConsultaTareas consulta;
+         consulta = new ConsultaTareas();
+         consulta.inicializaconsulta(this,undto);
+         consulta.setVisible(true);
      }
-     public void abrirBaja(int cod)
+     public void abrirBaja(int cod,ABMTipoInstancia abm)
      {
-         BajaSector baja = new BajaSector();
-         baja.inicializaBaja(this, cod);
+         BajaTipoInstancia baja = new BajaTipoInstancia();
+         baja.inicializaBaja(this, abm, cod);
          baja.setVisible(true);
      }
-     public void abrirAlta()
+     public void abrirModificar(int cod,ABMTipoInstancia abm)
      {
-         AltaSector alta = new AltaSector();
-         alta.inicializaAlta(this);
-         alta.setVisible(true);
-     }
-     */
-   
-    
+         ModTipoInstancia mod = new ModTipoInstancia();
+         mod.inicializaModificar(this,abm, cod);
+         mod.setVisible(true);
+     }   
 }

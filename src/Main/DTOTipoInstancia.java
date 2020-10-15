@@ -10,10 +10,10 @@ import java.util.List;
  */
 public class DTOTipoInstancia {
     private int codTipoInstancia;
+    private int codSector;
+    private String nomSector;
     private String nombreTipoInstancia;
     private Date fechaHoraFinVigenciaTipoInstancia;
-    
-    private DTOSector dtosector;
     private List<DTOTipoTarea> listaDTOTipoTarea = new ArrayList<>();
 
     public DTOTipoInstancia() {
@@ -22,11 +22,26 @@ public class DTOTipoInstancia {
     public int getCodTipoInstancia() {
         return codTipoInstancia;
     }
-
     public void setCodTipoInstancia(int codTipoInstancia) {
         this.codTipoInstancia = codTipoInstancia;
     }
+   
+    public int getCodSector() {
+        return codSector;
+    }
+   
+    public void setCodSector(int codSector) {
+        this.codSector = codSector;
+    }
+    
+     public String getNombreSector() {
+        return nomSector;
+    }
 
+    public void setNombreSector(String nomSector) {
+        this.nomSector = nomSector;
+    }
+    
     public String getNombreTipoInstancia() {
         return nombreTipoInstancia;
     }
@@ -42,15 +57,6 @@ public class DTOTipoInstancia {
     public void setFechaHoraFinVigenciaTipoInstancia(Date fechaHoraFinVigenciaTipoInstancia) {
         this.fechaHoraFinVigenciaTipoInstancia = fechaHoraFinVigenciaTipoInstancia;
     }
-
-    public DTOSector getDTOSector() {
-        return dtosector;
-    }
-
-    public void setDTOSector(DTOSector sector) {
-        this.dtosector = sector;
-    }
-
     public List<DTOTipoTarea> getListaDTOTipoTarea() {
         return listaDTOTipoTarea;
     }

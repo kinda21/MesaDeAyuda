@@ -12,9 +12,9 @@ public class MesaDeAyuda {
        MainMenu menu = new MainMenu();
        menu.setVisible(true);
        // Controlador().Metodo();
-       ControladorABMTipoInstancia control = new ControladorABMTipoInstancia();
-       List<DTOTipoInstancia> lista = control.buscarTipoInstancias();
-       System.out.println("break");
+       //ControladorABMTipoInstancia control = new ControladorABMTipoInstancia();
+       //List<DTOTipoInstancia> lista = control.buscarTipoInstancias();
+       //System.out.println("break");
     }
     
 }

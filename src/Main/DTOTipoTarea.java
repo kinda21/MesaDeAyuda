@@ -46,4 +46,11 @@ public class DTOTipoTarea {
     public void setFechaFinVigenciaTipoTarea(Date fechaFinVigenciaTipoTarea) {
         this.fechaFinVigenciaTipoTarea = fechaFinVigenciaTipoTarea;
     }
+    public boolean equals(Object other) {
+    if (other == this) return true;
+    if (other == null) return false;
+    if (getClass() != other.getClass()) return false;
+    if (this.getCodTipoTarea()==((DTOTipoTarea) other).codTipoTarea) return true;
+        return false;
+  }
 }

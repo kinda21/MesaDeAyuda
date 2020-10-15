@@ -14,13 +14,12 @@ public class Experto {
     void crearElementos() {
         FachadaPersistencia.getInstance().iniciarTransaccion();
        // PRUEBAS SECTOR Y BUSQUEDA
-        
         Sector sector = new Sector();
-        sector.setCodSector(3);
-        sector.setDescripcionSector("Descripción");
+        sector.setCodSector(1);
+        sector.setDescripcionSector("Recepcion de llamados");
         sector.setFechaHoraFinVigenciaSector(new Date());
-        sector.setNombreSector("Servicio Técnico");
-        Sector sector2 = new Sector(8,"Area Tecnica","otro sector");
+        sector.setNombreSector("CALL CENTER");
+        Sector sector2 = new Sector(2,"CENTRO DE COMPUTOS","otro sector");
         System.out.println("Sector 1");
          System.out.println(sector.getNombreSector());
          System.out.println(sector.getCodSector());
