@@ -3,18 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/tipocaso.hbm.xml</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Entidades/Caso.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/tipocasotipoinstancia.hbm.xml</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/Experto.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/MesaDeAyuda.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/tipocasoiteracion.hbm.xml</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/tipoinstancia.hbm.xml</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/tipotarea.hbm.xml</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/MainMenu.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ModSector.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoInstancia.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoCaso/AltaTipoCaso.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoCaso/BajaTipoCaso.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoCaso/ControladorTipoCaso.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoInstancia/ControladorABMTipoInstancia.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoCaso/ExpertoABMTipoCaso.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMSector/ModSector.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Entidades/TipoCaso.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoInstancia/ExpertoABMTipoInstancia.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoCaso/ConsultaIteraciones.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoInstancia/ABMTipoInstancia.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoCaso/ABMTipoCaso.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoCaso/ModTipoCaso.java</file>
         </group>
     </open-files>
 </project-private>

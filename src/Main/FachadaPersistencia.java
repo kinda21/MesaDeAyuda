@@ -24,11 +24,11 @@ public class FachadaPersistencia {
         FachadaInterna.getInstance().guardar(objeto);
     }
     
-    void iniciarTransaccion() {
+    public void iniciarTransaccion() {
         FachadaInterna.getInstance().iniciarTransaccion();
     }
 
-    void finalizarTransaccion() {
+    public void finalizarTransaccion() {
         FachadaInterna.getInstance().finalizarTransaccion();
     }
 

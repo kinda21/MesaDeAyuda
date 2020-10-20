@@ -1,5 +1,4 @@
 package Main;
-import Entidades.Entidad;
 import java.util.*;
 
 /**
@@ -7,7 +6,7 @@ import java.util.*;
  * @author milig
  */
 
-public class DTOSector extends Entidad {
+public class DTOSector {
     
     private int codSector;
     private String nombreSector;
