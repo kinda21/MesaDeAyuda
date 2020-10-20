@@ -53,7 +53,7 @@ public class ExpertoABMTipoInstancia {
             }
             listaTipoInstancia.add(tipoinstancia);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTipoInstancia;
         }
     public List<DTOTipoInstancia> buscarTipoInstancia(String nomfilTipoInstancia, String nomSector){
@@ -207,8 +207,8 @@ public class ExpertoABMTipoInstancia {
         
                 }
 
-        
-    return listaTipoInstancia;   
+    FachadaPersistencia.getInstance().finalizarTransaccion();    
+    return listaTipoInstancia;
     }
     public List<DTOTipoInstancia> buscarTipoInstancia(int codfilTipoInstancia){  
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -242,7 +242,7 @@ public class ExpertoABMTipoInstancia {
             }
             listaTipoInstancia.add(tipoinstancia);
         }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTipoInstancia;
         }
     public List<DTOSector> buscarSectores(String filNombreSector, String filCodSector){
@@ -324,10 +324,11 @@ public class ExpertoABMTipoInstancia {
                 //} 
             }
         }   
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores; 
     }    
     public List<DTOSector> buscarSectoresVigentes(){  
-       // FachadaPersistencia.getInstance().iniciarTransaccion();
+        FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
         List<DTOSector> listaSectores = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
@@ -345,7 +346,7 @@ public class ExpertoABMTipoInstancia {
             sector.setNombreSector(sectorleido.getNombreSector());
             listaSectores.add(sector);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
         }
     public List<DTOTipoTarea> buscarTiposTarea(){  
@@ -365,7 +366,7 @@ public class ExpertoABMTipoInstancia {
             //System.out.println(sector.getNombreSector());
             listaTiposTarea.add(tipotarea);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTiposTarea;
         }
     public List<DTOTipoTarea> buscarTiposTareasVigentes(){  
@@ -387,7 +388,7 @@ public class ExpertoABMTipoInstancia {
             tipotarea.setNombreTipoTarea(tipotarealeida.getNombreTipoTarea());
             listaTiposTarea.add(tipotarea);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTiposTarea;
         }
     public boolean daraltaTipoInstancia(int codtipoinstancia, int codSector, String nomTI, List<DTOTipoTarea> tareas) {
@@ -451,16 +452,21 @@ public class ExpertoABMTipoInstancia {
                     return false;
                 }
         }
+        if (nuevoTI.getListaTipoTarea().isEmpty() || nuevoTI.getListaTipoTarea().equals(null)) {
+            JOptionPane.showMessageDialog(null, "No se puede modificar un Tipo Instancia dejándolo sin Tipos Tarea.");
+            return false;
+        }
         }
         catch(Exception e){
             
             JOptionPane.showMessageDialog(null, "Error al crear el Sector");
-            return false; }
+            return false;
+        }
         //System.out.println("!");
         //System.out.println("Guardando nuevo Tipo Instancia");
         FachadaPersistencia.getInstance().guardar(nuevoTI);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
         public boolean modificarTipoInstancia(int codtipoinstancia, int codSector, String nomTI, List<DTOTipoTarea> tareas) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -517,8 +523,12 @@ public class ExpertoABMTipoInstancia {
                 listaTiposTarea.add(tipotarea);   
             }          
         TIamodificar.setListaTipoTarea(listaTiposTarea);
+        if (TIamodificar.getListaTipoTarea().isEmpty() || TIamodificar.getListaTipoTarea().equals(null)) {
+            JOptionPane.showMessageDialog(null, "No se puede modificar un Tipo Instancia dejándolo sin Tipos Tarea.");
+            return false;
+        }
         FachadaPersistencia.getInstance().guardar(TIamodificar);
- //       FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
     }
     public boolean darbajaTipoInstancia(int codTipoInstancia) {
@@ -538,8 +548,8 @@ public class ExpertoABMTipoInstancia {
         Date fechadehoy = new Date();
         tipoInstanciadebaja.setFechaHoraFinVigenciaTipoInstancia(fechadehoy);
         FachadaPersistencia.getInstance().guardar(tipoInstanciadebaja);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     
     }

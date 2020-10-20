@@ -105,8 +105,6 @@ public class ExpertoABMTipoCaso {
             listaTipoCasos.add(tipocaso);
             }
             }
-         
-        
         //si vienen los dos argumentos inicializados busco todos los tipo instancia que cumpla con ambos
         if (!nomfilTipoCaso.equals("") && !codfilTipoCaso.equals("")) {
             int codigotc;
@@ -148,11 +146,11 @@ public class ExpertoABMTipoCaso {
             listaTipoCasos.add(tipocaso);
             }
             }
-       
+    FachadaPersistencia.getInstance().finalizarTransaccion();   
     return listaTipoCasos;   
     } 
     public List<DTOTipoCaso> buscarTipoCasosVigentes(){  
-       // FachadaPersistencia.getInstance().iniciarTransaccion();
+        FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOCriterio> criterioList = new ArrayList<>();
         List<DTOTipoCaso> listaTipoCasos = new ArrayList<>();
         DTOCriterio dto = new DTOCriterio();
@@ -179,8 +177,8 @@ public class ExpertoABMTipoCaso {
                 }
             listaTipoCasos.add(tipocaso);
         }
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTipoCasos;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
     }        
 
     public boolean daraltaTipoCaso(int codtipocaso, String nomTC, int maxiteraciones) {
@@ -217,8 +215,8 @@ public class ExpertoABMTipoCaso {
             return false; 
         }
         FachadaPersistencia.getInstance().guardar(nuevoTC);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     public boolean modificarTipoCaso(int codtipocaso,String nomTC,int maxiteraciones) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -249,7 +247,7 @@ public class ExpertoABMTipoCaso {
         TCamodificar.setNombreTipoCaso(nomTC);
         TCamodificar.setNumeroMaximaIteracion(maxiteraciones);
         FachadaPersistencia.getInstance().guardar(TCamodificar);
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
     }
     public boolean darbajaTipoCaso(int codTipoCaso) {
@@ -269,8 +267,8 @@ public class ExpertoABMTipoCaso {
         Date fechadehoy = new Date();
         tipoCasodebaja.setFechaFinVigenciaTipoCaso(fechadehoy);
         FachadaPersistencia.getInstance().guardar(tipoCasodebaja);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     
     }

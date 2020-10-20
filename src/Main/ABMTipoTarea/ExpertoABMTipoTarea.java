@@ -101,7 +101,8 @@ public class ExpertoABMTipoTarea {
                 listaTipoTareas.add(tipoTarea);
             }
         }   
-        return listaTipoTareas; 
+        FachadaPersistencia.getInstance().finalizarTransaccion();
+        return listaTipoTareas;
     }    
     
     public List<DTOTipoTarea> buscarTiposTarea(){ 
@@ -121,6 +122,7 @@ public class ExpertoABMTipoTarea {
             //System.out.println(sector.getNombreSector());
             listaTiposTarea.add(tipotarea);
             }
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTiposTarea;
         }
     public List<DTOTipoTarea> buscarTiposTareasVigentes(){  
@@ -142,7 +144,7 @@ public class ExpertoABMTipoTarea {
             tipotarea.setNombreTipoTarea(tipotarealeida.getNombreTipoTarea());
             listaTiposTarea.add(tipotarea);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTiposTarea;
         }   
     
@@ -165,7 +167,7 @@ public class ExpertoABMTipoTarea {
             unTipoTarea.setNombreTipoTarea(TipoTarealeido.getNombreTipoTarea());
             listaTipoTarea.add(unTipoTarea);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTipoTarea;
     }
     public List<DTOTipoTarea> buscarTiposTarea(String filNombreTipoTarea){
@@ -187,7 +189,7 @@ public class ExpertoABMTipoTarea {
             tipotarea.setNombreTipoTarea(tipotarealeido.getNombreTipoTarea());
             listaTipoTarea.add(tipotarea);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaTipoTarea;
     }
     public boolean daraltaTipoTarea(int codTipoTarea, String nomTipoTarea, String descTipoTarea) {
@@ -245,8 +247,8 @@ public class ExpertoABMTipoTarea {
         Date fechadehoy = new Date();
         TipoTareadebaja.setFechaFinVigenciaTipoTarea(fechadehoy);
         FachadaPersistencia.getInstance().guardar(TipoTareadebaja);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     public boolean modificarTipoTarea (int codTipoTarea, String nomTipoTarea, String descTipoTarea) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -271,8 +273,9 @@ public class ExpertoABMTipoTarea {
             return false;                       
         }
         FachadaPersistencia.getInstance().guardar(TipoTareaamodif);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+
         }
     }
     

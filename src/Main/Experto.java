@@ -12,7 +12,7 @@ public class Experto {
     }
     
     void crearElementos() {
-FachadaPersistencia.getInstance().iniciarTransaccion();
+        FachadaPersistencia.getInstance().iniciarTransaccion();
         Date fecha = new Date();
 
         //sectores

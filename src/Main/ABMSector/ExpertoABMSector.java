@@ -77,7 +77,7 @@ public class ExpertoABMSector {
             listaSectores.add(sector);
             }
         }
-        //si ninguno viene vacío, busco todos los que tengan el nombre y sean mayores? al codigo enviado
+        //si ninguno viene vacío, busco todos los que tengan el nombre y tengan el codigo enviado
         if (!"".equals(filCodSector) && !"".equals(filNombreSector)) {
             DTOCriterio dto = new DTOCriterio();
             dto.setAtributo("nombreSector");
@@ -86,10 +86,9 @@ public class ExpertoABMSector {
             criterioList.add(dto);
             DTOCriterio dto2 = new DTOCriterio();
             dto2.setAtributo("codSector");
-            dto2.setOperacion(">=");
+            dto2.setOperacion("=");
             dto2.setValor(Integer.parseInt(filCodSector));      
             criterioList.add(dto2);
-            // List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
             List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
             for (Object x : objetoList) {
                 Sector sectorleido = (Sector) x;
@@ -102,7 +101,8 @@ public class ExpertoABMSector {
                     listaSectores.add(sector);
                 //} 
             }
-        }   
+        }
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores; 
     }    
     public List<DTOSector> buscarSectores(){  
@@ -122,6 +122,7 @@ public class ExpertoABMSector {
             //System.out.println(sector.getNombreSector());
             listaSectores.add(sector);
         }
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
     }
     public List<DTOSector> buscarSectoresVigentes(){  
@@ -147,7 +148,7 @@ public class ExpertoABMSector {
             //System.out.println(sector.getNombreSector());
             listaSectores.add(sector);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
         }
     public List<DTOSector> buscarSectores(String filNombreSector){
@@ -169,7 +170,7 @@ public class ExpertoABMSector {
             sector.setNombreSector(sectorleido.getNombreSector());
             listaSectores.add(sector);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
     }
    
@@ -192,7 +193,7 @@ public class ExpertoABMSector {
             sector.setNombreSector(sectorleido.getNombreSector());
             listaSectores.add(sector);
             }
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return listaSectores;
     }
     public boolean daraltaSector(int codSector, String nomSector, String descSector) {
@@ -231,8 +232,8 @@ public class ExpertoABMSector {
             return false;
             }
         FachadaPersistencia.getInstance().guardar(nuevoSector);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     public boolean darbajaSector(int codSector) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -251,8 +252,8 @@ public class ExpertoABMSector {
         Date fechadehoy = new Date();
         sectordebaja.setFechaHoraFinVigenciaSector(fechadehoy);
         FachadaPersistencia.getInstance().guardar(sectordebaja);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     public boolean modificarSector (int codSector, String nomSector, String descSector){
         FachadaPersistencia.getInstance().iniciarTransaccion();
@@ -277,8 +278,8 @@ public class ExpertoABMSector {
             return false;
         }
         FachadaPersistencia.getInstance().guardar(sectoramodif);
+        FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
-        //FachadaPersistencia.getInstance().finalizarTransaccion();
         }
     }
     
