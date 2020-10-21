@@ -292,14 +292,17 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
 
         jLabel6.setText("Ingrese Código de Sector a asignar:");
 
-        codSectorTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                codSectorTextFieldActionPerformed(evt);
+        codSectorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                codSectorTextFieldFocusLost(evt);
             }
         });
         codSectorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 codSectorTextFieldKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                codSectorTextFieldKeyTyped(evt);
             }
         });
 
@@ -478,27 +481,7 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
     }//GEN-LAST:event_removerTareaButtonActionPerformed
 
     private void codSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codSectorTextFieldKeyReleased
-        if ("".equals(codSectorTextField.getText())){
-            nomSectorTextField.setText("");
-            return;
-        }
-        if (!"".equals(codSectorTextField.getText())) try { 
-            Integer a= Integer.parseInt(codSectorTextField.getText());
-        }
-        catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Ingrese un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
-            codaltaTipoInstanciaTextField.setText(null);
-            return;
-        }
-        nomfilSector="";
-        codfilSector=codSectorTextField.getText();
-        List<DTOSector> listaSectoresfiltrados = controladorABMTI.buscarSectores("",codfilSector);
-        if (listaSectoresfiltrados.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No existe un Sector con el código ingresado", "ERROR", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        nomSectorTextField.setText(listaSectoresfiltrados.get(0).getNombreSector());
-       /* REMOVIDO
+        /* REMOVIDO
         sectoresComboBox.removeAllItems();
         for (int i=0;i<listaSectoresfiltrados.size();i++)
         {
@@ -521,9 +504,32 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
         }*/
     }//GEN-LAST:event_nomSectorTextFieldKeyReleased
 
-    private void codSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codSectorTextFieldActionPerformed
+    private void codSectorTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codSectorTextFieldFocusLost
+       if ("".equals(codSectorTextField.getText())){
+            nomSectorTextField.setText("");
+            return;
+        }
+        if (!"".equals(codSectorTextField.getText())) try { 
+            Integer a= Integer.parseInt(codSectorTextField.getText());
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Ingrese un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            codSectorTextField.setText(null);
+            return;
+        }
+        nomfilSector="";
+        codfilSector=codSectorTextField.getText();
+        List<DTOSector> listaSectoresfiltrados = controladorABMTI.buscarSectores("",codfilSector);
+        if (listaSectoresfiltrados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No existe un Sector con el código ingresado", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        nomSectorTextField.setText(listaSectoresfiltrados.get(0).getNombreSector());
+    }//GEN-LAST:event_codSectorTextFieldFocusLost
+
+    private void codSectorTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codSectorTextFieldKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_codSectorTextFieldActionPerformed
+    }//GEN-LAST:event_codSectorTextFieldKeyTyped
 
     /**
      * @param args the command line arguments
