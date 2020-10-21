@@ -85,6 +85,7 @@ public class FachadaInterna {
     }
 
     void iniciarTransaccion() {
+        HibernateUtil.getSession().setFlushMode(FlushMode.MANUAL);
         if (HibernateUtil.getSession().getTransaction().isActive())
         {
             HibernateUtil.getSession().getTransaction().commit();
@@ -93,10 +94,9 @@ public class FachadaInterna {
     }
 
     void finalizarTransaccion() {
-        HibernateUtil.getSession().setFlushMode(FlushMode.NEVER);
+        HibernateUtil.getSession().setFlushMode(FlushMode.MANUAL);
         HibernateUtil.getSession().getTransaction().commit();
         HibernateUtil.getSession().close();
-        HibernateUtil.getSessionFactory().close();
     }
 
 }
