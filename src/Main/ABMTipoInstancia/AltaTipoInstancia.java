@@ -297,6 +297,11 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
                 codSectorTextFieldFocusLost(evt);
             }
         });
+        codSectorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                codSectorTextFieldActionPerformed(evt);
+            }
+        });
         codSectorTextField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 codSectorTextFieldKeyReleased(evt);
@@ -419,11 +424,18 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
         int codSector,codtipoinstancia;
         try  {
             codtipoinstancia=(Integer.parseInt(codaltaTipoInstanciaTextField.getText()));
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Error al ingresar código de Tipo Instancia. Por favor ingrese un número", "ERROR", JOptionPane.ERROR_MESSAGE);
+            codaltaTipoInstanciaTextField.setText(null);
+            return;
+        }
+        try  {
             codSector=(Integer.parseInt(codSectorTextField.getText()));
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Error al ingresar codSector. Por favor ingrese un número", "ERROR", JOptionPane.ERROR_MESSAGE);
-            codaltaTipoInstanciaTextField.setText(null);
+            JOptionPane.showMessageDialog(this, "Error al ingresar código de Sector. Por favor ingrese un número", "ERROR", JOptionPane.ERROR_MESSAGE);
+            codSectorTextField.setText(null);
             return;
         }
         String nomTI = nomaltaTipoInstanciaTextField.getText();
@@ -530,6 +542,10 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
     private void codSectorTextFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codSectorTextFieldKeyTyped
         // TODO add your handling code here:
     }//GEN-LAST:event_codSectorTextFieldKeyTyped
+
+    private void codSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codSectorTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_codSectorTextFieldActionPerformed
 
     /**
      * @param args the command line arguments

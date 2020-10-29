@@ -26,7 +26,7 @@
             <column name="fechaFinVigenciaTipoCaso"/>
         </property>
         
-        <bag name="listaTipoCasoIteracion" table="tipocasoiteracion" cascade="save-update" inverse="false">
+        <bag name="listaTipoCasoIteracion" table="tipocasoiteracion" cascade="save-update,delete-orphan" inverse="false">
             <key column="OIDTipoCaso" not-null="true"/>
             <one-to-many class="Entidades.TipoCasoIteracion"/>
         </bag>

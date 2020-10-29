@@ -181,7 +181,7 @@ public class ExpertoABMTipoCaso {
         return listaTipoCasos;
     }        
 
-    public boolean daraltaTipoCaso(int codtipocaso, String nomTC, int maxiteraciones) {
+    public boolean daraltaTipoCaso(int codtipocaso, String nomTC, int maxiteraciones,List<DTOTipoCasoIteracion> iteraciones) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         TipoCaso nuevoTC = new TipoCaso();
         try {
@@ -189,6 +189,18 @@ public class ExpertoABMTipoCaso {
         nuevoTC.setFechaFinVigenciaTipoCaso(null);
         nuevoTC.setNombreTipoCaso(nomTC);
         nuevoTC.setNumeroMaximaIteracion(maxiteraciones);
+        List<TipoCasoIteracion> iteracionesdealta = new ArrayList();
+        for (Object x : iteraciones){
+            DTOTipoCasoIteracion undto = (DTOTipoCasoIteracion) x;
+            int numero,coef;
+            numero = undto.getNumeroDeIteracion();
+            coef = undto.getCoeficienteReduccionTipo();
+            TipoCasoIteracion iteraciondealta = new TipoCasoIteracion();
+            iteraciondealta.setNumeroDeIteracion(numero);
+            iteraciondealta.setCoeficienteReduccionTipo(coef);
+            iteracionesdealta.add(iteraciondealta);
+        }
+        nuevoTC.setListaTipoCasoIteracion(iteracionesdealta);
         if (nuevoTC.getNumeroMaximaIteracion()<0) {
             JOptionPane.showMessageDialog(null, "El número máximo de iteraciones es incorrecto, no puede ser menor a 0");
             return false;
@@ -202,8 +214,8 @@ public class ExpertoABMTipoCaso {
             return false;
         }
         List objetoList3 = FachadaPersistencia.getInstance().buscar("TipoCaso", null);
-        for (Object x3 : objetoList3) {
-            TipoCaso TCaverificar = (TipoCaso) x3;
+        for (Object x2 : objetoList3) {
+            TipoCaso TCaverificar = (TipoCaso) x2;
             if(nuevoTC.getCodTipoCaso()== TCaverificar.getCodTipoCaso()){
                 JOptionPane.showMessageDialog(null, "El codigo ingresado no es valido, ya existe un Tipo Caso con ese código.");
                 return false;
@@ -218,7 +230,7 @@ public class ExpertoABMTipoCaso {
         FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
         }
-    public boolean modificarTipoCaso(int codtipocaso,String nomTC,int maxiteraciones) {
+    public boolean modificarTipoCaso(int codtipocaso,String nomTC,int maxiteraciones,List<DTOTipoCasoIteracion> iteraciones) {
         FachadaPersistencia.getInstance().iniciarTransaccion();
         if (nomTC.equals("")) {
             JOptionPane.showMessageDialog(null, "El nombre ingresado es incorrecto, valor nulo no aceptado");
@@ -246,6 +258,19 @@ public class ExpertoABMTipoCaso {
         }
         TCamodificar.setNombreTipoCaso(nomTC);
         TCamodificar.setNumeroMaximaIteracion(maxiteraciones);
+        TCamodificar.getListaTipoCasoIteracion().clear();
+        List<TipoCasoIteracion> iteracionesmodificadas = new ArrayList();
+        for (Object x : iteraciones){
+            DTOTipoCasoIteracion undto = (DTOTipoCasoIteracion) x;
+            int numero,coef;
+            numero = undto.getNumeroDeIteracion();
+            coef = undto.getCoeficienteReduccionTipo();
+            TipoCasoIteracion iteracionmodificada = new TipoCasoIteracion();
+            iteracionmodificada.setNumeroDeIteracion(numero);
+            iteracionmodificada.setCoeficienteReduccionTipo(coef);
+            iteracionesmodificadas.add(iteracionmodificada);
+        }
+        TCamodificar.getListaTipoCasoIteracion().addAll(iteracionesmodificadas);
         FachadaPersistencia.getInstance().guardar(TCamodificar);
         FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;
