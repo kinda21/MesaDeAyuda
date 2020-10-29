@@ -20,7 +20,6 @@ public class ModTipoInstancia extends javax.swing.JFrame {
     List<DTOTipoTarea> listatipostareaVigentesTemporal;
     List<DTOTipoTarea> listaTiposTareaParaAlta;
     List<DTOSector> listasectores;
-    String nomfilSector;
     String codfilSector;
     javax.swing.table.DefaultTableModel miTablaDisponibles=new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -304,6 +303,11 @@ public class ModTipoInstancia extends javax.swing.JFrame {
 
         jLabel8.setText("Ingrese nuevo código de Sector:");
 
+        codModSectorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                codModSectorTextFieldFocusLost(evt);
+            }
+        });
         codModSectorTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 codModSectorTextFieldActionPerformed(evt);
@@ -509,7 +513,6 @@ public class ModTipoInstancia extends javax.swing.JFrame {
             codModSectorTextField.setText(null);
             return;
         }
-        nomfilSector="";
         codfilSector=codModSectorTextField.getText();
         List<DTOSector> listaSectoresfiltrados = controladorABMTI.buscarSectores("",codfilSector);
         if (listaSectoresfiltrados.isEmpty()) {
@@ -526,6 +529,28 @@ public class ModTipoInstancia extends javax.swing.JFrame {
     private void nomSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomSectorTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nomSectorTextFieldActionPerformed
+
+    private void codModSectorTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codModSectorTextFieldFocusLost
+        if ("".equals(codModSectorTextField.getText())){
+            nomSectorTextField.setText("");
+            return;
+        }
+        if (!"".equals(codModSectorTextField.getText())) try { 
+            Integer a= Integer.parseInt(codModSectorTextField.getText());
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "Ingrese un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            codModSectorTextField.setText(null);
+            return;
+        }
+        codfilSector=codModSectorTextField.getText();
+        List<DTOSector> listaSectoresfiltrados = controladorABMTI.buscarSectores("",codfilSector);
+        if (listaSectoresfiltrados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No existe un Sector con el código ingresado", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        nomSectorTextField.setText(listaSectoresfiltrados.get(0).getNombreSector());
+    }//GEN-LAST:event_codModSectorTextFieldFocusLost
 
     /**
      * @param args the command line arguments

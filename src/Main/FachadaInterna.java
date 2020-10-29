@@ -83,6 +83,10 @@ public class FachadaInterna {
         HibernateUtil.getSession().saveOrUpdate(objeto);
         HibernateUtil.getSession().flush();
     }
+    void delete(Object objeto) {
+        HibernateUtil.getSession().delete(objeto);
+        HibernateUtil.getSession().flush();
+    }
 
     void iniciarTransaccion() {
         HibernateUtil.getSession().setFlushMode(FlushMode.MANUAL);

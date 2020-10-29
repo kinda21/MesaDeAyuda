@@ -1,5 +1,8 @@
 package Main.ABMTipoCaso;
 
+import Main.DTOTipoCasoIteracion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -9,8 +12,25 @@ import javax.swing.JOptionPane;
 public class AltaTipoCaso extends javax.swing.JFrame {
     ControladorTipoCaso controladorABMtc = new ControladorTipoCaso();
     ABMTipoCaso abm;
-    int codTCAlta,maxiteracionesTC;
+    int codTCAlta,maxiteracionesTC,numiteracion;
+    List<DTOTipoCasoIteracion> listaiteraciones;
     String nomTCAlta;
+    javax.swing.table.DefaultTableModel miTablaIteraciones=new javax.swing.table.DefaultTableModel(
+        new Object [][] {
+
+            },
+        new String [] {
+                "N° Iteración","Coeficiente de Reducción"
+            }
+        ) {
+        boolean[] canEdit = new boolean [] {
+                false,false
+            };
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+        }
+    };
     /**
      * Creates new form AltaSector
      */
@@ -21,8 +41,56 @@ public class AltaTipoCaso extends javax.swing.JFrame {
    {
        controladorABMtc=cont;
        abm=abmsector;
+       numiteracion = 1;
+       numIteracionTextField.setText(Integer.toString(numiteracion));
+       listaiteraciones = new ArrayList();
        
    }
+    public void poblarTablaIteraciones (List<DTOTipoCasoIteracion> listaiteraciones) {
+        List<DTOTipoCasoIteracion> listaordenada = ordenaDTOIteracions(listaiteraciones);
+        miTablaIteraciones.setRowCount(0);
+        for (int i=0;i<listaordenada.size();i++)
+        {
+            DTOTipoCasoIteracion unaiteracion = listaordenada.get(i);
+            miTablaIteraciones.addRow(new Object[]{unaiteracion.getNumeroDeIteracion(),unaiteracion.getCoeficienteReduccionTipo()});
+        }
+        IteracionesTable.setModel(miTablaIteraciones);
+    }
+    private  List<DTOTipoCasoIteracion> ordenaDTOIteracions(List<DTOTipoCasoIteracion> listaiteraciones)
+    {
+        List<DTOTipoCasoIteracion> ordenado,aux;
+        ordenado=new ArrayList<DTOTipoCasoIteracion>();
+        aux= new ArrayList<DTOTipoCasoIteracion>();
+        for (int i=0; i< listaiteraciones.size();i++)
+        {
+            aux.add(listaiteraciones.get(i));
+        }
+        for (int i=0; i< listaiteraciones.size();i++)
+        {
+            int ultCod=0;
+            DTOTipoCasoIteracion saux=null;
+            for(int j=0;j<aux.size();j++)
+            {
+                if(ultCod ==0)
+                {
+                    ultCod=aux.get(j).getNumeroDeIteracion();
+                    saux=aux.get(j);
+                }
+                if (ultCod >aux.get(j).getNumeroDeIteracion())
+                {
+                    ultCod=aux.get(j).getNumeroDeIteracion();
+                    saux=aux.get(j);
+                }
+            }
+            ordenado.add(saux);
+            aux.remove(saux);
+        }
+         return ordenado; 
+    }
+     /*codigo para actualizar filas si borro
+     for(int index=row ;index<model.getRowCount();index++){
+        model.setValueAt(index+1, index, 0); //setValueAt(data,row,column)
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,9 +106,15 @@ public class AltaTipoCaso extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         codTipoCaso = new javax.swing.JTextField();
         nomTipoCaso = new javax.swing.JTextField();
-        numMaxIteraciones = new javax.swing.JTextField();
-        BotonAltaSector = new javax.swing.JButton();
+        coefReduccionTextField = new javax.swing.JTextField();
+        BotonAltaTipoCaso = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        IteracionesTable = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        numIteracionTextField = new javax.swing.JTextField();
+        addCoefRedux = new javax.swing.JButton();
+        removeCoefRedux = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alta Tipo Caso");
@@ -49,7 +123,7 @@ public class AltaTipoCaso extends javax.swing.JFrame {
 
         jLabel2.setText("Nombre Tipo Caso:");
 
-        jLabel3.setText("N° Máximo Iteraciones:");
+        jLabel3.setText("Coeficiente de Reduccion:");
 
         nomTipoCaso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,17 +131,17 @@ public class AltaTipoCaso extends javax.swing.JFrame {
             }
         });
 
-        numMaxIteraciones.addActionListener(new java.awt.event.ActionListener() {
+        coefReduccionTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                numMaxIteracionesActionPerformed(evt);
+                coefReduccionTextFieldActionPerformed(evt);
             }
         });
 
-        BotonAltaSector.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        BotonAltaSector.setText("Dar de alta");
-        BotonAltaSector.addActionListener(new java.awt.event.ActionListener() {
+        BotonAltaTipoCaso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        BotonAltaTipoCaso.setText("Dar de alta");
+        BotonAltaTipoCaso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BotonAltaSectorActionPerformed(evt);
+                BotonAltaTipoCasoActionPerformed(evt);
             }
         });
 
@@ -78,6 +152,53 @@ public class AltaTipoCaso extends javax.swing.JFrame {
             }
         });
 
+        IteracionesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "N°Iteracion", "Coeficiente de Reducción"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(IteracionesTable);
+
+        jLabel4.setText("N° Máximo Iteración:");
+
+        numIteracionTextField.setEditable(false);
+        numIteracionTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                numIteracionTextFieldActionPerformed(evt);
+            }
+        });
+
+        addCoefRedux.setText("Agregar Coeficiente");
+        addCoefRedux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCoefReduxActionPerformed(evt);
+            }
+        });
+
+        removeCoefRedux.setText("Limpiar Lista Iteraciones");
+        removeCoefRedux.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCoefReduxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -85,18 +206,38 @@ public class AltaTipoCaso extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(BotonAltaSector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(codTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nomTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(numMaxIteraciones, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(addCoefRedux, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(removeCoefRedux, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(coefReduccionTextField)
+                            .addComponent(numIteracionTextField)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(BotonAltaTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(182, 182, 182)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomTipoCaso)
+                            .addComponent(codTipoCaso))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -105,19 +246,29 @@ public class AltaTipoCaso extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(codTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nomTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel2)
+                    .addComponent(nomTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(numMaxIteraciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(numIteracionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(coefReduccionTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BotonAltaSector)
+                    .addComponent(addCoefRedux)
+                    .addComponent(removeCoefRedux))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BotonAltaTipoCaso)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -128,11 +279,11 @@ public class AltaTipoCaso extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nomTipoCasoActionPerformed
 
-    private void numMaxIteracionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numMaxIteracionesActionPerformed
+    private void coefReduccionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coefReduccionTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_numMaxIteracionesActionPerformed
+    }//GEN-LAST:event_coefReduccionTextFieldActionPerformed
 
-    private void BotonAltaSectorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAltaSectorActionPerformed
+    private void BotonAltaTipoCasoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAltaTipoCasoActionPerformed
         try  {
             codTCAlta=(Integer.parseInt(codTipoCaso.getText()));
         }
@@ -141,7 +292,7 @@ public class AltaTipoCaso extends javax.swing.JFrame {
             return;
         }
         try  {
-            maxiteracionesTC = (Integer.parseInt(numMaxIteraciones.getText()));
+            maxiteracionesTC = listaiteraciones.size();
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(this, "La cantidad máxima de iteraciones debe ser un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -149,18 +300,47 @@ public class AltaTipoCaso extends javax.swing.JFrame {
         }
         Boolean exito;
         nomTCAlta = nomTipoCaso.getText();
-        exito = controladorABMtc.daraltaTipoCaso(codTCAlta,nomTCAlta,maxiteracionesTC);
+        exito = controladorABMtc.daraltaTipoCaso(codTCAlta,nomTCAlta,maxiteracionesTC,listaiteraciones);
         if (exito == true) {
         setVisible(false);
         dispose();
         abm.setVisible(true);
         }
-    }//GEN-LAST:event_BotonAltaSectorActionPerformed
+    }//GEN-LAST:event_BotonAltaTipoCasoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         setVisible(false);
         dispose();  
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void numIteracionTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_numIteracionTextFieldActionPerformed
+    }//GEN-LAST:event_numIteracionTextFieldActionPerformed
+
+    private void addCoefReduxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCoefReduxActionPerformed
+        int coeficiente,numero;
+        try  {
+            coeficiente=(Integer.parseInt(coefReduccionTextField.getText()));
+            numero=(Integer.parseInt(numIteracionTextField.getText()));
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this, "El coeficiente debe ser un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        DTOTipoCasoIteracion undto = new DTOTipoCasoIteracion();
+        undto.setNumeroDeIteracion(numiteracion);
+        undto.setCoeficienteReduccionTipo(coeficiente);
+        listaiteraciones.add(undto);
+        numiteracion++;
+        numIteracionTextField.setText(Integer.toString(numiteracion));
+        poblarTablaIteraciones(listaiteraciones);
+    }//GEN-LAST:event_addCoefReduxActionPerformed
+
+    private void removeCoefReduxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCoefReduxActionPerformed
+        listaiteraciones.clear();
+        numiteracion=1;
+        numIteracionTextField.setText(Integer.toString(numiteracion));
+        poblarTablaIteraciones(listaiteraciones);
+    }//GEN-LAST:event_removeCoefReduxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,13 +381,19 @@ public class AltaTipoCaso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BotonAltaSector;
+    private javax.swing.JButton BotonAltaTipoCaso;
+    private javax.swing.JTable IteracionesTable;
+    private javax.swing.JButton addCoefRedux;
     private javax.swing.JTextField codTipoCaso;
+    private javax.swing.JTextField coefReduccionTextField;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nomTipoCaso;
-    private javax.swing.JTextField numMaxIteraciones;
+    private javax.swing.JTextField numIteracionTextField;
+    private javax.swing.JButton removeCoefRedux;
     // End of variables declaration//GEN-END:variables
 }

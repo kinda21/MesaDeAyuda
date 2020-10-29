@@ -1,5 +1,6 @@
 package Main.ABMTipoCaso;
 import Main.DTOTipoCaso;
+import Main.DTOTipoCasoIteracion;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,14 +15,14 @@ public class ControladorTipoCaso {
     }
     
 
-     public boolean daraltaTipoCaso(int codtipocaso, String nomTC, int maxiteraciones){
-        return expertoTC.daraltaTipoCaso(codtipocaso, nomTC, maxiteraciones);
+     public boolean daraltaTipoCaso(int codtipocaso, String nomTC, int maxiteraciones,List<DTOTipoCasoIteracion> iteraciones){
+        return expertoTC.daraltaTipoCaso(codtipocaso, nomTC, maxiteraciones,iteraciones);
         }
     public boolean darbajaTipoCaso(int codtipocaso) {
         return expertoTC.darbajaTipoCaso(codtipocaso);
     }
-    public boolean modificarTipoCaso (int codtipocaso, String nomTC,int maxiteraciones) {
-        return expertoTC.modificarTipoCaso(codtipocaso, nomTC, maxiteraciones);
+    public boolean modificarTipoCaso (int codtipocaso, String nomTC,int maxiteraciones,List<DTOTipoCasoIteracion> iteraciones) {
+        return expertoTC.modificarTipoCaso(codtipocaso, nomTC, maxiteraciones,iteraciones);
     }
      public List<DTOTipoCaso> buscarTipoCasos(String nomfilTipoCaso, String codfilTipoCaso){
        List<DTOTipoCaso> listatipocasos = expertoTC.buscarTipoCasos(nomfilTipoCaso,codfilTipoCaso);

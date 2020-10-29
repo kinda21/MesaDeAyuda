@@ -24,6 +24,10 @@ public class FachadaPersistencia {
         FachadaInterna.getInstance().guardar(objeto);
     }
     
+    public void delete(Object objeto) {
+        FachadaInterna.getInstance().delete(objeto);
+    }
+    
     public void iniciarTransaccion() {
         FachadaInterna.getInstance().iniciarTransaccion();
     }
