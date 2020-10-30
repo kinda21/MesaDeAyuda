@@ -24,7 +24,7 @@ public class ABMConfigurar extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -256,6 +256,8 @@ public class ABMConfigurar extends javax.swing.JFrame {
         }
        String nroconf=a.toString();
        contconfig.verificarConfiguracion(nroconf,parcodTC);
+       List<DTOConfiguracionTipoCaso> listaconfiguraciones = contconfig.buscarConfiguraciones(parcodTC);
+       poblarTabla(listaconfiguraciones);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

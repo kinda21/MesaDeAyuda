@@ -1,12 +1,10 @@
 package Main.ConfigurarCaso;
+
 import Main.DTOConfiguracionTipoCaso;
 import Main.DTOTipoCaso;
-import Main.DTOTipoCasoIteracion;
 import Main.DTOTipoCasoTipoInstancia;
 import Main.DTOTipoInstancia;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

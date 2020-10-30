@@ -4,7 +4,6 @@ import Main.DTOTipoTarea;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author FLIA HUDSON

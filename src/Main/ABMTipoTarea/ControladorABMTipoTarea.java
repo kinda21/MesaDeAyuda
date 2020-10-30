@@ -1,13 +1,7 @@
 package Main.ABMTipoTarea;
-import Main.ABMTipoTarea.ABMTipoTarea;
-import Main.ABMTipoTarea.BajaTipoTarea;
-import Main.ABMTipoTarea.AltaTipoTarea;
-import Main.ABMTipoTarea.ExpertoABMTipoTarea;
-import Main.ABMTipoTarea.ModTipoTarea;
+
 import Main.DTOTipoTarea;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

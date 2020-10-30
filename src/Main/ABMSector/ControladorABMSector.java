@@ -1,8 +1,6 @@
 package Main.ABMSector;
 import Main.DTOSector;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

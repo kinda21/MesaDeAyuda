@@ -1,6 +1,5 @@
 package Main.ConfigurarCaso;
 
-import Entidades.TipoCaso;
 import Main.DTOConfiguracionTipoCaso;
 import Main.DTOTipoCaso;
 import Main.DTOTipoCasoTipoInstancia;

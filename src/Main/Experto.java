@@ -1,7 +1,6 @@
 package Main;
 
 import Entidades.*;
-import Main.DTOCriterio;
 import java.util.*;
 
 

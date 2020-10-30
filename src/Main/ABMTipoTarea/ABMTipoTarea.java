@@ -1,11 +1,9 @@
 package Main.ABMTipoTarea;
+
 import java.util.*;
-import Entidades.*;
 import Main.DTOTipoTarea;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import javax.swing.*;
-import java.lang.*;
+
 /**
  *
  * @author FLIA HUDSON

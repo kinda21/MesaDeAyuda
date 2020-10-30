@@ -13,16 +13,6 @@ import javax.swing.JOptionPane;
  */
 public class ExpertoABMTipoTarea {
     public ExpertoABMTipoTarea() {
-    //    PRUEBAS DE LOS MÉTODOS.
-    //    FachadaPersistencia.getInstance().iniciarTransaccion();
-    //    DTOSector prueba = new DTOSector();
-    //    prueba.setCodSector(333);
-    //    prueba.setDescripcionSector("probando ABM");
-    //    prueba.setFechaHoraFinVigenciaSector(null);
-    //    prueba.setNombreSector("prueba sin pantalla");
-    //    daraltaSector(prueba);
-    //    darbajaSector(333);
-    //    modificarSector(333,"prueba superada","ya lo probe");
     }
     public List<DTOTipoTarea> buscarTiposTarea(String filNombreTT, String filCodTT){
         FachadaPersistencia.getInstance().iniciarTransaccion();
