@@ -255,7 +255,7 @@ public class ABMConfigurar extends javax.swing.JFrame {
             return;
         }
        String nroconf=a.toString();
-       contconfig.verificarConfiguracion(parcodTC,nroconf);
+       contconfig.verificarConfiguracion(nroconf,parcodTC);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed

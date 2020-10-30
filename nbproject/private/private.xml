@@ -5,8 +5,13 @@
         <group>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Entidades/ConfiguracionTipoCaso.java</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/AltaConfigurar.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/BajaConfigurar.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/tipocasotipoinstancia.hbm.xml</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoCaso/ExpertoABMTipoCaso.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/configuraciontipocaso.hbm.xml</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/ModConfigurar.java</file>
-            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ABMTipoInstancia/AltaTipoInstancia.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/SeleccionTipoCaso.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Entidades/TipoCaso.java</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/ControladorConfigurar.java</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/ExpertoConfigurar.java</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/ABMConfigurar.java</file>

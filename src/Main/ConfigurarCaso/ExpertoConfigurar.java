@@ -672,7 +672,7 @@ public class ExpertoConfigurar {
         criterioList.add(dto);
         //busco el tipocaso pasado por codigo
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoCaso", criterioList);
-        if (objetoList == null) {
+        if (objetoList.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Tipo Caso no encontrado. Ingrese código de tipo caso nuevamente", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -695,6 +695,7 @@ public class ExpertoConfigurar {
         criterioList.add(dto3);
         objetoList = FachadaPersistencia.getInstance().buscar("ConfiguracionTipoCaso", criterioList);
         configaverificar = (ConfiguracionTipoCaso) objetoList.get(0);
+        
         //verifico que se cumpla el orden de los tipocasotipoinstancia
         int orden = 1;
         for (TipoCasoTipoInstancia x : configaverificar.getListaTipoCasoTipoInstancia()) {
@@ -753,7 +754,7 @@ public class ExpertoConfigurar {
         Date datehoymenosuno = Date.from(instant);
         configaverificar.setFechaFinVigencia(datehoymenosuno);
         configaverificar.setFechaVerificacion(fechadehoy);
-        JOptionPane.showMessageDialog(null, "La configuración fue verificada con éxito.", "Aviso", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "La configuración fue verificada con éxito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         FachadaPersistencia.getInstance().guardar(configaverificar);
         FachadaPersistencia.getInstance().finalizarTransaccion();
         return true;   
