@@ -407,6 +407,10 @@ public class ExpertoConfigurar {
             JOptionPane.showMessageDialog(null, "La fecha de inicio no puede ser menor a la fecha actual", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false; 
         }
+        if (listatipocasotipoinstancia.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La configuración debe tener por lo menos un TipoCasoTipoInstancia.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         DTOCriterio dto = new DTOCriterio();
         dto.setAtributo("codTipoCaso");
         dto.setOperacion("=");
@@ -448,6 +452,10 @@ public class ExpertoConfigurar {
                 codigoTI = undto.getCodigoTipoInstancia();
                 minutosmax = undto.getMinutosMaximaResolucion();
                 orden = undto.getOrdenTipoCasoTipoInstancia();
+                if (orden<=0) {
+                JOptionPane.showMessageDialog(null, "El orden de un TipoCasoTipoInstancia no puede ser menor o igual a 0.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return false;
+                }
                 TipoCasoTipoInstancia tipocasotipoinstanciadealta = new TipoCasoTipoInstancia();
                 tipocasotipoinstanciadealta.setOrdenTipoCasoTipoInstancia(orden);
                 tipocasotipoinstanciadealta.setMinutosMaximaResolucion(minutosmax);
@@ -504,6 +512,10 @@ public class ExpertoConfigurar {
             JOptionPane.showMessageDialog(null, "La fecha de inicio no puede ser menor a la fecha actual", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false; 
         }
+        if (listatipocasotipoinstancia.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "La configuración debe tener por lo menos un TipoCasoTipoInstancia.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         DTOCriterio dto = new DTOCriterio();
         dto.setAtributo("codTipoCaso");
         dto.setOperacion("=");
@@ -546,6 +558,10 @@ public class ExpertoConfigurar {
             codigoTI = undto.getCodigoTipoInstancia();
             minutosmax = undto.getMinutosMaximaResolucion();
             orden = undto.getOrdenTipoCasoTipoInstancia();
+            if (orden<=0) {
+                JOptionPane.showMessageDialog(null, "El orden de un TipoCasoTipoInstancia no puede ser menor o igual a 0.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
             TipoCasoTipoInstancia tipocasotipoinstanciamodificada= new TipoCasoTipoInstancia();
             tipocasotipoinstanciamodificada.setOrdenTipoCasoTipoInstancia(orden);
             tipocasotipoinstanciamodificada.setMinutosMaximaResolucion(minutosmax);
