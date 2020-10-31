@@ -1,9 +1,8 @@
 package Main.ABMTipoCaso;
+
 import Main.DTOTipoCaso;
 import Main.DTOTipoCasoIteracion;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

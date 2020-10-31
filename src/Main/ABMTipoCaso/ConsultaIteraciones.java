@@ -1,7 +1,5 @@
 package Main.ABMTipoCaso;
 
-import Main.ABMTipoTarea.*;
-import Main.ABMTipoInstancia.ControladorABMTipoInstancia;
 import Main.DTOTipoCaso;
 import Main.DTOTipoCasoIteracion;
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ public class ConsultaIteraciones extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

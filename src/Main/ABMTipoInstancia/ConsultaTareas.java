@@ -1,6 +1,5 @@
 package Main.ABMTipoInstancia;
 
-import Main.ABMTipoInstancia.ControladorABMTipoInstancia;
 import Main.DTOTipoInstancia;
 import Main.DTOTipoTarea;
 import java.util.ArrayList;
