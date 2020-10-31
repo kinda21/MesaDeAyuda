@@ -753,6 +753,10 @@ public class ExpertoConfigurar {
                 } 
             }    
         }
+        if (configaverificar.getFechaVerificacion()!=null) {
+            JOptionPane.showMessageDialog(null, "La configuración elegida ya ha sido verificada.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         if (configaverificar.getFechaFinVigencia()!=null) {
             JOptionPane.showMessageDialog(null, "La configuración elegida ya ha sido dada de baja.", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
