@@ -6,6 +6,7 @@ import Main.DTOTipoCasoTipoInstancia;
 import Main.DTOTipoInstancia;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -336,11 +337,13 @@ public class BajaConfigurar extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void modificarTCTIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarTCTIActionPerformed
-        SimpleDateFormat formatter;
+        /* SimpleDateFormat formatter;
         Locale locale = jDatePicker1.getLocale();
-        formatter = new SimpleDateFormat("dd/MM/yyyy", locale);
+        formatter = new SimpleDateFormat("dd/MM/yyyy", locale);*/
         try {
-          fechainicioconfig = formatter.parse(jDatePicker1.getFormattedTextField().getText());
+          //fechainicioconfig = formatter.parse(jDatePicker1.getFormattedTextField().getText());
+            Calendar selectedValue = (Calendar) jDatePicker1.getModel().getValue();
+            fechainicioconfig = selectedValue.getTime();
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Elija una fecha válida para la configuración", "ERROR", JOptionPane.ERROR_MESSAGE);
