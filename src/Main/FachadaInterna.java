@@ -75,7 +75,6 @@ public class FachadaInterna {
 
             }
         }
-
         return cr.list();
     }
 

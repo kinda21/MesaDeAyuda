@@ -241,7 +241,12 @@ public class BajaConfigurar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(modificarTCTI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backButton))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -264,16 +269,8 @@ public class BajaConfigurar extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel8))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(modificarTCTI)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(backButton)))))
+                                .addGap(0, 460, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,8 +300,8 @@ public class BajaConfigurar extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificarTCTI)
                     .addComponent(backButton))
@@ -337,13 +334,11 @@ public class BajaConfigurar extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void modificarTCTIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarTCTIActionPerformed
-        /* SimpleDateFormat formatter;
+        SimpleDateFormat formatter;
         Locale locale = jDatePicker1.getLocale();
-        formatter = new SimpleDateFormat("dd/MM/yyyy", locale);*/
+        formatter = new SimpleDateFormat("dd/MM/yyyy", locale);
         try {
-          //fechainicioconfig = formatter.parse(jDatePicker1.getFormattedTextField().getText());
-            Calendar selectedValue = (Calendar) jDatePicker1.getModel().getValue();
-            fechainicioconfig = selectedValue.getTime();
+          fechainicioconfig = formatter.parse(jDatePicker1.getFormattedTextField().getText());
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Elija una fecha válida para la configuración", "ERROR", JOptionPane.ERROR_MESSAGE);

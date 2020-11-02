@@ -550,6 +550,10 @@ public class ExpertoConfigurar {
             JOptionPane.showMessageDialog(null, "No se puede modificar una Configuracion ya verificada", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
         }
+        if (configamodificar.getFechaFinVigencia()!=null) {
+            JOptionPane.showMessageDialog(null, "No se puede modificar una Configuracion dada de baja.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
         configamodificar.setFechaInicioVigencia(fechainicio);
         configamodificar.getListaTipoCasoTipoInstancia().clear();
         for (Object x : listatipocasotipoinstancia){
@@ -711,7 +715,6 @@ public class ExpertoConfigurar {
         criterioList.add(dto3);
         objetoList = FachadaPersistencia.getInstance().buscar("ConfiguracionTipoCaso", criterioList);
         configaverificar = (ConfiguracionTipoCaso) objetoList.get(0);
-        
         //verifico que se cumpla el orden de los tipocasotipoinstancia
         int orden = 1;
         for (TipoCasoTipoInstancia x : configaverificar.getListaTipoCasoTipoInstancia()) {
@@ -730,30 +733,7 @@ public class ExpertoConfigurar {
                return false; 
             }
         }
-        //verifico que no exista una configuracion verificada con fechainicio mayor a la de la configuracion que estoy verificando
-        criterioList.clear();
-        criterioList.add(dto2);
-        DTOCriterio dto4 = new DTOCriterio();
-        dto4.setAtributo("fechaFinVigencia");
-        dto4.setOperacion("=");
-        dto4.setValor(null);
-        criterioList.add(dto4);
-        DTOCriterio dto5 = new DTOCriterio();
-        dto5.setAtributo("fechaVerificacion");
-        dto5.setOperacion("<>");
-        dto5.setValor(null);
-        criterioList.add(dto5);
-        objetoList = FachadaPersistencia.getInstance().buscar("ConfiguracionTipoCaso", criterioList);
-        if (objetoList.size()>0) {
-            for (Object x : objetoList) {
-                ConfiguracionTipoCaso unaconfig = (ConfiguracionTipoCaso) x;
-                if (unaconfig.getFechaInicioVigencia().after(configaverificar.getFechaInicioVigencia())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe una configuración verificada con la fecha mayor a fecha de inicio”", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    return false;
-                } 
-            }    
-        }
-        if (configaverificar.getFechaVerificacion()!=null) {
+         if (configaverificar.getFechaVerificacion()!=null) {
             JOptionPane.showMessageDialog(null, "La configuración elegida ya ha sido verificada.", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -766,13 +746,39 @@ public class ExpertoConfigurar {
             JOptionPane.showMessageDialog(null, "La fecha de inicio no puede ser menor o igual a la fecha de hoy.", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        //tuve que convertir la fecha de inicio a instant para poder restarle un dia y asi asignarlo a la fecha de fin vigencia...
-        Instant instant = Instant.ofEpochMilli(configaverificar.getFechaInicioVigencia().getTime());
-        LocalDateTime ldt = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
-        LocalDateTime hoymenosundia = ldt.minusDays(1);
-        instant = hoymenosundia.toInstant(ZoneOffset.UTC);
-        Date datehoymenosuno = Date.from(instant);
-        configaverificar.setFechaFinVigencia(datehoymenosuno);
+        //verifico que no exista una configuracion verificada con fechainicio mayor a la de la configuracion que estoy verificando
+        criterioList.clear();
+        objetoList.clear();
+
+        DTOCriterio dto4 = new DTOCriterio();
+        dto4.setAtributo("fechaFinVigencia");
+        dto4.setOperacion("=");
+        dto4.setValor(null);
+        DTOCriterio dto5 = new DTOCriterio();
+        dto5.setAtributo("fechaVerificacion");
+        dto5.setOperacion("<>");
+        dto5.setValor(null);
+        criterioList.add(dto2); //relacionada a tipo caso
+        criterioList.add(dto5);//con fechaverificacion definida
+        criterioList.add(dto4);//sin fechafinvigencia definida
+        objetoList = FachadaPersistencia.getInstance().buscar("ConfiguracionTipoCaso", criterioList);
+        if (objetoList.size()>0)  { //si es la primera en estar verificada se salta esto
+            for (Object x : objetoList) {
+                ConfiguracionTipoCaso ultimaconfigverif = (ConfiguracionTipoCaso) x;
+                if (ultimaconfigverif.getFechaInicioVigencia().after(configaverificar.getFechaInicioVigencia())) {
+                    JOptionPane.showMessageDialog(null, "Ya existe una configuración verificada con una fecha mayor a la fecha de inicio de la configuración ingresada", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    return false;
+                }
+                //tuve que convertir la fecha de inicio a instant para poder restarle un dia y asi asignarlo a la fecha de fin vigencia...
+                Instant instant = Instant.ofEpochMilli(configaverificar.getFechaInicioVigencia().getTime());
+                LocalDateTime ldt = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+                LocalDateTime hoymenosundia = ldt.minusDays(1);
+                instant = hoymenosundia.toInstant(ZoneOffset.UTC);
+                Date datehoymenosuno = Date.from(instant);
+                ultimaconfigverif.setFechaFinVigencia(datehoymenosuno);
+                FachadaPersistencia.getInstance().guardar(ultimaconfigverif);
+            }    
+        }
         configaverificar.setFechaVerificacion(fechadehoy);
         JOptionPane.showMessageDialog(null, "La configuración fue verificada con éxito.", "Aviso", JOptionPane.INFORMATION_MESSAGE);
         FachadaPersistencia.getInstance().guardar(configaverificar);
