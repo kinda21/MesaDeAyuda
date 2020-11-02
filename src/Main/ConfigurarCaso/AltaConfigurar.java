@@ -4,12 +4,10 @@ import Main.DTOConfiguracionTipoCaso;
 import Main.DTOTipoCaso;
 import Main.DTOTipoCasoTipoInstancia;
 import Main.DTOTipoInstancia;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**

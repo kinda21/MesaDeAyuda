@@ -1,6 +1,5 @@
 package Main;
 
-import Entidades.ConfiguracionTipoCaso;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.FlushMode;
