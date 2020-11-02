@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import org.jdatepicker.DateModel;
+import org.jdatepicker.UtilDateModel;
 
 /**
  *
@@ -82,10 +84,14 @@ public class ModConfigurar extends javax.swing.JFrame {
             codTCTextField.setText(Integer.toString(tcbuscado.getCodTipoCaso()));
             nomTCTextField.setText(tcbuscado.getNombreTipoCaso());
             nroConfigTextField.setText(parnroConfiguracion);
-            String fechainicial;
-            fechainicial = configamodificar.getFechaInicioVigencia().toString();
-            fechainicial = arreglarDate(fechainicial); 
-            jDatePicker1.getFormattedTextField().setText(fechainicial);
+           // String fechainicial;
+           // fechainicial = configamodificar.getFechaInicioVigencia().toString();
+           // fechainicial = arreglarDate(fechainicial); 
+           // jDatePicker1.getFormattedTextField().setText(fechainicial);
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(configamodificar.getFechaInicioVigencia().getTime());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDatePicker1.getModel();
+            dateModel.setValue(cal);
             if (listaTITC.size()>0){
             poblarTabla(listaTITC);
             }
@@ -350,15 +356,12 @@ public class ModConfigurar extends javax.swing.JFrame {
                                 .addComponent(backButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel8))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel8)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(addTCTI)
                                         .addGap(0, 0, Short.MAX_VALUE)))
-                                .addGap(8, 8, 8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(removeTCTI)))
                         .addContainerGap())))
         );

@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import org.jdatepicker.DateModel;
 
 /**
  *
@@ -82,10 +83,14 @@ public class BajaConfigurar extends javax.swing.JFrame {
             codTCTextField.setText(Integer.toString(tcbuscado.getCodTipoCaso()));
             nomTCTextField.setText(tcbuscado.getNombreTipoCaso());
             nroConfigTextField.setText(parnroConfiguracion);
-            String fechainicial;
+         /* String fechainicial;
             fechainicial = configadarbaja.getFechaInicioVigencia().toString();
             fechainicial = arreglarDate(fechainicial); 
-            jDatePicker1.getFormattedTextField().setText(fechainicial);
+            jDatePicker1.getFormattedTextField().setText(fechainicial); */
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(configadarbaja.getFechaInicioVigencia().getTime());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDatePicker1.getModel();
+            dateModel.setValue(cal);
             if (listaTITC.size()>0){
             poblarTabla(listaTITC);
             }

@@ -759,12 +759,13 @@ public class ExpertoConfigurar {
         dto5.setOperacion("<>");
         dto5.setValor(null);
         criterioList.add(dto2); //relacionada a tipo caso
-        criterioList.add(dto5);//con fechaverificacion definida
         criterioList.add(dto4);//sin fechafinvigencia definida
+        criterioList.add(dto5);//con fechaverificacion definida
         objetoList = FachadaPersistencia.getInstance().buscar("ConfiguracionTipoCaso", criterioList);
         if (objetoList.size()>0)  { //si es la primera en estar verificada se salta esto
             for (Object x : objetoList) {
                 ConfiguracionTipoCaso ultimaconfigverif = (ConfiguracionTipoCaso) x;
+                System.out.println(ultimaconfigverif.getNroConfigTC());
                 if (ultimaconfigverif.getFechaInicioVigencia().after(configaverificar.getFechaInicioVigencia())) {
                     JOptionPane.showMessageDialog(null, "Ya existe una configuración verificada con una fecha mayor a la fecha de inicio de la configuración ingresada", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return false;
