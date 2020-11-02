@@ -4,12 +4,12 @@ import Main.DTOConfiguracionTipoCaso;
 import Main.DTOTipoCaso;
 import Main.DTOTipoCasoTipoInstancia;
 import Main.DTOTipoInstancia;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import javax.swing.JOptionPane;
+import org.jdatepicker.DateModel;
 
 /**
  *
@@ -81,10 +81,14 @@ public class ModConfigurar extends javax.swing.JFrame {
             codTCTextField.setText(Integer.toString(tcbuscado.getCodTipoCaso()));
             nomTCTextField.setText(tcbuscado.getNombreTipoCaso());
             nroConfigTextField.setText(parnroConfiguracion);
-            String fechainicial;
-            fechainicial = configamodificar.getFechaInicioVigencia().toString();
-            fechainicial = arreglarDate(fechainicial); 
-            jDatePicker1.getFormattedTextField().setText(fechainicial);
+           // String fechainicial;
+           // fechainicial = configamodificar.getFechaInicioVigencia().toString();
+           // fechainicial = arreglarDate(fechainicial); 
+           // jDatePicker1.getFormattedTextField().setText(fechainicial);
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(configamodificar.getFechaInicioVigencia().getTime());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDatePicker1.getModel();
+            dateModel.setValue(cal);
             if (listaTITC.size()>0){
             poblarTabla(listaTITC);
             }
@@ -222,8 +226,10 @@ public class ModConfigurar extends javax.swing.JFrame {
             TablaTITC.getColumnModel().getColumn(2).setResizable(false);
         }
 
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Máximo minutos:");
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Orden:");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -241,6 +247,7 @@ public class ModConfigurar extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Código Tipo Instancia:");
 
         codTITextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -254,6 +261,7 @@ public class ModConfigurar extends javax.swing.JFrame {
             }
         });
 
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Nombre Tipo Instancia:");
 
         nomTITextField.setEditable(false);
@@ -301,26 +309,8 @@ public class ModConfigurar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(modificarTCTI)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ordenTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(codTITextField, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -340,22 +330,41 @@ public class ModConfigurar extends javax.swing.JFrame {
                                     .addComponent(codTCTextField)
                                     .addComponent(nomTCTextField)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(addTCTI)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ordenTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                                    .addComponent(maxMinutosTextField))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomTITextField)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(codTITextField)
+                                        .addGap(2, 2, 2))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(modificarTCTI)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(removeTCTI))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(backButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel8)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(addTCTI)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(maxMinutosTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(nomTITextField, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(removeTCTI)))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -398,11 +407,11 @@ public class ModConfigurar extends javax.swing.JFrame {
                     .addComponent(removeTCTI))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificarTCTI)
                     .addComponent(backButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -525,11 +534,13 @@ public class ModConfigurar extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void modificarTCTIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarTCTIActionPerformed
-        SimpleDateFormat formatter;
+        /* SimpleDateFormat formatter;
         Locale locale = jDatePicker1.getLocale();
-        formatter = new SimpleDateFormat("dd/MM/yyyy", locale);
+        formatter = new SimpleDateFormat("dd/MM/yyyy", locale);*/
         try {
-          fechainicioconfig = formatter.parse(jDatePicker1.getFormattedTextField().getText());
+          //fechainicioconfig = formatter.parse(jDatePicker1.getFormattedTextField().getText());
+            Calendar selectedValue = (Calendar) jDatePicker1.getModel().getValue();
+            fechainicioconfig = selectedValue.getTime();
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Elija una fecha válida para la configuración", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -537,6 +548,10 @@ public class ModConfigurar extends javax.swing.JFrame {
         }
         try {
           Integer a = Integer.parseInt(nroConfigTextField.getText());
+          if (a==0) {
+            JOptionPane.showMessageDialog(this, "El orden debe ser mayor a 0", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;  
+            }
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Ingrese un entero mayor a 0 para el numero de configuración", "ERROR", JOptionPane.ERROR_MESSAGE);

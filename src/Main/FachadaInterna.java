@@ -40,7 +40,6 @@ public class FachadaInterna {
                 String atributo = criterio.getAtributo();
                 String operacion = criterio.getOperacion();
                 Object valor = criterio.getValor();
-
                 switch (operacion) {
                     case "=":
                         cr.add(Restrictions.conjunction(Restrictions.eqOrIsNull(atributo, valor)));
@@ -58,7 +57,7 @@ public class FachadaInterna {
                         cr.add(Restrictions.conjunction(Restrictions.ge(atributo, valor)));
                         break;
                     case "<>":
-                        cr.add(Restrictions.conjunction(Restrictions.ne(atributo, valor)));
+                        cr.add(Restrictions.conjunction(Restrictions.neOrIsNotNull(atributo, valor)));
                         break;
                     case "like":
                         cr.add(Restrictions.conjunction(Restrictions.ilike(atributo,(String)valor,MatchMode.ANYWHERE)));
@@ -75,7 +74,6 @@ public class FachadaInterna {
 
             }
         }
-
         return cr.list();
     }
 

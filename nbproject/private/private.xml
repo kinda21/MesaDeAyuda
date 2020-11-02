@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Entidades/ConfiguracionTipoCaso.java</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/AltaConfigurar.java</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/BajaConfigurar.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/configuraciontipocaso.hbm.xml</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/ModConfigurar.java</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/ExpertoConfigurar.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/FachadaInterna.java</file>
+            <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/FachadaPersistencia.java</file>
             <file>file:/C:/Users/FLIA%20HUDSON/Desktop/Design/TP6/Projects/Fuentes/MesaDeAyuda/src/Main/ConfigurarCaso/ABMConfigurar.java</file>
         </group>
     </open-files>

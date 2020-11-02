@@ -6,10 +6,12 @@ import Main.DTOTipoCasoTipoInstancia;
 import Main.DTOTipoInstancia;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
+import org.jdatepicker.DateModel;
 
 /**
  *
@@ -81,10 +83,14 @@ public class BajaConfigurar extends javax.swing.JFrame {
             codTCTextField.setText(Integer.toString(tcbuscado.getCodTipoCaso()));
             nomTCTextField.setText(tcbuscado.getNombreTipoCaso());
             nroConfigTextField.setText(parnroConfiguracion);
-            String fechainicial;
+         /* String fechainicial;
             fechainicial = configadarbaja.getFechaInicioVigencia().toString();
             fechainicial = arreglarDate(fechainicial); 
-            jDatePicker1.getFormattedTextField().setText(fechainicial);
+            jDatePicker1.getFormattedTextField().setText(fechainicial); */
+            Calendar cal = Calendar.getInstance();
+            cal.setTimeInMillis(configadarbaja.getFechaInicioVigencia().getTime());
+            DateModel<Calendar> dateModel = (DateModel<Calendar>) jDatePicker1.getModel();
+            dateModel.setValue(cal);
             if (listaTITC.size()>0){
             poblarTabla(listaTITC);
             }
@@ -240,7 +246,12 @@ public class BajaConfigurar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(modificarTCTI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backButton))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
@@ -263,16 +274,8 @@ public class BajaConfigurar extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel8))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(modificarTCTI)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(backButton)))))
+                                .addGap(0, 460, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,8 +305,8 @@ public class BajaConfigurar extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificarTCTI)
                     .addComponent(backButton))
