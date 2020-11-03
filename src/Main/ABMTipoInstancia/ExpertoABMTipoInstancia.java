@@ -400,6 +400,10 @@ public class ExpertoABMTipoInstancia {
         dto.setValor(codigosector);
         criterioList.add(dto);
         List objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
+        if (objetoList.isEmpty()==true) {
+            JOptionPane.showMessageDialog(null, "El código sector ingresado es incorrecto, no existe un Sector con ese código.");
+            return false;
+        }
         Sector sectoraAsignar = (Sector)objetoList.get(0);
         if(sectoraAsignar.getFechaHoraFinVigenciaSector() != null){
             JOptionPane.showMessageDialog(null, "El Sector ingresado es incorrecto, ya fue dado de baja");
@@ -449,7 +453,7 @@ public class ExpertoABMTipoInstancia {
         }
         catch(Exception e){
             
-            JOptionPane.showMessageDialog(null, "Error al crear el Sector");
+            JOptionPane.showMessageDialog(null, "Error al crear el Tipo Instancia");
             return false;
         }
         //System.out.println("!");
@@ -487,9 +491,15 @@ public class ExpertoABMTipoInstancia {
             dto.setAtributo("codSector");
             dto.setOperacion("=");
             dto.setValor(codSector);
+            objetoList.clear();
             criterioList.clear();
             criterioList.add(dto);
-            Sector sectorasignado = (Sector)FachadaPersistencia.getInstance().buscar("Sector", criterioList).get(0);
+            objetoList = FachadaPersistencia.getInstance().buscar("Sector", criterioList);
+            if (objetoList.isEmpty()==true) {
+            JOptionPane.showMessageDialog(null, "El código sector ingresado es incorrecto, no existe un Sector con ese código.");
+            return false;
+            }
+            Sector sectorasignado = (Sector) objetoList.get(0);
             if(sectorasignado.getFechaHoraFinVigenciaSector() != null){
                 JOptionPane.showMessageDialog(null, "El Sector ingresado es incorrecto, ya fue dado de baja");
                 return false;

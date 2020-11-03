@@ -72,6 +72,7 @@ public class BajaTipoInstancia extends javax.swing.JFrame {
         volverButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Baja Tipo Instancia");
 
         jLabel1.setText("Código Tipo Instancia:");
 
@@ -204,6 +205,7 @@ public class BajaTipoInstancia extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void codbajaTipoInstanciaTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codbajaTipoInstanciaTextFieldActionPerformed

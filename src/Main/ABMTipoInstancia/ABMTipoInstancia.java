@@ -269,7 +269,7 @@ public class ABMTipoInstancia extends javax.swing.JFrame {
               a= (Integer) TablaTipoInstancias.getModel().getValueAt(TablaTipoInstancias.getSelectedRow(), 0);
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Seleccione un Sector", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione un Tipo Instancia", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cod=a;

@@ -59,6 +59,7 @@ public class AltaConfigurar extends javax.swing.JFrame {
        parcodTC = codigoTC;
        listaTITC = new ArrayList<>();
        listaTIfiltrados = new ArrayList<>();
+       tibuscada = new DTOTipoInstancia();
        miTabla.setRowCount(0);
     }
 
@@ -460,6 +461,10 @@ public class AltaConfigurar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El máximo de minutos debe ser un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (tibuscada.getNombreSector()==null) {
+            JOptionPane.showMessageDialog(this, "Ingrese un código Tipo Instancia válido.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         DTOTipoCasoTipoInstancia undto = new DTOTipoCasoTipoInstancia();
         undto.setOrdenTipoCasoTipoInstancia(Integer.parseInt(ordenTextField.getText()));
         undto.setMinutosMaximaResolucion(Integer.parseInt(maxMinutosTextField.getText()));
@@ -499,6 +504,7 @@ public class AltaConfigurar extends javax.swing.JFrame {
     }//GEN-LAST:event_removeTCTIActionPerformed
 
     private void codTITextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codTITextFieldFocusLost
+        tibuscada = new DTOTipoInstancia();
         if ("".equals(codTITextField.getText())){
             nomTITextField.setText(null);
             return;
@@ -515,7 +521,7 @@ public class AltaConfigurar extends javax.swing.JFrame {
         listaTIfiltrados.clear();
         listaTIfiltrados = cont.buscarTipoInstanciaVigente(Integer.parseInt(codTITextField.getText()));
         if (listaTIfiltrados.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No existe un Tipo Instancia con el código ingresado o ha sido dado de baja", "ERROR", JOptionPane.ERROR_MESSAGE);
+            nomTITextField.setText(null);
             return;
         }
         tibuscada = listaTIfiltrados.get(0);

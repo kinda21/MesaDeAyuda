@@ -120,7 +120,7 @@ public class ModTipoCaso extends javax.swing.JFrame {
         removeCoefRedux = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Modificar Sector");
+        setTitle("Modificar Tipo Caso");
 
         codTCTextField.setEditable(false);
         codTCTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -143,7 +143,7 @@ public class ModTipoCaso extends javax.swing.JFrame {
         });
 
         modButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        modButton.setText("Modificar Sector");
+        modButton.setText("Modificar Tipo Caso");
         modButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modButtonActionPerformed(evt);
