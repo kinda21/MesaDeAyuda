@@ -63,6 +63,7 @@ public class ModConfigurar extends javax.swing.JFrame {
        configamodificar = (DTOConfiguracionTipoCaso) cont.buscarConfiguracion(parcodTC,parnroConfiguracion);
        listaTITC = configamodificar.getListaDTOTipoCasoTipoInstancia();
        listaTIfiltrados = new ArrayList<>();
+       tibuscada = new DTOTipoInstancia();
     }
     public String arreglarDate (String date) {
         String dateoriginal = date; // formato YYYY-MM-dd
@@ -355,10 +356,8 @@ public class ModConfigurar extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel8)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(addTCTI)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(addTCTI))
+                                .addGap(0, 155, Short.MAX_VALUE)
                                 .addComponent(removeTCTI)))
                         .addContainerGap())))
         );
@@ -466,6 +465,10 @@ public class ModConfigurar extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El máximo de minutos debe ser un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (tibuscada.getNombreSector()==null) {
+            JOptionPane.showMessageDialog(this, "Ingrese un código Tipo Instancia válido.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         DTOTipoCasoTipoInstancia undto = new DTOTipoCasoTipoInstancia();
         undto.setOrdenTipoCasoTipoInstancia(Integer.parseInt(ordenTextField.getText()));
         undto.setMinutosMaximaResolucion(Integer.parseInt(maxMinutosTextField.getText()));
@@ -505,6 +508,7 @@ public class ModConfigurar extends javax.swing.JFrame {
     }//GEN-LAST:event_removeTCTIActionPerformed
 
     private void codTITextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_codTITextFieldFocusLost
+        tibuscada = new DTOTipoInstancia();
         if ("".equals(codTITextField.getText())){
             nomTITextField.setText(null);
             return;
@@ -521,7 +525,7 @@ public class ModConfigurar extends javax.swing.JFrame {
         listaTIfiltrados.clear();
         listaTIfiltrados = cont.buscarTipoInstanciaVigente(Integer.parseInt(codTITextField.getText()));
         if (listaTIfiltrados.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No existe un Tipo Instancia con el código ingresado o ha sido dado de baja", "ERROR", JOptionPane.ERROR_MESSAGE);
+            nomTITextField.setText(null);
             return;
         }
         tibuscada = listaTIfiltrados.get(0);

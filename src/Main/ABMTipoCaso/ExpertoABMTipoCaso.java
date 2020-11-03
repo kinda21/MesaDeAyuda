@@ -286,7 +286,7 @@ public class ExpertoABMTipoCaso {
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoCaso", criterioList);
         TipoCaso tipoCasodebaja = (TipoCaso)objetoList.get(0);
         if (tipoCasodebaja.getFechaFinVigenciaTipoCaso()!= null){
-            JOptionPane.showMessageDialog(null,"Este Tipo Caso ya esta dado de baja" );
+            JOptionPane.showMessageDialog(null,"Este Tipo Caso ya está dado de baja." );
             return false;
         }
         Date fechadehoy = new Date();

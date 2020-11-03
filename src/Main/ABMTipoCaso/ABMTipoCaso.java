@@ -203,7 +203,7 @@ public class ABMTipoCaso extends javax.swing.JFrame {
               a= (Integer) TablaTipoCasos.getModel().getValueAt(TablaTipoCasos.getSelectedRow(), 0);
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Seleccione un Sector", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione un Tipo Caso", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cod=a;
@@ -221,7 +221,7 @@ public class ABMTipoCaso extends javax.swing.JFrame {
               a= (Integer) TablaTipoCasos.getModel().getValueAt(TablaTipoCasos.getSelectedRow(), 0);
         }
         catch (Exception e){
-            JOptionPane.showMessageDialog(this, "Seleccione un Sector", "ERROR", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Seleccione un Tipo Caso", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
         int cod=a;

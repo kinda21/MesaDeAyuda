@@ -501,7 +501,7 @@ public class ModTipoInstancia extends javax.swing.JFrame {
     }//GEN-LAST:event_nomSectorTextFieldKeyReleased
 
     private void codModSectorTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_codModSectorTextFieldKeyReleased
-        if ("".equals(codModSectorTextField.getText())){
+     /*   if ("".equals(codModSectorTextField.getText())){
             nomSectorTextField.setText("");
             return;
         }
@@ -519,7 +519,7 @@ public class ModTipoInstancia extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No existe un Sector con el código ingresado", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        nomSectorTextField.setText(listaSectoresfiltrados.get(0).getNombreSector());
+        nomSectorTextField.setText(listaSectoresfiltrados.get(0).getNombreSector()); */
     }//GEN-LAST:event_codModSectorTextFieldKeyReleased
 
     private void codModSectorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_codModSectorTextFieldActionPerformed
@@ -546,7 +546,7 @@ public class ModTipoInstancia extends javax.swing.JFrame {
         codfilSector=codModSectorTextField.getText();
         List<DTOSector> listaSectoresfiltrados = controladorABMTI.buscarSectores("",codfilSector);
         if (listaSectoresfiltrados.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No existe un Sector con el código ingresado", "ERROR", JOptionPane.ERROR_MESSAGE);
+            nomSectorTextField.setText("");
             return;
         }
         nomSectorTextField.setText(listaSectoresfiltrados.get(0).getNombreSector());

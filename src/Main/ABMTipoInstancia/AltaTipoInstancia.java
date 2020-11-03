@@ -532,7 +532,7 @@ public class AltaTipoInstancia extends javax.swing.JFrame {
         codfilSector=codSectorTextField.getText();
         List<DTOSector> listaSectoresfiltrados = controladorABMTI.buscarSectores("",codfilSector);
         if (listaSectoresfiltrados.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No existe un Sector con el código ingresado", "ERROR", JOptionPane.ERROR_MESSAGE);
+            nomSectorTextField.setText("");
             return;
         }
         nomSectorTextField.setText(listaSectoresfiltrados.get(0).getNombreSector());

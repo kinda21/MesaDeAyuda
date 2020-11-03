@@ -138,7 +138,7 @@ public class AltaTipoCaso extends javax.swing.JFrame {
         });
 
         BotonAltaTipoCaso.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        BotonAltaTipoCaso.setText("Dar de alta");
+        BotonAltaTipoCaso.setText("Dar de alta Tipo Caso");
         BotonAltaTipoCaso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonAltaTipoCasoActionPerformed(evt);
@@ -224,8 +224,8 @@ public class AltaTipoCaso extends javax.swing.JFrame {
                             .addComponent(coefReduccionTextField)
                             .addComponent(numIteracionTextField)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(BotonAltaTipoCaso, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(182, 182, 182)
+                        .addComponent(BotonAltaTipoCaso)
+                        .addGap(143, 143, 143)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
