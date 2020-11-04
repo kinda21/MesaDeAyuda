@@ -764,10 +764,15 @@ public class ExpertoConfigurar {
         objetoList = FachadaPersistencia.getInstance().buscar("ConfiguracionTipoCaso", criterioList);
         if (objetoList.size()>0)  { //si es la primera en estar verificada se salta esto
             for (Object x : objetoList) {
+                //sumo un dia para controlar que la config a verificar no empiece el mismo dia o antes que la verificada.
                 ConfiguracionTipoCaso ultimaconfigverif = (ConfiguracionTipoCaso) x;
-                System.out.println(ultimaconfigverif.getNroConfigTC());
-                if (ultimaconfigverif.getFechaInicioVigencia().after(configaverificar.getFechaInicioVigencia())) {
-                    JOptionPane.showMessageDialog(null, "Ya existe una configuración verificada con una fecha mayor a la fecha de inicio de la configuración ingresada", "ERROR", JOptionPane.ERROR_MESSAGE);
+                Date fechacontrol = ultimaconfigverif.getFechaInicioVigencia();
+                Calendar c = Calendar.getInstance(); 
+                c.setTime(fechacontrol); 
+                c.add(Calendar.DATE, 1);
+                fechacontrol = c.getTime();
+                if (fechacontrol.after(configaverificar.getFechaInicioVigencia())) {
+                    JOptionPane.showMessageDialog(null, "Ya existe una configuración verificada con una fecha mayor o igual a la fecha de inicio de la configuración ingresada", "ERROR", JOptionPane.ERROR_MESSAGE);
                     return false;
                 }
                 //tuve que convertir la fecha de inicio a instant para poder restarle un dia y asi asignarlo a la fecha de fin vigencia...
