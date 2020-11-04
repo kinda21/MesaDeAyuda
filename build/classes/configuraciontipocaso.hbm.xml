@@ -3,7 +3,7 @@
 
 <hibernate-mapping>
     
-    <class name="Entidades.ConfiguracionTipoCaso" table="configuraciontipocaso">
+    <class name="Entidades.ConfiguracionTipoCaso"  table="configuraciontipocaso" >
         
         <id name="OID" type="string">
             <column name="OIDConfiguracionTipoCaso"/>

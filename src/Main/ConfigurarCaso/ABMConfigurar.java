@@ -63,6 +63,7 @@ public class ABMConfigurar extends javax.swing.JFrame {
         for (int i=0; i< listaconfiguraciones.size();i++)
         {
             int ultCod=0;
+            long ultTime = 0;
             DTOConfiguracionTipoCaso saux=null;
             for(int j=0;j<aux.size();j++)
             {
@@ -70,10 +71,12 @@ public class ABMConfigurar extends javax.swing.JFrame {
                 {
                     ultCod=aux.get(j).getNroConfigTC();
                     saux=aux.get(j);
+                    ultTime = saux.getFechaInicioVigencia().getTime();
                 }
-                if (ultCod >aux.get(j).getNroConfigTC())
+                if (ultTime<aux.get(j).getFechaInicioVigencia().getTime())
                 {
                     ultCod=aux.get(j).getNroConfigTC();
+                    ultTime = aux.get(j).getFechaInicioVigencia().getTime();
                     saux=aux.get(j);
                 }
             }
