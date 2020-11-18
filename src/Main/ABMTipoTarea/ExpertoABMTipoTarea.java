@@ -231,7 +231,7 @@ public class ExpertoABMTipoTarea {
         List objetoList = FachadaPersistencia.getInstance().buscar("TipoTarea", criterioList);
         TipoTarea TipoTareadebaja = (TipoTarea)objetoList.get(0);
         if (TipoTareadebaja.getFechaFinVigenciaTipoTarea() != null){
-            JOptionPane.showMessageDialog(null, "El Sector elegido ya se encuentra dado de baja");
+            JOptionPane.showMessageDialog(null, "El Tipo Tarea elegido ya se encuentra dado de baja");
             return false;
         }
         Date fechadehoy = new Date();
