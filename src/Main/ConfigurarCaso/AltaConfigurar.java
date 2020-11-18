@@ -67,7 +67,7 @@ public class AltaConfigurar extends javax.swing.JFrame {
     
     public void setVisible(boolean b) {
         if (b==true) {
-            DTOTipoCaso tcbuscado = (DTOTipoCaso) cont.buscarTipoCasosVigentes("", parcodTC).get(0);
+            DTOTipoCaso tcbuscado = (DTOTipoCaso) cont.buscarTipoCasos("", parcodTC).get(0);
             codTCTextField.setText(Integer.toString(tcbuscado.getCodTipoCaso()));
             nomTCTextField.setText(tcbuscado.getNombreTipoCaso());
             super.setVisible(b);
@@ -445,7 +445,7 @@ public class AltaConfigurar extends javax.swing.JFrame {
         int minutos,numero;
         try  {
             numero=(Integer.parseInt(ordenTextField.getText()));
-            if (numero==0) {
+            if (numero<=0) {
             JOptionPane.showMessageDialog(this, "El orden debe ser mayor a 0", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;  
             }

@@ -79,7 +79,7 @@ public class BajaConfigurar extends javax.swing.JFrame {
     
     public void setVisible(boolean b) {
         if (b==true) {
-            DTOTipoCaso tcbuscado = (DTOTipoCaso) cont.buscarTipoCasosVigentes("", parcodTC).get(0);
+            DTOTipoCaso tcbuscado = (DTOTipoCaso) cont.buscarTipoCasos("", parcodTC).get(0);
             codTCTextField.setText(Integer.toString(tcbuscado.getCodTipoCaso()));
             nomTCTextField.setText(tcbuscado.getNombreTipoCaso());
             nroConfigTextField.setText(parnroConfiguracion);
@@ -339,11 +339,13 @@ public class BajaConfigurar extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void modificarTCTIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarTCTIActionPerformed
-        SimpleDateFormat formatter;
+        /* SimpleDateFormat formatter;
         Locale locale = jDatePicker1.getLocale();
-        formatter = new SimpleDateFormat("dd/MM/yyyy", locale);
+        formatter = new SimpleDateFormat("dd/MM/yyyy", locale);*/
         try {
-          fechainicioconfig = formatter.parse(jDatePicker1.getFormattedTextField().getText());
+            //fechainicioconfig = formatter.parse(jDatePicker1.getFormattedTextField().getText());
+            Calendar selectedValue = (Calendar) jDatePicker1.getModel().getValue();
+            fechainicioconfig = selectedValue.getTime();
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Elija una fecha válida para la configuración", "ERROR", JOptionPane.ERROR_MESSAGE);

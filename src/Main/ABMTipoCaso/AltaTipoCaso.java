@@ -41,7 +41,7 @@ public class AltaTipoCaso extends javax.swing.JFrame {
    {
        controladorABMtc=cont;
        abm=abmsector;
-       numiteracion = 1;
+       numiteracion = 0;
        numIteracionTextField.setText(Integer.toString(numiteracion));
        listaiteraciones = new ArrayList();
        
@@ -321,23 +321,28 @@ public class AltaTipoCaso extends javax.swing.JFrame {
         try  {
             coeficiente=(Integer.parseInt(coefReduccionTextField.getText()));
             numero=(Integer.parseInt(numIteracionTextField.getText()));
+            
         }
         catch (Exception e){
             JOptionPane.showMessageDialog(this, "El coeficiente debe ser un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (coeficiente<0) {
+            JOptionPane.showMessageDialog(this, "El coeficiente debe ser mayor a o igual 0", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         DTOTipoCasoIteracion undto = new DTOTipoCasoIteracion();
+        numiteracion++;
         undto.setNumeroDeIteracion(numiteracion);
         undto.setCoeficienteReduccionTipo(coeficiente);
         listaiteraciones.add(undto);
-        numiteracion++;
         numIteracionTextField.setText(Integer.toString(numiteracion));
         poblarTablaIteraciones(listaiteraciones);
     }//GEN-LAST:event_addCoefReduxActionPerformed
 
     private void removeCoefReduxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCoefReduxActionPerformed
         listaiteraciones.clear();
-        numiteracion=1;
+        numiteracion=0;
         numIteracionTextField.setText(Integer.toString(numiteracion));
         poblarTablaIteraciones(listaiteraciones);
     }//GEN-LAST:event_removeCoefReduxActionPerformed

@@ -64,17 +64,17 @@ public class ExpertoConfigurar {
         return listaTipoInstancia;
         }
     
-    public List<DTOTipoCaso> buscarTipoCasosVigentes(String nomfilTipoCaso, String codfilTipoCaso){
+    public List<DTOTipoCaso> buscarTipoCasos(String nomfilTipoCaso, String codfilTipoCaso){
         FachadaPersistencia.getInstance().iniciarTransaccion();
         List<DTOTipoCaso> listaTipoCasos = new ArrayList<>();
         //si los 2 argumentos vienen vacios traigo todos los TC
         if (nomfilTipoCaso.equals("") && codfilTipoCaso.equals("")) {
             List<DTOCriterio> criterioList = new ArrayList<>();
-            DTOCriterio vigente = new DTOCriterio();
+           /* DTOCriterio vigente = new DTOCriterio();
             vigente.setAtributo("fechaFinVigenciaTipoCaso");
             vigente.setOperacion("=");
             vigente.setValor(null);
-            criterioList.add(vigente);
+            criterioList.add(vigente);*/
             List objetoList = FachadaPersistencia.getInstance().buscar("TipoCaso", criterioList);
             for (Object x : objetoList) {
                 TipoCaso tipoCasoleido = (TipoCaso) x;
@@ -103,11 +103,11 @@ public class ExpertoConfigurar {
             dto.setOperacion("like");
             dto.setValor(nomfilTipoCaso);
             criterioList.add(dto);
-            DTOCriterio vigente = new DTOCriterio();
+            /*DTOCriterio vigente = new DTOCriterio();
             vigente.setAtributo("fechaFinVigenciaTipoCaso");
             vigente.setOperacion("=");
             vigente.setValor(null);
-            criterioList.add(vigente);
+            criterioList.add(vigente);*/
             List objetoList = FachadaPersistencia.getInstance().buscar("TipoCaso", criterioList);
             for (Object x : objetoList) {
                 TipoCaso tipoCasoleido = (TipoCaso) x;
@@ -144,11 +144,11 @@ public class ExpertoConfigurar {
             dto.setOperacion("=");
             dto.setValor(codigotc);
             criterioList.add(dto);
-            DTOCriterio vigente = new DTOCriterio();
+            /*DTOCriterio vigente = new DTOCriterio();
             vigente.setAtributo("fechaFinVigenciaTipoCaso");
             vigente.setOperacion("=");
             vigente.setValor(null);
-            criterioList.add(vigente);
+            criterioList.add(vigente);*/
             List objetoList = FachadaPersistencia.getInstance().buscar("TipoCaso", criterioList);
             for (Object x : objetoList) {
                 TipoCaso tipoCasoleido = (TipoCaso) x;
@@ -188,11 +188,11 @@ public class ExpertoConfigurar {
             dto2.setAtributo("nombreTipoCaso");
             dto2.setOperacion("like");
             dto2.setValor(nomfilTipoCaso);
-            DTOCriterio vigente = new DTOCriterio();
+            /*DTOCriterio vigente = new DTOCriterio();
             vigente.setAtributo("fechaFinVigenciaTipoCaso");
             vigente.setOperacion("=");
             vigente.setValor(null);
-            criterioList.add(vigente);
+            criterioList.add(vigente);*/
             criterioList.add(dto);
             criterioList.add(dto2);
             List objetoList = FachadaPersistencia.getInstance().buscar("TipoCaso", criterioList);
@@ -649,6 +649,10 @@ public class ExpertoConfigurar {
         configadardebaja = (ConfiguracionTipoCaso) objetoList.get(0);
         if (configadardebaja.getFechaFinVigencia()!=null) {
             JOptionPane.showMessageDialog(null, "La configuración ingresada ya ha sido dada de baja previamente.", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        if (configadardebaja.getFechaVerificacion()!=null) {
+            JOptionPane.showMessageDialog(null, "No se puede dar de baja una configuración verificada.", "ERROR", JOptionPane.ERROR_MESSAGE);
             return false;
         }
         Date fechadehoy = new Date();

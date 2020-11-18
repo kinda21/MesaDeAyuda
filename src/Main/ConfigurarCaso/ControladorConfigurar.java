@@ -20,8 +20,8 @@ public class ControladorConfigurar{
         return expertoconfig.buscarTipoInstanciaVigente(codfilTipoInstancia);
     }
     
-    public List<DTOTipoCaso> buscarTipoCasosVigentes(String nomfilTipoCaso, String codfilTipoCaso) {
-       return expertoconfig.buscarTipoCasosVigentes(nomfilTipoCaso, codfilTipoCaso);
+    public List<DTOTipoCaso> buscarTipoCasos(String nomfilTipoCaso, String codfilTipoCaso) {
+       return expertoconfig.buscarTipoCasos(nomfilTipoCaso, codfilTipoCaso);
     }
     public List<DTOConfiguracionTipoCaso> buscarConfiguraciones(String codTC){
         return expertoconfig.buscarConfiguraciones(codTC);

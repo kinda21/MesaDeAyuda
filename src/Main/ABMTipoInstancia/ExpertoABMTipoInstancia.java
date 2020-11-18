@@ -447,7 +447,7 @@ public class ExpertoABMTipoInstancia {
                 }
         }
         if (nuevoTI.getListaTipoTarea().isEmpty() || nuevoTI.getListaTipoTarea().equals(null)) {
-            JOptionPane.showMessageDialog(null, "No se puede modificar un Tipo Instancia dejándolo sin Tipos Tarea.");
+            JOptionPane.showMessageDialog(null, "No se puede dar de alta un Tipo Instancia dejándolo sin Tipos Tarea.");
             return false;
         }
         }

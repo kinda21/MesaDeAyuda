@@ -78,7 +78,7 @@ public class ModConfigurar extends javax.swing.JFrame {
     
     public void setVisible(boolean b) {
         if (b==true) {
-            DTOTipoCaso tcbuscado = (DTOTipoCaso) cont.buscarTipoCasosVigentes("", parcodTC).get(0);
+            DTOTipoCaso tcbuscado = (DTOTipoCaso) cont.buscarTipoCasos("", parcodTC).get(0);
             codTCTextField.setText(Integer.toString(tcbuscado.getCodTipoCaso()));
             nomTCTextField.setText(tcbuscado.getNombreTipoCaso());
             nroConfigTextField.setText(parnroConfiguracion);

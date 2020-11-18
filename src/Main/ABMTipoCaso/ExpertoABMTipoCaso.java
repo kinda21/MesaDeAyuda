@@ -195,6 +195,10 @@ public class ExpertoABMTipoCaso {
             int numero,coef;
             numero = undto.getNumeroDeIteracion();
             coef = undto.getCoeficienteReduccionTipo();
+            if (coef <0) {
+            JOptionPane.showMessageDialog(null, "El coeficiente de reducción no puede ser menor a 0");
+            return false;
+            }
             TipoCasoIteracion iteraciondealta = new TipoCasoIteracion();
             iteraciondealta.setNumeroDeIteracion(numero);
             iteraciondealta.setCoeficienteReduccionTipo(coef);
@@ -265,6 +269,10 @@ public class ExpertoABMTipoCaso {
             int numero,coef;
             numero = undto.getNumeroDeIteracion();
             coef = undto.getCoeficienteReduccionTipo();
+            if (coef <0) {
+            JOptionPane.showMessageDialog(null, "El coeficiente de reducción no puede ser menor a 0");
+            return false;
+            }
             TipoCasoIteracion iteracionmodificada = new TipoCasoIteracion();
             iteracionmodificada.setNumeroDeIteracion(numero);
             iteracionmodificada.setCoeficienteReduccionTipo(coef);

@@ -65,7 +65,7 @@ public class SeleccionTipoCaso extends javax.swing.JFrame {
     }
     public void setVisible(boolean b) {
         if (b==true) {
-            listatipocasos = controladorConfig.buscarTipoCasosVigentes(nomTCTextField.getText(),"");
+            listatipocasos = controladorConfig.buscarTipoCasos(nomTCTextField.getText(),"");
             poblarTabla(listatipocasos);
         }    
         super.setVisible(b);
@@ -182,7 +182,7 @@ public class SeleccionTipoCaso extends javax.swing.JFrame {
 
     private void nomTCTextFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nomTCTextFieldKeyReleased
         nomfilTipoCaso=nomTCTextField.getText();
-        List<DTOTipoCaso> listatipocasos = controladorConfig.buscarTipoCasosVigentes(nomfilTipoCaso,"");  
+        List<DTOTipoCaso> listatipocasos = controladorConfig.buscarTipoCasos(nomfilTipoCaso,"");  
         poblarTabla(listatipocasos);   
     }//GEN-LAST:event_nomTCTextFieldKeyReleased
 

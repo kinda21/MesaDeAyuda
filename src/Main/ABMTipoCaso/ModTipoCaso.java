@@ -41,8 +41,8 @@ public class ModTipoCaso extends javax.swing.JFrame {
        List<DTOTipoCaso> dtoCaso = controladorABMtc.buscarTipoCasos("",Integer.toString(parCodTC));
        codTCTextField.setText(Integer.toString(dtoCaso.get(0).getCodTipoCaso()));
        nomTCTextField.setText(dtoCaso.get(0).getNombreTipoCaso());
-       maxiteraciones = dtoCaso.get(0).getNumeroMaximaIteracion()+1;
-       numIteracionTextField.setText(Integer.toString(dtoCaso.get(0).getNumeroMaximaIteracion()+1));
+       maxiteraciones = dtoCaso.get(0).getNumeroMaximaIteracion();
+       numIteracionTextField.setText(Integer.toString(dtoCaso.get(0).getNumeroMaximaIteracion()));
        listaiteracionesoriginal = ordenaDTOIteraciones(dtoCaso.get(0).getListaTipoCasoIteracion());
        listaiteracionesamodificar = listaiteracionesoriginal;
        poblarTablaIteraciones(listaiteracionesoriginal);
@@ -344,18 +344,22 @@ public class ModTipoCaso extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "El coeficiente debe ser un número entero", "ERROR", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (coeficiente<0) {
+            JOptionPane.showMessageDialog(this, "El coeficiente debe ser mayor a o igual 0", "ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         DTOTipoCasoIteracion undto = new DTOTipoCasoIteracion();
-        undto.setNumeroDeIteracion(numero);
+        maxiteraciones++;
+        undto.setNumeroDeIteracion(maxiteraciones);
         undto.setCoeficienteReduccionTipo(coeficiente);
         listaiteracionesamodificar.add(undto);
-        maxiteraciones++;
         numIteracionTextField.setText(Integer.toString(maxiteraciones));
         poblarTablaIteraciones(listaiteracionesamodificar);
     }//GEN-LAST:event_addCoefReduxActionPerformed
 
     private void removeCoefReduxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCoefReduxActionPerformed
         listaiteracionesamodificar.clear();
-        maxiteraciones=1;
+        maxiteraciones=0;
         numIteracionTextField.setText(Integer.toString(maxiteraciones));
         poblarTablaIteraciones(listaiteracionesamodificar);
     }//GEN-LAST:event_removeCoefReduxActionPerformed
