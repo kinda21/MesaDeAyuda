@@ -122,7 +122,7 @@ public class ABMSector extends javax.swing.JFrame {
                 nomSectorTextFieldKeyReleased(evt);
             }
         });
-        getContentPane().add(nomSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 270, -1));
+        getContentPane().add(nomSectorTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 10, 580, -1));
 
         TablaSectores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -147,7 +147,7 @@ public class ABMSector extends javax.swing.JFrame {
         TablaSectores.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(TablaSectores);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 460, 200));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 770, 220));
 
         BotonAlta.setText("Alta");
         BotonAlta.addActionListener(new java.awt.event.ActionListener() {
@@ -155,7 +155,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonAltaActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 100, 30));
+        getContentPane().add(BotonAlta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 210, 30));
 
         BotonBaja.setText("Baja");
         BotonBaja.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +163,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonBajaActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 40, 110, 30));
+        getContentPane().add(BotonBaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 220, 30));
 
         BotonMod.setText("Modificar");
         BotonMod.addActionListener(new java.awt.event.ActionListener() {
@@ -171,7 +171,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BotonModActionPerformed(evt);
             }
         });
-        getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 130, 30));
+        getContentPane().add(BotonMod, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 40, 220, 30));
 
         BackButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         BackButton.setText("Volver");
@@ -180,7 +180,7 @@ public class ABMSector extends javax.swing.JFrame {
                 BackButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(BackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 10, -1, 60));
+        getContentPane().add(BackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 10, -1, 60));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Nombre Sector:");

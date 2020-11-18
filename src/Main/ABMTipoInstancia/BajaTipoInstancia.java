@@ -200,8 +200,7 @@ public class BajaTipoInstancia extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BajaButton)
-                    .addComponent(volverButton))
-                .addGap(17, 17, 17))
+                    .addComponent(volverButton)))
         );
 
         pack();

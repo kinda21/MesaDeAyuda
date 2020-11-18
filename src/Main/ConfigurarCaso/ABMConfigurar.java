@@ -140,6 +140,11 @@ public class ABMConfigurar extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(TablaConfiguraciones);
+        if (TablaConfiguraciones.getColumnModel().getColumnCount() > 0) {
+            TablaConfiguraciones.getColumnModel().getColumn(0).setMinWidth(60);
+            TablaConfiguraciones.getColumnModel().getColumn(0).setPreferredWidth(0);
+            TablaConfiguraciones.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
 
         jButton1.setText("Alta");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
