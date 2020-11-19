@@ -119,7 +119,7 @@ public class SeleccionTipoCaso extends javax.swing.JFrame {
                 nomTCTextFieldKeyReleased(evt);
             }
         });
-        getContentPane().add(nomTCTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 260, -1));
+        getContentPane().add(nomTCTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 440, 20));
 
         TablaTipoCasos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -144,7 +144,7 @@ public class SeleccionTipoCaso extends javax.swing.JFrame {
         TablaTipoCasos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(TablaTipoCasos);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 480, 200));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 770, 220));
 
         BackButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         BackButton.setText("Volver");
@@ -153,7 +153,7 @@ public class SeleccionTipoCaso extends javax.swing.JFrame {
                 BackButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(BackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 10, -1, 60));
+        getContentPane().add(BackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 40, 180, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel1.setText("Nombre Tipo Caso:");
@@ -165,7 +165,7 @@ public class SeleccionTipoCaso extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 10, 180, -1));
 
         pack();
         setLocationRelativeTo(null);
